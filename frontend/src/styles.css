@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--color-bg);
+}
+
+:root {
+  --color-bg: #f4faf9;
+  --color-surface: #e6f0ee;
+  --color-surface-alt: #d3e4e1;
+  --title-color: #fff9f0;
+
+  --color-primary: #d0e3ff;
+  --color-primary-dark: #081f5c;
+  --color-primary-light: #7096d1;
+  --card-container-bg: #f7f2eb;
+  --bg-color: transparent;
+}
