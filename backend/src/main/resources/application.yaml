@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: infocomunidade
+  mongodb:
+    uri: mongodb://localhost:27017/infocomunidadeMongoDB
