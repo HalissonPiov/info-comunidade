@@ -1,7 +1,4 @@
-html,
-body {
-  height: 100%;
-}
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -17,6 +14,6 @@ body {
   --color-primary: #d0e3ff;
   --color-primary-dark: #081f5c;
   --color-primary-light: #7096d1;
-  --card-container-bg: #f7f2eb;
+  --card-container-bg: #ffffff;
   --bg-color: transparent;
 }

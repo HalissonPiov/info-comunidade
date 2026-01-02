@@ -1,0 +1,84 @@
+.container {
+  margin: 20px 0;
+  align-items: center;
+}
+
+.header-container {
+  background: var(--card-container-bg);
+  color: #000000;
+}
+
+.card-component {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.card-header {
+  padding: 10px 15px;
+}
+
+.custom-card-header {
+  width: 100%;
+  background: var(--card-container-bg);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile-info {
+  min-height: 3rem;
+  display: flex;
+  gap: 10px;
+}
+
+.profile-info i {
+  font-size: 1.5rem;
+}
+
+.profile-info div,
+.profile-info i
+{
+  align-content: center;
+  color: #000000;
+}
+
+.name,
+.username {
+  font-size: 1rem;
+}
+
+.username,
+.date,
+i {
+  color: #9c9c9c;
+}
+
+.options-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.btn {
+  padding: 5px;
+}
+
+.content {
+  background-color: var(--card-container-bg);
+}
+
+
+.card-title {
+  font-size: 1.2rem;
+  padding: 0.6rem 0 0 0.6rem;
+}
+
+.card-content {
+  padding: 0.6rem;
+}
+
+
+
+
