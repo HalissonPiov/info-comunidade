@@ -1,0 +1,8 @@
+# Padrão geral
+* text=auto eol=lf
+
+# Script Maven (Linux/macOS)
+/mvnw text eol=lf
+
+# Script Maven (Windows)
+*.cmd text eol=crlf

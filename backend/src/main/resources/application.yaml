@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: infocomunidade
+
+  mongodb:
+    uri: mongodb://admin:1234@localhost:27018/infocomunidadeMongoDB?authSource=admin
