@@ -1,0 +1,51 @@
+.dialog-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  width: 80%;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.custom-input .mat-mdc-text-field-wrapper {
+  background-color: #f5f7fa;
+  border-radius: 8px;
+}
+
+.button {
+  width: 80px;
+  border-radius: 25px;
+  background-color: var(--color-primary-dark);
+  color: var(--text-color);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.button:hover {
+  opacity: 100%;
+}

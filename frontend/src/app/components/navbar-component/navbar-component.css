@@ -3,12 +3,52 @@
 }
 
 .container-fluid {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
 }
 
 .title {
-  color: var(--title-color);
+  grid-column: 2;
+  justify-self: center;
+  color: var(--text-color);
   font-size: 1.5rem;
+  text-align: center;
+}
+
+.dropdown {
+  width: 200px;
+  grid-column: 3;
+  justify-self: end;
+  right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.profile-container {
+  display: flex;
+  align-content: center;
+  gap: 15px;
+  color: var(--text-color);
+  flex-direction: row-reverse;
+  padding: 5px;
+}
+
+.profile-container i,
+.profile-info {
+  color: var(--text-color);
+  align-content: center;
+}
+
+.name,
+.profile-container i {
+  font-size: 1rem;
+}
+
+.dropdown-menu {
+  right: 0;
+}
+
+.btn:focus {
+  border: none;
 }

@@ -3,5 +3,19 @@
     <a class="navbar-brand title" href="#">
       <i class="fa-solid fa-computer-mouse"></i> InfoComunidade
     </a>
+    <div class="dropdown">
+      <button class="btn profile-container" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i>
+        <div class="profile-info">
+          <mat-card-title class="name">{{nomeCompleto}}</mat-card-title>
+        </div>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Minhas publicações</a></li>
+        <li><a class="dropdown-item" href="#" (click)="openEditDialog()">Editar perfil</a></li>
+        <li><a class="dropdown-item" href="#" style="color: var(--text-atention);">Deletar conta</a></li>
+      </ul>
+    </div>
+
   </div>
 </nav>
