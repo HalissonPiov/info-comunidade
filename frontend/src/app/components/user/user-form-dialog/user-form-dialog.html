@@ -1,0 +1,31 @@
+<div class="dialog-container">
+  <h2>{{data.title}}</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill" class="custom-input">
+        <mat-label>Nome de Usuário</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Data</mat-label>
+        <input matInput type="date" formControlName="dataNascimento">
+      </mat-form-field>
+    </p>
+
+    <button class="button" type="submit" [disabled]="!userForm.valid">{{data.confirmationMessage}}</button>
+  </form>
+</div>

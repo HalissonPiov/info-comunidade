@@ -9,7 +9,8 @@ body {
   --color-bg: #f4faf9;
   --color-surface: #e6f0ee;
   --color-surface-alt: #d3e4e1;
-  --title-color: #fff9f0;
+  --text-color: #fff9f0;
+  --text-atention: #960018;
 
   --color-primary: #d0e3ff;
   --color-primary-dark: #081f5c;
