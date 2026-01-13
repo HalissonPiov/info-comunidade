@@ -28,7 +28,7 @@ public class Usuario implements Serializable{
     @EqualsAndHashCode.Include
     private String username;
     private String bairro;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
     private boolean excluido;
 
