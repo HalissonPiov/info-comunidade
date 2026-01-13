@@ -21,6 +21,6 @@ public abstract class Publicacao implements Serializable {
     private List<String> hashtags;
     private Endereco endereco;
     private String imagemURL;
-//    private Usuario usuario;
+    private Usuario usuario;
 
 }
