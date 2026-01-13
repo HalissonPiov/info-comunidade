@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
@@ -25,15 +23,15 @@ public class UsuarioRepository {
     }
 
     public boolean existeUsername(String username) {
-        Query query = new Query(Criteria.where("username").is(username));
-        return mongoTemplate.exists(query, Usuario.class, "usuarios");
+        String mql = "{ \"username\" : \"" + username + "\" }";
+        return mongoTemplate.exists(new BasicQuery(mql), Usuario.class, "usuarios");
     }
 
     public Usuario encontrarPorID(String id) {
-        Query query = new Query(Criteria.where("_id").is(id));
+        String mql = "{ \"_id\" : \"" + id + "\" }";
         try {
-            Usuario usuario = mongoTemplate.findOne(query, Usuario.class, "usuarios");
-            return usuario; 
+            Usuario usuario = mongoTemplate.findOne(new BasicQuery(mql), Usuario.class, "usuarios");
+            return usuario;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -41,37 +39,35 @@ public class UsuarioRepository {
 
     public Usuario encontrarPorUsername(String username){
         String mql = "{ \"username\" : \"" + username + "\" }";
-        Query query = new BasicQuery(mql);
         try {
-            Usuario usuario = mongoTemplate.findOne(query, Usuario.class, "usuarios");
+            Usuario usuario = mongoTemplate.findOne(new BasicQuery(mql), Usuario.class, "usuarios");
             return usuario;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public void atualizarUsuario(String id, Usuario usuario){
-        Query query = new Query(Criteria.where("_id").is(id));
-
+    public void atualizarUsuario(String id, Usuario usuario) {
+        String mql = "{ \"_id\" : \"" + id + "\" }";
         Update usuarioAtualizado = new Update()
             .set("nome", usuario.getNome())
             .set("username", usuario.getUsername())
             .set("bairro", usuario.getBairro())
             .set("dataNascimento", usuario.getDataNascimento())
             .set("excluido", usuario.isExcluido());
-        
-        mongoTemplate.updateFirst(query, usuarioAtualizado, Usuario.class, "usuarios");
+
+        mongoTemplate.updateFirst(new BasicQuery(mql), usuarioAtualizado, Usuario.class, "usuarios");
     }
 
-    public void deletarPorID(String ID){
-        Query query = new Query(Criteria.where("_id").is(ID));
-        mongoTemplate.remove(query, Usuario.class, "usuarios");
+    public void deletarPorID(String id) {
+        String mql = "{ \"_id\" : \"" + id + "\" }";
+        mongoTemplate.remove(new BasicQuery(mql), Usuario.class, "usuarios");
     }
 
-    public void deletarLogicamentePorID(String ID){
-        Query query = new Query(Criteria.where("_id").is(ID));
+    public void deletarLogicamentePorID(String id) {
+        String mql = "{ \"_id\" : \"" + id + "\" }";
         Update usuarioExcluido = new Update().set("excluido", true);
-        mongoTemplate.updateFirst(query, usuarioExcluido, Usuario.class, "usuarios");
+        mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
     }
-    
+
 }
