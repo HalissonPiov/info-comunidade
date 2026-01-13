@@ -1,0 +1,58 @@
+<div class="container">
+  @if (showLogin()) {
+  <div class="form-container log-in">
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+      <h1 class="title">Login</h1>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="username" placeholder="" formControlName="username">
+        <label for="username">Nome de usuário</label>
+      </div>
+
+      <div class="form-floating mb-3 floating-compact">
+        <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+        <label for="senha">Senha</label>
+      </div>
+      <button class="button" type="submit" [disabled]="!loginForm.valid">Fazer login</button>
+      <p class="switch">
+        Não tem conta?
+        <a (click)="toggleForm()">Criar conta</a>
+      </p>
+    </form>
+  </div>
+  }
+
+  @else {
+  <div class="form-container sign-in">
+    <form [formGroup]="singinForm" (ngSubmit)="onSingInFormSubmit()">
+      <h1 class="title">Cria conta</h1>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="nome" placeholder="" formControlName="name">
+        <label for="username">Nome Completo</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="username" placeholder="" formControlName="username">
+        <label for="username">Nome de usuário</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">
+        <label for="bairro">Bairro</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento">
+        <label for="dataNascimento">dataNascimento</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+        <label for="senha">Senha</label>
+      </div>
+
+      <button class="button" type="submit" [disabled]="!singinForm.valid">Criar conta</button>
+
+      <p class="switch">
+        Já tem conta?
+        <a (click)="toggleForm()">Fazer login</a>
+      </p>
+    </form>
+  </div>
+  }
+</div>

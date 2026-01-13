@@ -1,0 +1,46 @@
+.container {
+  width: 50%;
+  margin: 100px auto;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+}
+
+p {
+  align-content: center;
+  text-align: center;
+}
+
+p,
+mat-form-field {
+  width: 60%;
+}
+
+.button {
+  width: 150px;
+}
+
+.switch {
+  font-size: 0.9rem;
+  color: var(--gray-text);
+}
+
+.switch a {
+  font-weight: bold;
+  text-decoration: underline;
+}
+

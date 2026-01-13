@@ -4,5 +4,6 @@ export interface User {
   username: string;
   bairro: string;
   dataNascimento: string;
+  senha: string;
   excluido?: string;
 }

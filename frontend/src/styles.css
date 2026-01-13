@@ -1,8 +1,11 @@
-
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: var(--color-bg);
+}
+
+* {
+  transition: 0.3s ease, color 0.3s ease;
 }
 
 :root {
@@ -11,10 +14,70 @@ body {
   --color-surface-alt: #d3e4e1;
   --text-color: #fff9f0;
   --text-atention: #960018;
+  --gray-text: #898989;
 
   --color-primary: #d0e3ff;
   --color-primary-dark: #081f5c;
   --color-primary-light: #7096d1;
   --card-container-bg: #ffffff;
   --bg-color: transparent;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 2rem;
+  color: var(--color-primary-dark);
+}
+
+.floating-compact
+.form-control {
+  height: 36px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.85rem;
+  width: 300px;
+  margin-right: 15px;
+}
+
+.floating-compact label {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.floating-compact input {
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+  border-radius: 0%;
+  font-weight: normal;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  padding-top: 1.8rem;
+}
+
+.floating-compact input[type="text"]:focus,
+.floating-compact input[type="password"]:focus,
+.floating-compact input[type="date"]:focus,
+.accordion-button:focus {
+  box-shadow: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+  background-color: var(--color-bg);
+}
+
+.button {
+  width: 80px;
+  border-radius: 25px;
+  background-color: var(--color-primary-dark);
+  color: var(--text-color);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.button:hover {
+  opacity: 100%;
 }
