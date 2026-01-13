@@ -1,11 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
-import { SharedModule } from '../../../shared/shared-module';
-import { User } from '../../../models/User';
-import { UserService } from '../../../services/user-service';
-import { AuthUserService } from '../../../services/auth-user-service';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+
+import { User } from '../../../models/User';
+import { AuthUserService } from '../../../services/auth-user-service';
+import { UserService } from '../../../services/user-service';
+import { SharedModule } from '../../../shared/shared-module';
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +20,10 @@ export class LoginPage {
   authService = inject(AuthUserService)
   private router = inject(Router);
 
+  ngOnInit() {
+    this.authService.logout()
+  }
+
   toggleForm() {
     this.showLogin.update((v) => !v);
   }
@@ -31,7 +36,7 @@ export class LoginPage {
   });
 
   public singinForm = this.formBuilder.group({
-    name: ['', Validators.required],
+    nome: ['', Validators.required],
     username: ['', Validators.required],
     senha: ['', Validators.required],
     bairro: [''],
@@ -42,7 +47,7 @@ export class LoginPage {
 
   onSingInFormSubmit() {
     const user: User = {
-      nome: this.singinForm.value.name as string,
+      nome: this.singinForm.value.nome as string,
       username: this.singinForm.value.username as string,
       bairro: this.singinForm.value.bairro as string,
       dataNascimento: this.singinForm.value.dataNascimento as string,
@@ -59,4 +64,26 @@ export class LoginPage {
       }
     );
   }
+
+  findByUsername() {
+      this.singinForm
+      .get('username')
+      ?.valueChanges.pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(username =>
+          this.userService.findByUsername(username)
+        )
+      )
+      .subscribe({
+        next: (response) => {
+          console.log('Username já existe');
+          this.singinForm.get('username')?.setErrors({ usernameExists: true });
+        },
+        error: (error) => {
+          this.singinForm.get('username')?.setErrors(null);
+          console.log(error)
+        }
+      });
+    }
 }

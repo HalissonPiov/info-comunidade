@@ -26,12 +26,17 @@
     <form [formGroup]="singinForm" (ngSubmit)="onSingInFormSubmit()">
       <h1 class="title">Cria conta</h1>
       <div class="form-floating mb-3 floating-compact">
-        <input type="text" class="form-control" id="nome" placeholder="" formControlName="name">
-        <label for="username">Nome Completo</label>
+        <input type="text" class="form-control" id="nome" placeholder="" formControlName="nome">
+        <label for="nome">Nome Completo</label>
       </div>
       <div class="form-floating mb-3 floating-compact">
-        <input type="text" class="form-control" id="username" placeholder="" formControlName="username">
+        <input type="text" class="form-control" id="username" placeholder="" formControlName="username"
+          (ngModelChange)="findByUsername()"
+          [class.is-invalid]="singinForm.get('username')?.hasError('usernameExists')">
         <label for="username">Nome de usuário</label>
+        <div class="invalid-feedback">
+          Nome de usuário já está em uso
+        </div>
       </div>
       <div class="form-floating mb-3 floating-compact">
         <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">

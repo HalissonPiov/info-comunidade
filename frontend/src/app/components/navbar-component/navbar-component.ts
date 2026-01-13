@@ -24,7 +24,7 @@ export class NavbarComponent {
   openEditDialog(): void {
     const dialogRef = this.dialog.open(UserFormDialog, {
       width: '500px',
-      data: {title: 'Editar dados', confirmationMessage: "Salvar", action: "edicao"},
+      data: {user: this.authService.getUserFromStorage(), title: 'Editar dados', confirmationMessage: "Salvar", action: "edicao"},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -40,7 +40,8 @@ export class NavbarComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
+      if (result !== undefined) {
+      }
     });
   }
 }
