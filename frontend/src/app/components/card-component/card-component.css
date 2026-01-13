@@ -79,6 +79,17 @@ i {
   padding: 0.6rem;
 }
 
+.image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
 
+.hashtags {
+  color: var(--gray-text);
+  font-size: 0.9rem;
+}
 
 
