@@ -1,30 +1,26 @@
 <div class="dialog-container">
   <h2>{{data.title}}</h2>
   <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Nome Completo</mat-label>
-        <input matInput formControlName="name">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill" class="custom-input">
-        <mat-label>Nome de Usuário</mat-label>
-        <input matInput formControlName="username">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Bairro</mat-label>
-        <input matInput formControlName="bairro">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Data</mat-label>
-        <input matInput type="date" formControlName="dataNascimento">
-      </mat-form-field>
-    </p>
+     <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="nome" placeholder="" formControlName="name">
+        <label for="username">Nome Completo</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="username" placeholder="" formControlName="username">
+        <label for="username">Nome de usuário</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">
+        <label for="bairro">Bairro</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento">
+        <label for="dataNascimento">dataNascimento</label>
+      </div>
+      <div class="form-floating mb-3 floating-compact">
+        <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+        <label for="senha">Senha</label>
+      </div>
 
     <button class="button" type="submit" [disabled]="!userForm.valid">{{data.confirmationMessage}}</button>
   </form>

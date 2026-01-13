@@ -1,0 +1,8 @@
+<h2>Confirmação</h2>
+<mat-dialog-content>
+  <p>Deseja realmente exluir sua conta?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="closeDialog()">Não</button>
+  <button matButton [mat-dialog-close]="deleteUser()" cdkFocusInitial>Sim</button>
+</mat-dialog-actions>
