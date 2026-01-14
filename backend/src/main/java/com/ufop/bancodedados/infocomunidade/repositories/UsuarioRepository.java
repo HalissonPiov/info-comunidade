@@ -71,19 +71,8 @@ public class UsuarioRepository {
         mongoTemplate.remove(new BasicQuery(mql), Usuario.class, "usuarios");
     }
 
-    public void deletarPorUsername(String username) {
-        String mql = "{ \"username\" : \"" + username + "\" }";
-        mongoTemplate.remove(new BasicQuery(mql), Usuario.class, "usuarios");
-    }
-
     public void deletarLogicamentePorID(String id) {
         String mql = "{ \"_id\" : \"" + id + "\" }";
-        Update usuarioExcluido = new Update().set("excluido", true);
-        mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
-    }
-    
-    public void deletarLogicamentePorUsername(String username) {
-        String mql = "{ \"username\" : \"" + username + "\" }";
         Update usuarioExcluido = new Update().set("excluido", true);
         mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
     }
