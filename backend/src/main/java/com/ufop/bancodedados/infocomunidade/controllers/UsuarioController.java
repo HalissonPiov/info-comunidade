@@ -24,42 +24,38 @@ public class UsuarioController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> createUser(@RequestBody Usuario usuario){
-        Usuario u = usuarioService.criaUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(u);
+    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario){
+        Usuario usuarioNovo = usuarioService.criaUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioNovo);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> findByID(@PathVariable String id){
-        Usuario u = usuarioService.encontrarPorID(id);
-        return ResponseEntity.ok().body(u); 
+    public ResponseEntity<Usuario> encontrarPeloID(@PathVariable String id){
+        Usuario usuario = usuarioService.encontraPorID(id);
+        return ResponseEntity.ok().body(usuario); 
     }
 
     @GetMapping("/pesquisa/username")
-    public ResponseEntity<Usuario> findByUsername(@RequestParam String username) {
-        var usuario = usuarioService.encontrarPorUsername(username);
-        if (usuario == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<Usuario> encontrarPeloUsername(@RequestParam String username) {
+        var usuario = usuarioService.encontraPorUsername(username);
         return ResponseEntity.ok(usuario);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUserData(@PathVariable String id,
-                                                      @RequestBody Usuario usuario) {
-        usuarioService.atualizarUsuario(id, usuario);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable String id, @RequestBody Usuario usuario) {
+        Usuario usuarioAtualizado = usuarioService.atualizaUsuario(id, usuario);
+        return ResponseEntity.ok(usuarioAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
-        usuarioService.deletarUsuario(id);
+    public ResponseEntity<Void> deletarUsuarioID(@PathVariable String id) {
+        usuarioService.deletaUsuario(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @DeleteMapping("/logical/{id}")
-    public ResponseEntity<Void> logicalDeleteUser(@PathVariable String id) {
-        usuarioService.deletarLogicamenteUsuario(id);
+    public ResponseEntity<Void> DeletarLogicamenteUsuarioID(@PathVariable String id) {
+        usuarioService.deletaLogicamenteUsuario(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     

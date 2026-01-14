@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.mongodb.client.result.UpdateResult;
 import com.ufop.bancodedados.infocomunidade.models.Usuario;
 
 import lombok.AllArgsConstructor;
@@ -47,7 +48,7 @@ public class UsuarioRepository {
         }
     }
 
-    public void atualizarUsuario(String id, Usuario usuario) {
+    public Usuario atualizarUsuario(String id, Usuario usuario) {
         String mql = "{ \"_id\" : \"" + id + "\" }";
         Update usuarioAtualizado = new Update()
             .set("nome", usuario.getNome())
@@ -56,7 +57,13 @@ public class UsuarioRepository {
             .set("dataNascimento", usuario.getDataNascimento())
             .set("excluido", usuario.isExcluido());
 
-        mongoTemplate.updateFirst(new BasicQuery(mql), usuarioAtualizado, Usuario.class, "usuarios");
+        UpdateResult atualizaUsuario = mongoTemplate.updateFirst(new BasicQuery(mql), usuarioAtualizado, Usuario.class, "usuarios");
+
+        if(atualizaUsuario.getMatchedCount() == 0){
+            return null;
+        }
+
+        return mongoTemplate.findOne(new BasicQuery(mql), Usuario.class, "usuarios");
     }
 
     public void deletarPorID(String id) {
@@ -64,8 +71,19 @@ public class UsuarioRepository {
         mongoTemplate.remove(new BasicQuery(mql), Usuario.class, "usuarios");
     }
 
+    public void deletarPorUsername(String username) {
+        String mql = "{ \"username\" : \"" + username + "\" }";
+        mongoTemplate.remove(new BasicQuery(mql), Usuario.class, "usuarios");
+    }
+
     public void deletarLogicamentePorID(String id) {
         String mql = "{ \"_id\" : \"" + id + "\" }";
+        Update usuarioExcluido = new Update().set("excluido", true);
+        mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
+    }
+    
+    public void deletarLogicamentePorUsername(String username) {
+        String mql = "{ \"username\" : \"" + username + "\" }";
         Update usuarioExcluido = new Update().set("excluido", true);
         mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
     }

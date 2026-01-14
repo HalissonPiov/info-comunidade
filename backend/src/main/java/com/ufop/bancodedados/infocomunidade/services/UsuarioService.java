@@ -19,25 +19,29 @@ public class UsuarioService {
         return usuarioRepositorio.criarUsuario(usuario);
     }
 
-    public Usuario encontrarPorID(String id){
+    public Usuario encontraPorID(String id){
         Usuario usuarioEncontrado = usuarioRepositorio.encontrarPorID(id);
         return usuarioEncontrado;
     }
 
-    public Usuario encontrarPorUsername(String username){
+    public Usuario encontraPorUsername(String username){
         Usuario usuarioEncontrado = usuarioRepositorio.encontrarPorUsername(username);
+        if (usuarioEncontrado == null) {
+            return null;
+        }
         return usuarioEncontrado;
     }
 
-    public void atualizarUsuario(String id, Usuario usuario){
-        usuarioRepositorio.atualizarUsuario(id, usuario);
+    public Usuario atualizaUsuario(String id, Usuario usuario){
+        Usuario usuarioAtualizado = usuarioRepositorio.atualizarUsuario(id, usuario);
+        return usuarioAtualizado;
     }
 
-    public void deletarUsuario(String id){
+    public void deletaUsuario(String id){
         usuarioRepositorio.deletarPorID(id);
     }
 
-    public void deletarLogicamenteUsuario(String id){
+    public void deletaLogicamenteUsuario(String id){
         usuarioRepositorio.deletarLogicamentePorID(id);
     }
 }
