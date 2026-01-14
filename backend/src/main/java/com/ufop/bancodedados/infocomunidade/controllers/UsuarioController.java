@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufop.bancodedados.infocomunidade.models.DTOs.LoginDTO;
 import com.ufop.bancodedados.infocomunidade.models.Usuario;
 import com.ufop.bancodedados.infocomunidade.services.UsuarioService;
 
@@ -27,6 +28,12 @@ public class UsuarioController {
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario){
         Usuario usuarioNovo = usuarioService.criaUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioNovo);
+    }
+
+    @PostMapping("/login")
+        public ResponseEntity<Usuario> verificarLogin(@RequestBody LoginDTO login){
+        Usuario usuario = usuarioService.verificaLogin(login);
+        return ResponseEntity.ok(usuario);
     }
     
     @GetMapping("/{id}")

@@ -87,5 +87,17 @@ public class UsuarioRepository {
         Update usuarioExcluido = new Update().set("excluido", true);
         mongoTemplate.updateFirst(new BasicQuery(mql), usuarioExcluido, Usuario.class, "usuarios");
     }
+    
+    public Usuario autenticarLogin(String username, String senha){
+        String mql = "{ \"username\" : \"" + username + "\", \"senha\" : \"" + senha +"\" }";
+        Usuario usuario;
+
+        try {
+            usuario = mongoTemplate.findOne(new BasicQuery(mql), Usuario.class, "usuarios");
+            return usuario;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 
 }

@@ -3,6 +3,7 @@ package com.ufop.bancodedados.infocomunidade.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ufop.bancodedados.infocomunidade.models.DTOs.LoginDTO;
 import com.ufop.bancodedados.infocomunidade.models.Usuario;
 import com.ufop.bancodedados.infocomunidade.repositories.UsuarioRepository;
 
@@ -43,5 +44,13 @@ public class UsuarioService {
 
     public void deletaLogicamenteUsuario(String id){
         usuarioRepositorio.deletarLogicamentePorID(id);
+    }
+
+    public Usuario verificaLogin(LoginDTO login){
+        Usuario usuario = usuarioRepositorio.autenticarLogin(login.username(), login.senha());
+        if(usuario == null){
+            throw new RuntimeException("Email e/ou senha estão incorretos, tente novamente!");
+        }
+        return usuario;
     }
 }
