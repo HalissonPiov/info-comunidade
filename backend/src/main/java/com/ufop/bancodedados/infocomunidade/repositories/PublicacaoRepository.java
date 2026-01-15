@@ -1,16 +1,18 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 
-import com.ufop.bancodedados.infocomunidade.models.Informativo;
-import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
-import com.ufop.bancodedados.infocomunidade.models.Publicacao;
-import lombok.Data;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 
+import com.ufop.bancodedados.infocomunidade.models.Informativo;
+import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
+import com.ufop.bancodedados.infocomunidade.models.Publicacao;
+
+import lombok.Data;
 
 @Data
 @Repository

@@ -1,16 +1,24 @@
 package com.ufop.bancodedados.infocomunidade.controllers;
 
-import com.ufop.bancodedados.infocomunidade.models.Informativo;
-import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
-import com.ufop.bancodedados.infocomunidade.models.Publicacao;
-import com.ufop.bancodedados.infocomunidade.services.PublicacaoService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ufop.bancodedados.infocomunidade.models.DTOs.InformativoDTO;
+import com.ufop.bancodedados.infocomunidade.models.DTOs.OcorrenciaDTO;
+import com.ufop.bancodedados.infocomunidade.models.Publicacao;
+import com.ufop.bancodedados.infocomunidade.services.PublicacaoService;
 
 @Controller
 @RequestMapping("publicacao")
@@ -20,15 +28,15 @@ public class PublicacaoController {
     private PublicacaoService publicacaoService;
 
     @PostMapping("/ocorrencia")
-    public ResponseEntity<Publicacao> criarOcorrencia(@RequestBody Ocorrencia ocorrencia) {
-        Publicacao publiOcorrencia = publicacaoService.criar(ocorrencia);
-        return ResponseEntity.status(HttpStatus.CREATED).body(publiOcorrencia);
+    public ResponseEntity<Publicacao> criarOcorrencia(@RequestBody OcorrenciaDTO ocorrenciaDTO){
+        Publicacao pubOcorrencia = publicacaoService.criarOcorrencia(ocorrenciaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pubOcorrencia);
     }
 
     @PostMapping("/informativo")
-    public ResponseEntity<Publicacao> criarInformativo(@RequestBody Informativo informativo) {
-        Publicacao publicInformativo = publicacaoService.criar(informativo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(publicInformativo);
+    public ResponseEntity<Publicacao> criarInformativo(@RequestBody InformativoDTO informativoDTO){
+        Publicacao pubInformativo = publicacaoService.criarInformativo(informativoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pubInformativo);
     }
 
     @GetMapping
@@ -37,14 +45,14 @@ public class PublicacaoController {
     }
 
     @PutMapping("/ocorrencia/{id}")
-    public ResponseEntity<Void> atualizarOcorrencia(@PathVariable String id, @RequestBody Ocorrencia ocorrencia) {
-        publicacaoService.atualizar(id, ocorrencia);
+    public ResponseEntity<Void> atualizarOcorrencia(@PathVariable String id, @RequestBody OcorrenciaDTO ocorrenciaDTO) {
+        publicacaoService.atualizarOcorrencia(id, ocorrenciaDTO);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/informativo/{id}")
-    public ResponseEntity<Void> atualizarInformativo(@PathVariable String id, @RequestBody Informativo informativo) {
-        publicacaoService.atualizar(id, informativo);
+    public ResponseEntity<Void> atualizarInformativo(@PathVariable String id, @RequestBody InformativoDTO informativoDTO) {
+        publicacaoService.atualizarInformativo(id, informativoDTO);
         return ResponseEntity.noContent().build();
     }
 
@@ -90,8 +98,8 @@ public class PublicacaoController {
         return ResponseEntity.ok(publiHashtags);
     }
 
-    @GetMapping("/usuario")
-    public ResponseEntity<List<Publicacao>> buscarPorIdDoUsuario(@RequestParam String idUsuario){
+    @GetMapping("/por-usuario/{idUsuario}")
+    public ResponseEntity<List<Publicacao>> buscarPorIdDoUsuario(@PathVariable String idUsuario){
         List<Publicacao> publiIdUsuario = publicacaoService.buscarPorIdDoUsuario(idUsuario);
         if(publiIdUsuario == null){
             return ResponseEntity.notFound().build();
