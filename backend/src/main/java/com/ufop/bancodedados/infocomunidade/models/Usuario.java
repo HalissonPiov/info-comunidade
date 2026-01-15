@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 
 @Document(collection="usuarios")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Usuario implements Serializable{
     private static final long serialVersionUID = 1L;

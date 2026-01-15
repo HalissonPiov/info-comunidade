@@ -11,7 +11,7 @@ import com.ufop.bancodedados.infocomunidade.repositories.UsuarioRepository;
 public class UsuarioService {
 
     @Autowired
-    UsuarioRepository usuarioRepositorio;
+    private UsuarioRepository usuarioRepositorio;
 
     public Usuario criaUsuario(Usuario usuario){
         if(usuarioRepositorio.existeUsername(usuario.getUsername())){

@@ -53,6 +53,7 @@ public class UsuarioRepository {
         Update usuarioAtualizado = new Update()
             .set("nome", usuario.getNome())
             .set("username", usuario.getUsername())
+            .set("senha", usuario.getSenha())
             .set("bairro", usuario.getBairro())
             .set("dataNascimento", usuario.getDataNascimento())
             .set("excluido", usuario.isExcluido());

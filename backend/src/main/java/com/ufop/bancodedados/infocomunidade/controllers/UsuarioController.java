@@ -22,7 +22,7 @@ import com.ufop.bancodedados.infocomunidade.services.UsuarioService;
 public class UsuarioController {
 
     @Autowired
-    UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario){
@@ -31,7 +31,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-        public ResponseEntity<Usuario> verificarLogin(@RequestBody LoginDTO login){
+    public ResponseEntity<Usuario> verificarLogin(@RequestBody LoginDTO login){
         Usuario usuario = usuarioService.verificaLogin(login);
         return ResponseEntity.ok(usuario);
     }
@@ -61,7 +61,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/logical/{id}")
-    public ResponseEntity<Void> DeletarLogicamenteUsuarioID(@PathVariable String id) {
+    public ResponseEntity<Void> deletarLogicamenteUsuarioID(@PathVariable String id) {
         usuarioService.deletaLogicamenteUsuario(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
