@@ -45,6 +45,7 @@ public class UsuarioController {
     @GetMapping("/pesquisa/username")
     public ResponseEntity<Usuario> encontrarPeloUsername(@RequestParam String username) {
         var usuario = usuarioService.encontraPorUsername(username);
+        if(usuario == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(usuario);
     }
 
