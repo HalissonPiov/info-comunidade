@@ -23,6 +23,24 @@ body {
   --bg-color: transparent;
 }
 
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  color: #898989;
+  font-size: 0.95rem;
+}
+
+.form-floating,
+.select-container,
+.mb-3 {
+  width: 90%; /* 🔥 aqui está o segredo */
+}
 .title {
   font-weight: bolder;
   font-size: 2rem;
@@ -41,7 +59,7 @@ body {
   padding-top: 0.75rem;
   padding-bottom: 0.25rem;
   font-size: 0.85rem;
-  width: 300px;
+  width: 100%;
   margin-right: 15px;
 }
 
@@ -69,6 +87,50 @@ body {
   box-shadow: none;
   border-bottom: 2px solid var(--color-primary-dark);
   background-color: var(--color-bg);
+}
+
+.button {
+  width: 80px;
+  border-radius: 25px;
+  background-color: var(--color-primary-dark);
+  color: var(--text-color);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.button:hover {
+  opacity: 100%;
+}
+
+.dialog-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+
+mat-form-field {
+  width: 100%;
+}
+
+.custom-input .mat-mdc-text-field-wrapper {
+  background-color: #f5f7fa;
+  border-radius: 8px;
 }
 
 .button {

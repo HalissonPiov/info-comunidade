@@ -1,22 +1,28 @@
-
-  <mat-tab-group>
-    <mat-tab label="Informe-se">
+<mat-tab-group>
+  <mat-tab label="Informe-se">
+    <section class="cards-container">
+      @for (item of PUBLICACAO_DATA; track $index) {
+      <app-card-component [publicacao]="item"></app-card-component>
+      }
+    </section>
+    <mat-tab label="O que está acontecendo na cidade?">
       <section class="cards-container">
-        <app-card-component></app-card-component>
-        <app-card-component></app-card-component>
-      </section>
-      <mat-tab label="O que está acontecendo na cidade?">
-        <section class="cards-container">
-          <app-card-component></app-card-component>
-          <app-card-component></app-card-component>
-        </section>
-      </mat-tab>
+      @for (item of PUBLICACAO_DATA; track $index) {
+      <app-card-component [publicacao]="item"></app-card-component>
+      }
+    </section>
     </mat-tab>
-    <mat-tab label="Acontecimentos">
-      <section class="cards-container">
-        <app-card-component></app-card-component>
-        <app-card-component></app-card-component>
-      </section>
-    </mat-tab>
-  </mat-tab-group>
+  </mat-tab>
+  <mat-tab label="Acontecimentos">
+    <section class="cards-container">
+      @for (item of PUBLICACAO_DATA; track $index) {
+      <app-card-component [publicacao]="item"></app-card-component>
+      }
+    </section>
+  </mat-tab>
+</mat-tab-group>
 
+<button class="fab" (click)="openCreatePublicacaoDialog()">
+  <span class="fab-icon">+</span>
+  <span class="fab-text">Criar publicação</span>
+</button>

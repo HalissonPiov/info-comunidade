@@ -1,3 +1,4 @@
+@if (publicacao) {
 <div class="container">
   <mat-card class="card card-component" appearance="raised">
     <mat-card-header class="header-container card-header">
@@ -5,15 +6,15 @@
         <div class="profile-info">
           <i class="fa-solid fa-user"></i>
           <div>
-            <mat-card-title class="name">{{nomeCompleto}}</mat-card-title>
-            <mat-card-subtitle class="username">{{nomeUsuario}}</mat-card-subtitle>
+            <mat-card-title class="name">{{publicacao.usuario.nome}}</mat-card-title>
+            <mat-card-subtitle class="username">{{publicacao.usuario.username}}</mat-card-subtitle>
           </div>
         </div>
         <div class="options-container">
-          <span class="date">{{date}}</span>
+          <span class="date">{{ publicacao.dataCriacao | date:'d \'de\' MMMM \'de\' y' }}</span>
+          @if(showOptions) {
           <div class="dropdown">
-            <button class="btn" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
@@ -21,19 +22,32 @@
               <li><a class="dropdown-item" href="#">Deletar</a></li>
             </ul>
           </div>
+          }
         </div>
       </div>
     </mat-card-header>
-    <img class="image" mat-card-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    @if(publicacao.imagemURL) {
+    <img *ngIf="publicacao?.imagemURL" mat-card-image class="image" [src]="publicacao.imagemURL"
+      alt="Imagem da publicação" />
+    }
     <mat-card-content class="content">
 
-      <h3 class="card-title">Titulo da publicação</h3>
+      <h3 class="card-title">{{publicacao.titulo}}</h3>
+      @if (publicacao.setor) {
       <p class="card-content">
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
+        Setor: {{publicacao.setor}}
       </p>
-      <p class="hashtags">#alguma coisa</p>
+      }
+      @if(publicacao.publicoAlvo) {
+      <p class="card-content">
+        Público Alvo: {{publicacao.publicoAlvo}}
+      </p>
+      }
+      <p class="card-content">
+        {{publicacao.descricao}}
+      </p>
+      <p class="hashtags">{{publicacao.hashtags}}</p>
     </mat-card-content>
   </mat-card>
 </div>
+}

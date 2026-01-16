@@ -13,3 +13,40 @@ main {
 ::ng-deep .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs > .mat-mdc-tab-header .mat-mdc-tab {
   width: 30%;
 }
+
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 200px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 20px;
+  border-radius: 30px;
+
+  background-color: var(--color-primary-dark);
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+.fab-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
