@@ -42,5 +42,6 @@ mat-form-field {
 .switch a {
   font-weight: bold;
   text-decoration: underline;
+  cursor: pointer;
 }
 

@@ -7,6 +7,7 @@ import { User } from '../../../models/User';
 import { AuthUserService } from '../../../services/auth-user-service';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
+import { Login } from '../model/Login';
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +20,8 @@ export class LoginPage {
   userService = inject(UserService)
   authService = inject(AuthUserService)
   private router = inject(Router);
+
+  isLoginInvalid: boolean = false
 
   ngOnInit() {
     this.authService.logout()
@@ -43,7 +46,24 @@ export class LoginPage {
     dataNascimento: [''],
   });
 
-  onLoginFormSubmit() {}
+  onLoginFormSubmit() {
+    const login: Login = {
+      username: this.loginForm.value.username as string,
+      senha: this.loginForm.value.senha as string
+    }
+
+    this.userService.loginUser(login).subscribe(
+      (response) => {
+        this.router.navigate(['/home']);
+        this.authService.setUser(response)
+        this.isLoginInvalid = false
+      },
+      (err) => {
+        this.isLoginInvalid = true
+        console.log('Erro ao fazer login!', err);
+      }
+    );
+  }
 
   onSingInFormSubmit() {
     const user: User = {
@@ -77,12 +97,10 @@ export class LoginPage {
       )
       .subscribe({
         next: (response) => {
-          console.log('Username já existe');
           this.singinForm.get('username')?.setErrors({ usernameExists: true });
         },
         error: (error) => {
           this.singinForm.get('username')?.setErrors(null);
-          console.log(error)
         }
       });
     }

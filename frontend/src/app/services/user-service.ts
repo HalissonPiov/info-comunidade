@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Login } from '../views/login/model/Login';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,11 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   private BASE_URL: string = 'http://localhost:8080/usuarios';
   constructor(private httpClient: HttpClient) {}
+
+
+  loginUser(login: Login): Observable<any> {
+    return this.httpClient.post(this.BASE_URL + `/login`, login);
+  }
 
   createUser(user: User): Observable<any> {
     return this.httpClient.post(this.BASE_URL, user);

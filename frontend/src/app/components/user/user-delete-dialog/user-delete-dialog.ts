@@ -3,10 +3,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-import { UserService } from '../../../services/user-service';
-import { AuthUserService } from '../../../services/auth-user-service';
 import { Router } from '@angular/router';
+
+import { AuthUserService } from '../../../services/auth-user-service';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-user-delete-dialog',
@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
   ],
   templateUrl: './user-delete-dialog.html',
   styleUrl: './user-delete-dialog.css',

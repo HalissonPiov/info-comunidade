@@ -4,15 +4,20 @@
     <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
       <h1 class="title">Login</h1>
       <div class="form-floating mb-3 floating-compact">
-        <input type="text" class="form-control" id="username" placeholder="" formControlName="username">
-        <label for="username">Nome de usuário</label>
+        <input type="text" class="form-control" id="username" placeholder="" formControlName="username" [class.is-invalid]="isLoginInvalid">
+        <label for="username"
+        >Nome de usuário</label>
       </div>
 
       <div class="form-floating mb-3 floating-compact">
-        <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+        <input type="password" class="form-control" id="senha" placeholder="Senha" formControlName="senha" [class.is-invalid]="isLoginInvalid">
         <label for="senha">Senha</label>
+        <div class="invalid-feedback">
+          Nome de usuário e/ou senha estão incorretos!
+        </div>
       </div>
       <button class="button" type="submit" [disabled]="!loginForm.valid">Fazer login</button>
+
       <p class="switch">
         Não tem conta?
         <a (click)="toggleForm()">Criar conta</a>

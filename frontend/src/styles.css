@@ -29,6 +29,12 @@ body {
   color: var(--color-primary-dark);
 }
 
+.form-floating .invalid-feedback {
+  position: absolute;
+  bottom: -1.5rem;
+  font-size: 0.75rem;
+}
+
 .floating-compact
 .form-control {
   height: 36px;
