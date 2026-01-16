@@ -1,0 +1,58 @@
+<div class="dialog-container-lg dialog-container">
+  <h2>Publicação</h2>
+  <form [formGroup]="publicacaoForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="titulo" placeholder="" formControlName="titulo">
+      <label for="titulo">Título</label>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao">Descrição</label>
+      <textarea type="text" class="form-control" id="descricao" placeholder="" formControlName="descricao"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="formFileSm" class="form-label">Escolher imagem</label>
+      <input class="form-control form-control-sm" id="formFileSm" type="file">
+    </div>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="rua" placeholder="" formControlName="rua">
+      <label for="rua">Rua</label>
+    </div>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">
+      <label for="bairro">Bairro</label>
+    </div>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="complemento" placeholder="" formControlName="complemento">
+      <label for="complemento">Complemento</label>
+    </div>
+    <div class="mb-3 select-container">
+      <label for="tipo">Tipo de publicação</label>
+      <select class="form-select" formControlName="tipo">
+        <option value="" disabled selected>Tipo de publicação</option>
+        <option value="OCORRENCIA">Ocorrência</option>
+        <option value="INFORMATIVO">Informativo</option>
+      </select>
+    </div>
+
+    @if(publicacaoForm.get('tipo')?.value === 'OCORRENCIA') {
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="setor" placeholder="" formControlName="setor">
+      <label for="setor">Setor</label>
+    </div>
+    }
+
+    @if (publicacaoForm.get('tipo')?.value === 'INFORMATIVO') {
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="publicoAlvo" placeholder="" formControlName="publicoAlvo">
+      <label for="publicoAlvo">Público-alvo</label>
+    </div>
+    }
+    <div class="mb-3">
+      <label for="hashtags">Hashtags</label>
+      <textarea type="text" class="form-control" id="hashtags" placeholder="" formControlName="hashtags"></textarea>
+    </div>
+
+    <button class="button" type="submit" [disabled]="!publicacaoForm.valid">Criar</button>
+  </form>
+</div>
