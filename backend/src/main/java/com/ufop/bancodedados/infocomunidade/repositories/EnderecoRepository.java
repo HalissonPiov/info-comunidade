@@ -1,6 +1,5 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 import com.ufop.bancodedados.infocomunidade.models.Endereco;
-import com.ufop.bancodedados.infocomunidade.models.Publicacao;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

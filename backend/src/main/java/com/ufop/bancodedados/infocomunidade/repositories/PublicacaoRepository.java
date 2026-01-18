@@ -32,7 +32,13 @@ public class PublicacaoRepository {
 
     public List<Publicacao> buscarTodas(){
         String mql = "{}";
-        return mongoTemplate.find(new BasicQuery(mql), Publicacao.class, "publicacao");
+        BasicQuery query = new BasicQuery(mql);
+
+        query.with(org.springframework.data.domain.Sort.by(
+                org.springframework.data.domain.Sort.Direction.DESC, "dataCriacao"
+        ));
+
+        return mongoTemplate.find(query, Publicacao.class, "publicacao");
     }
 
     public void atualizar(String id, Publicacao publicacao){
