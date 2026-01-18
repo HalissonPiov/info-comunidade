@@ -2,6 +2,7 @@ package com.ufop.bancodedados.infocomunidade.controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +29,13 @@ public class PublicacaoController {
     private PublicacaoService publicacaoService;
 
     @PostMapping("/ocorrencia")
-    public ResponseEntity<Publicacao> criarOcorrencia(@RequestBody OcorrenciaDTO ocorrenciaDTO){
+    public ResponseEntity<Publicacao> criarOcorrencia(@Valid @RequestBody OcorrenciaDTO ocorrenciaDTO){
         Publicacao pubOcorrencia = publicacaoService.criarOcorrencia(ocorrenciaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pubOcorrencia);
     }
 
     @PostMapping("/informativo")
-    public ResponseEntity<Publicacao> criarInformativo(@RequestBody InformativoDTO informativoDTO){
+    public ResponseEntity<Publicacao> criarInformativo(@Valid @RequestBody InformativoDTO informativoDTO){
         Publicacao pubInformativo = publicacaoService.criarInformativo(informativoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pubInformativo);
     }
