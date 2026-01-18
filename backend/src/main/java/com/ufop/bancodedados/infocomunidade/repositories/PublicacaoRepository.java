@@ -2,6 +2,8 @@ package com.ufop.bancodedados.infocomunidade.repositories;
 
 import java.util.List;
 
+import com.ufop.bancodedados.infocomunidade.models.DTOs.InformativoDTO;
+import com.ufop.bancodedados.infocomunidade.models.DTOs.OcorrenciaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -39,6 +41,16 @@ public class PublicacaoRepository {
         ));
 
         return mongoTemplate.find(query, Publicacao.class, "publicacao");
+    }
+
+    public List<OcorrenciaDTO> buscarTodasOcorrencias() {
+        String mql = "{ \"_class\" : \"ocorrencia\" }";
+        return mongoTemplate.find(new BasicQuery(mql), OcorrenciaDTO.class, "publicacao");
+    }
+
+    public List<InformativoDTO> buscarTodosInformativos() {
+        String mql = "{ \"_class\" : \"informativo\" }";
+        return mongoTemplate.find(new BasicQuery(mql), InformativoDTO.class, "publicacao");
     }
 
     public void atualizar(String id, Publicacao publicacao){

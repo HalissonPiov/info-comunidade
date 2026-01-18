@@ -71,16 +71,11 @@ public class PublicacaoService {
         ocorrencia.setDescricao(ocorrenciaDTO.getDescricao());
         ocorrencia.setHashtags(ocorrenciaDTO.getHashtags());
         ocorrencia.setImagemURL(ocorrenciaDTO.getImagemURL());
-        ocorrencia.setEndereco(endereco);  // pode ficar null
+        ocorrencia.setEndereco(endereco);
         ocorrencia.setSetor(ocorrenciaDTO.getSetor());
-        ocorrencia.setUsuario(usuario);
         ocorrencia.setDataCriacao(LocalDateTime.now());
 
         return publicacaoRepository.criar(ocorrencia);
-    }
-
-    public List<Publicacao> listarTodas() {
-        return publicacaoRepository.buscarTodas();
     }
 
     public void atualizarOcorrencia(String id, OcorrenciaDTO ocorrenciaDTO) {
@@ -129,6 +124,18 @@ public class PublicacaoService {
         informativo.setPublicoAlvo(dto.getPublicoAlvo());
 
         publicacaoRepository.atualizar(id, informativo);
+    }
+
+    public List<Publicacao> buscarTodas() {
+        return publicacaoRepository.buscarTodas();
+    }
+
+    public List<OcorrenciaDTO> buscarTodasOcorrencias() {
+        return publicacaoRepository.buscarTodasOcorrencias();
+    }
+
+    public List<InformativoDTO> buscarTodosInformativo() {
+        return publicacaoRepository.buscarTodosInformativos();
     }
 
     public void deletar(String id) {

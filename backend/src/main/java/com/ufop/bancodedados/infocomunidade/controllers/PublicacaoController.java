@@ -40,11 +40,6 @@ public class PublicacaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pubInformativo);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Publicacao>> listarTodas(){
-        return ResponseEntity.ok(publicacaoService.listarTodas());
-    }
-
     @PutMapping("/ocorrencia/{id}")
     public ResponseEntity<Void> atualizarOcorrencia(@PathVariable String id, @RequestBody OcorrenciaDTO ocorrenciaDTO) {
         publicacaoService.atualizarOcorrencia(id, ocorrenciaDTO);
@@ -55,6 +50,21 @@ public class PublicacaoController {
     public ResponseEntity<Void> atualizarInformativo(@PathVariable String id, @RequestBody InformativoDTO informativoDTO) {
         publicacaoService.atualizarInformativo(id, informativoDTO);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Publicacao>> buscarTodas(){
+        return ResponseEntity.ok(publicacaoService.buscarTodas());
+    }
+
+    @GetMapping("/ocorrencia")
+    public ResponseEntity<List<OcorrenciaDTO>> buscarTodasOcorrencias(){
+        return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias());
+    }
+
+    @GetMapping("informativo")
+    public ResponseEntity<List<InformativoDTO>> buscarTodosInformativos(){
+        return ResponseEntity.ok(publicacaoService.buscarTodosInformativo());
     }
 
     @DeleteMapping("/{id}")
