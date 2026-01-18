@@ -36,7 +36,7 @@ public class PublicacaoRepository {
     }
 
     public void atualizar(String id, Publicacao publicacao){
-        String mqlQuery = "{ \"_id\" : \"" + id + "\" }";
+        String mql = "{ \"_id\" : \"" + id + "\" }";
 
         Update update = new Update()
                 .set("titulo", publicacao.getTitulo())
@@ -51,7 +51,7 @@ public class PublicacaoRepository {
             update.set("publicoAlvo", ((Informativo) publicacao).getPublicoAlvo());
         }
 
-        mongoTemplate.updateFirst(new BasicQuery(mqlQuery), update, Publicacao.class, "publicacao");
+        mongoTemplate.updateFirst(new BasicQuery(mql), update, Publicacao.class, "publicacao");
     }
 
     public void deletar(String id){

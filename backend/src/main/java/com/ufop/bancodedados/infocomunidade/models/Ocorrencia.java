@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.TypeAlias;
 
 @Data
-@EqualsAndHashCode(callSuper = true) // Usado para verificar igualdade considerando atributos da subclasse e também da superclasse
+@EqualsAndHashCode(callSuper = true)
 @TypeAlias("ocorrencia")
 public class Ocorrencia extends Publicacao{
 
