@@ -1,18 +1,17 @@
 package com.ufop.bancodedados.infocomunidade.models;
 
-import lombok.Data;
+import java.io.Serializable;
+
 import org.springframework.data.annotation.Id;
 
-import java.io.Serializable;
+import lombok.Data;
 
 @Data
 public class Endereco implements Serializable {
 
     @Id
     private String idEndereco;
-
     private String rua;
     private String bairro;
-    private String complemento;
 
 }

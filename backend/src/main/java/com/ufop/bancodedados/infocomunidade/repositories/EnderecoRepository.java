@@ -1,13 +1,11 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
-import com.ufop.bancodedados.infocomunidade.models.Endereco;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-@Data
+import com.ufop.bancodedados.infocomunidade.models.Endereco;
 @Repository
 public class EnderecoRepository {
 
@@ -19,8 +17,7 @@ public class EnderecoRepository {
 
         Update update = new Update()
                 .set("rua", endereco.getRua())
-                .set("bairro", endereco.getBairro())
-                .set("complemento", endereco.getComplemento());
+                .set("bairro", endereco.getBairro());
 
         mongoTemplate.updateFirst(new BasicQuery(mql), update, Endereco.class, "endereco");
     }
