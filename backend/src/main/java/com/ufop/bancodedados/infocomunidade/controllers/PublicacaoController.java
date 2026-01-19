@@ -2,11 +2,9 @@ package com.ufop.bancodedados.infocomunidade.controllers;
 
 import java.util.List;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +13,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ufop.bancodedados.infocomunidade.models.DTOs.InformativoDTO;
 import com.ufop.bancodedados.infocomunidade.models.DTOs.OcorrenciaDTO;
 import com.ufop.bancodedados.infocomunidade.models.Publicacao;
 import com.ufop.bancodedados.infocomunidade.services.PublicacaoService;
 
-@Controller
+import jakarta.validation.Valid;
+
+@RestController
 @RequestMapping("publicacao")
 public class PublicacaoController {
 
