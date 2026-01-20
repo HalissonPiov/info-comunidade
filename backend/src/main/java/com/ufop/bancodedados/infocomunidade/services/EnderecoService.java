@@ -30,4 +30,8 @@ public class EnderecoService {
         return enderecoRepository.buscarPorBairro(bairro);
     }
 
+    public List<Endereco> buscarTodos(){
+        return enderecoRepository.buscarTodos();
+    }
+
 }

@@ -39,4 +39,9 @@ public class EnderecoRepository {
         return mongoTemplate.find(new BasicQuery(mql), Endereco.class, "endereco");
     }
 
+    public List<Endereco> buscarTodos(){
+        String mql = "{}";
+        return mongoTemplate.find(new BasicQuery(mql), Endereco.class, "endereco");
+    }
+
 }

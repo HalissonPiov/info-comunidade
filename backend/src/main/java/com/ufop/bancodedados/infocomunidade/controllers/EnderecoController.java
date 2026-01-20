@@ -39,6 +39,12 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoId);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Endereco>> buscarTodos() {
+        List<Endereco> todosEnderecos = enderecoService.buscarTodos();
+        return ResponseEntity.status(HttpStatus.OK).body(todosEnderecos);
+    }
+
     @GetMapping("/rua")
     public ResponseEntity<List<Endereco>> buscarPorRua(@RequestParam String rua){
         List<Endereco> enderecoRua = enderecoService.buscarPorRua(rua);
