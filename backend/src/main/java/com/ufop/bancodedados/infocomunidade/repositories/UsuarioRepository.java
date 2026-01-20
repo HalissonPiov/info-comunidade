@@ -39,7 +39,7 @@ public class UsuarioRepository {
     }
 
     public Usuario encontrarPorUsername(String username){
-        String mql = "{ \"username\" : \"" + username + "\" }";
+        String mql = "{ \"username\" : { \"$regex\" : \"^" + username + "\", \"$options\" : \"i\" } }";
         try {
             Usuario usuario = mongoTemplate.findOne(new BasicQuery(mql), Usuario.class, "usuarios");
             return usuario;
