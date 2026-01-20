@@ -1,9 +1,12 @@
 package com.ufop.bancodedados.infocomunidade.services;
 
-import com.ufop.bancodedados.infocomunidade.models.Endereco;
-import com.ufop.bancodedados.infocomunidade.repositories.EnderecoRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ufop.bancodedados.infocomunidade.models.Endereco;
+import com.ufop.bancodedados.infocomunidade.repositories.EnderecoRepository;
 
 @Service
 public class EnderecoService {
@@ -19,11 +22,11 @@ public class EnderecoService {
         return enderecoRepository.buscarPorId(id);
     }
 
-    public Endereco buscarPorRua(String rua){
+    public List<Endereco> buscarPorRua(String rua){
         return enderecoRepository.buscarPorRua(rua);
     }
 
-    public Endereco buscarPorBairro(String bairro){
+    public List<Endereco> buscarPorBairro(String bairro){
         return enderecoRepository.buscarPorBairro(bairro);
     }
 

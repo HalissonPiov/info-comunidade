@@ -1,4 +1,6 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
@@ -27,14 +29,14 @@ public class EnderecoRepository {
         return mongoTemplate.findOne(new BasicQuery(mql), Endereco.class, "endereco");
     }
 
-    public Endereco buscarPorRua(String rua){
+    public List<Endereco> buscarPorRua(String rua){
         String mql = "{ \"rua\" : { \"$regex\" : \"" + rua + "\", \"$options\" : \"i\" } }";
-        return mongoTemplate.findOne(new BasicQuery(mql), Endereco.class, "endereco");
+        return mongoTemplate.find(new BasicQuery(mql), Endereco.class, "endereco");
     }
 
-    public Endereco buscarPorBairro(String bairro){
+    public List<Endereco> buscarPorBairro(String bairro){
         String mql = "{ \"bairro\" : { \"$regex\" : \"" + bairro + "\", \"$options\" : \"i\" } }";
-        return mongoTemplate.findOne(new BasicQuery(mql), Endereco.class, "endereco");
+        return mongoTemplate.find(new BasicQuery(mql), Endereco.class, "endereco");
     }
 
 }
