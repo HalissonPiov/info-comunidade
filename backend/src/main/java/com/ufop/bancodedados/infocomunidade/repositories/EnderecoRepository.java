@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.ufop.bancodedados.infocomunidade.models.Endereco;
@@ -13,16 +12,6 @@ public class EnderecoRepository {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-
-    public void atualizar(String id, Endereco endereco){
-        String mql = "{ \"_id\" : \"" + id + "\" }";
-
-        Update update = new Update()
-                .set("rua", endereco.getRua())
-                .set("bairro", endereco.getBairro());
-
-        mongoTemplate.updateFirst(new BasicQuery(mql), update, Endereco.class, "endereco");
-    }
 
     public Endereco buscarPorId(String id){
         String mql = "{ \"_id\" : \"" + id + "\" }";

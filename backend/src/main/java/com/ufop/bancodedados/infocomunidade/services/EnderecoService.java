@@ -14,10 +14,6 @@ public class EnderecoService {
     @Autowired
     public EnderecoRepository enderecoRepository;
 
-    public void atualizar(String id, Endereco endereco ){
-      enderecoRepository.atualizar(id, endereco);
-    }
-
     public Endereco buscarPorId(String id){
         return enderecoRepository.buscarPorId(id);
     }
