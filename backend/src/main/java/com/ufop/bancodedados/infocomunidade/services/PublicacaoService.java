@@ -28,22 +28,16 @@ public class PublicacaoService {
         Endereco endereco = null;
         
         if(usuario == null){
-            throw new IllegalArgumentException("Usuário não encontrado, por isso não é possível criar um publicacão");
+            throw new IllegalArgumentException("Usuário não encontrado, por isso não é possível criar uma publicacão");
         }
 
-        if(informativoDTO.getEnderecoId() != null){
-            //aqui vai ter a funcao de buscar por endereco via id quando tiver pronta
-            if(endereco == null){
-                throw new IllegalArgumentException("Endereço passado não encontrado, por isso não é possível criar um publicacão");
-            }
-        }
         
         Informativo informativo = new Informativo();
         informativo.setTitulo(informativoDTO.getTitulo());
         informativo.setDescricao(informativoDTO.getDescricao());
         informativo.setHashtags(informativoDTO.getHashtags());
         informativo.setImagemURL(informativoDTO.getImagemURL());
-        informativo.setEndereco(endereco);  // pode ficar null
+        informativo.setEndereco(endereco);
         informativo.setPublicoAlvo(informativoDTO.getPublicoAlvo());
         informativo.setUsuario(usuario);
         informativo.setDataCriacao(LocalDateTime.now());
@@ -59,12 +53,6 @@ public class PublicacaoService {
             throw new IllegalArgumentException("Usuário não encontrado, por isso não é possível criar um publicacão");
         }
 
-        if(ocorrenciaDTO.getEnderecoId() != null){
-            //aqui vai ter a funcao de buscar por endereco via id quando tiver pronta
-            if(endereco == null){
-                throw new IllegalArgumentException("Endereço passado não encontrado, por isso não é possível criar um publicacão");
-            }
-        }
         
         Ocorrencia ocorrencia = new Ocorrencia();
         ocorrencia.setTitulo(ocorrenciaDTO.getTitulo());
@@ -130,11 +118,11 @@ public class PublicacaoService {
         return publicacaoRepository.buscarTodas();
     }
 
-    public List<OcorrenciaDTO> buscarTodasOcorrencias() {
+    public List<Ocorrencia> buscarTodasOcorrencias() {
         return publicacaoRepository.buscarTodasOcorrencias();
     }
 
-    public List<InformativoDTO> buscarTodosInformativo() {
+    public List<Informativo> buscarTodosInformativo() {
         return publicacaoRepository.buscarTodosInformativos();
     }
 

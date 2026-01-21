@@ -2,6 +2,8 @@ package com.ufop.bancodedados.infocomunidade.controllers;
 
 import java.util.List;
 
+import com.ufop.bancodedados.infocomunidade.models.Informativo;
+import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,12 +61,12 @@ public class PublicacaoController {
     }
 
     @GetMapping("/ocorrencia")
-    public ResponseEntity<List<OcorrenciaDTO>> buscarTodasOcorrencias(){
+    public ResponseEntity<List<Ocorrencia>> buscarTodasOcorrencias(){
         return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias());
     }
 
     @GetMapping("informativo")
-    public ResponseEntity<List<InformativoDTO>> buscarTodosInformativos(){
+    public ResponseEntity<List<Informativo>> buscarTodosInformativos(){
         return ResponseEntity.ok(publicacaoService.buscarTodosInformativo());
     }
 

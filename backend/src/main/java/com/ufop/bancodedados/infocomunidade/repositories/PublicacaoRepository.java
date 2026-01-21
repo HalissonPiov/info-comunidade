@@ -43,14 +43,14 @@ public class PublicacaoRepository {
         return mongoTemplate.find(query, Publicacao.class, "publicacao");
     }
 
-    public List<OcorrenciaDTO> buscarTodasOcorrencias() {
+    public List<Ocorrencia> buscarTodasOcorrencias() {
         String mql = "{ \"_class\" : \"ocorrencia\" }";
-        return mongoTemplate.find(new BasicQuery(mql), OcorrenciaDTO.class, "publicacao");
+        return mongoTemplate.find(new BasicQuery(mql), Ocorrencia.class, "publicacao");
     }
 
-    public List<InformativoDTO> buscarTodosInformativos() {
+    public List<Informativo> buscarTodosInformativos() {
         String mql = "{ \"_class\" : \"informativo\" }";
-        return mongoTemplate.find(new BasicQuery(mql), InformativoDTO.class, "publicacao");
+        return mongoTemplate.find(new BasicQuery(mql), Informativo.class, "publicacao");
     }
 
     public void atualizar(String id, Publicacao publicacao){
