@@ -14,17 +14,22 @@
       <label for="formFileSm" class="form-label">Escolher imagem</label>
       <input class="form-control form-control-sm" id="formFileSm" type="file">
     </div>
-    <div class="form-floating mb-3 floating-compact">
-      <input type="text" class="form-control" id="rua" placeholder="" formControlName="rua">
-      <label for="rua">Rua</label>
-    </div>
-    <div class="form-floating mb-3 floating-compact">
-      <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">
+
+    <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
+      <select class="form-select" formControlName="bairro">
+        @for (endereco of ENDERECO_DATA; track $index) {
+        <option [value]="endereco.bairro">{{endereco.bairro | titlecase}}</option>
+        }
+      </select>
     </div>
-    <div class="form-floating mb-3 floating-compact">
-      <input type="text" class="form-control" id="complemento" placeholder="" formControlName="complemento">
-      <label for="complemento">Complemento</label>
+    <div class="mb-3 select-container">
+      <label for="rua">Rua</label>
+      <select class="form-select" formControlName="rua">
+        @for (endereco of ENDERECO_POR_BAIRRO_DATA | async; track $index) {
+        <option [value]="endereco.id">{{endereco.rua | titlecase}}</option>
+        }
+      </select>
     </div>
     <div class="mb-3 select-container">
       <label for="tipo">Tipo de publicação</label>
@@ -50,7 +55,7 @@
     }
     <div class="mb-3">
       <label for="hashtags">Hashtags</label>
-      <textarea type="text" class="form-control" id="hashtags" placeholder="" formControlName="hashtags"></textarea>
+      <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag1, hashtag2" formControlName="hashtags"></textarea>
     </div>
 
     <button class="button" type="submit" [disabled]="!publicacaoForm.valid">Criar</button>

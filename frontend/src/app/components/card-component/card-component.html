@@ -26,10 +26,10 @@
         </div>
       </div>
     </mat-card-header>
-    @if(publicacao.imagemURL) {
-    <img *ngIf="publicacao?.imagemURL" mat-card-image class="image" [src]="publicacao.imagemURL"
+    <!-- @if(publicacao.imagemURL) {
+    <img mat-card-image class="image" [src]="publicacao.imagemURL"
       alt="Imagem da publicação" />
-    }
+    } -->
     <mat-card-content class="content">
 
       <h3 class="card-title">{{publicacao.titulo}}</h3>
@@ -46,7 +46,11 @@
       <p class="card-content">
         {{publicacao.descricao}}
       </p>
-      <p class="hashtags">{{publicacao.hashtags}}</p>
+      <p class="hashtags">
+        @for (hashtag of publicacao.hashtags; track $index) {
+          <span class="hashtag">#{{hashtag}}</span>
+        }
+      </p>
     </mat-card-content>
   </mat-card>
 </div>

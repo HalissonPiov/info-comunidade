@@ -1,7 +1,7 @@
 <mat-tab-group>
   <mat-tab label="Informe-se">
     <section class="cards-container">
-      @for (item of PUBLICACAO_DATA; track $index) {
+      @for (item of INFORMATIVO_DATA; track $index) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
@@ -15,7 +15,7 @@
   </mat-tab>
   <mat-tab label="Acontecimentos">
     <section class="cards-container">
-      @for (item of PUBLICACAO_DATA; track $index) {
+      @for (item of OCORRECIA_DATA; track $index) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>

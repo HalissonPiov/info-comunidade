@@ -12,39 +12,61 @@ import { Route, Router } from '@angular/router';
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
-export class HomePage implements OnInit{
-
-  public PUBLICACAO_DATA: Publicacao[] = []
+export class HomePage implements OnInit {
+  public PUBLICACAO_DATA: Publicacao[] = [];
+  public INFORMATIVO_DATA: Publicacao[] = [];
+  public OCORRECIA_DATA: Publicacao[] = [];
   readonly dialog = inject(MatDialog);
-  publicacaoService: PublicacaoService = inject(PublicacaoService)
+  publicacaoService: PublicacaoService = inject(PublicacaoService);
 
   ngOnInit(): void {
-    this.findAllPublicacoes()
+    this.findAllPublicacoes();
+    this.findAllOcorrencia();
+    this.findInformativos();
   }
 
   openCreatePublicacaoDialog(): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '900px',
       maxWidth: '95vw',
-      data: { },
+      data: {},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-      }
+      this.ngOnInit()
     });
   }
 
   findAllPublicacoes() {
-    this.publicacaoService.findAll()
-    .subscribe(
+    this.publicacaoService.findAll().subscribe(
       (response) => {
-        this.PUBLICACAO_DATA = response
+        this.PUBLICACAO_DATA = response;
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);
-      }
+      },
+    );
+  }
+
+  findAllOcorrencia() {
+    this.publicacaoService.findOcorrecia().subscribe(
+      (response) => {
+        this.OCORRECIA_DATA = response;
+      },
+      (err) => {
+        console.log('Erro ao buscar publicações!', err);
+      },
+    );
+  }
+
+  findInformativos() {
+    this.publicacaoService.findInformativos().subscribe(
+      (response) => {
+        this.OCORRECIA_DATA = response;
+      },
+      (err) => {
+        console.log('Erro ao buscar publicações!', err);
+      },
     );
   }
 }
