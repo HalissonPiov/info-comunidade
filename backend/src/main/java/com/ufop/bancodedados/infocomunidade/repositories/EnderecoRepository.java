@@ -33,4 +33,13 @@ public class EnderecoRepository {
         return mongoTemplate.find(new BasicQuery(mql), Endereco.class, "endereco");
     }
 
+    public long contar(){
+        String mql = "{}";
+        return mongoTemplate.count(new BasicQuery(mql), "endereco");
+    }
+
+    public Endereco salvar(Endereco endereco){
+        return mongoTemplate.save(endereco);
+    }
+
 }
