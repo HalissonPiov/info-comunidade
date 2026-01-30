@@ -3,6 +3,7 @@ package com.ufop.bancodedados.infocomunidade.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.ufop.bancodedados.infocomunidade.repositories.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +24,12 @@ public class PublicacaoService {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     public Publicacao criarInformativo(InformativoDTO informativoDTO){
         var usuario = usuarioService.encontraPorID(informativoDTO.getUsuarioId());
-        Endereco endereco = null;
+        Endereco endereco = enderecoRepository.buscarPorId(informativoDTO.getEnderecoId());
         
         if(usuario == null){
             throw new IllegalArgumentException("Usuário não encontrado, por isso não é possível criar uma publicacão");
@@ -47,7 +51,7 @@ public class PublicacaoService {
 
     public Publicacao criarOcorrencia(OcorrenciaDTO ocorrenciaDTO){
         var usuario = usuarioService.encontraPorID(ocorrenciaDTO.getUsuarioId());
-        Endereco endereco = null;
+        Endereco endereco = enderecoRepository.buscarPorId(ocorrenciaDTO.getEnderecoId());
         
         if(usuario == null){
             throw new IllegalArgumentException("Usuário não encontrado, por isso não é possível criar um publicacão");
@@ -62,6 +66,9 @@ public class PublicacaoService {
         ocorrencia.setEndereco(endereco);
         ocorrencia.setSetor(ocorrenciaDTO.getSetor());
         ocorrencia.setDataCriacao(LocalDateTime.now());
+        ocorrencia.setUsuario(usuario);
+
+        System.out.println(ocorrencia);
 
         return publicacaoRepository.criar(ocorrencia);
     }
@@ -71,21 +78,14 @@ public class PublicacaoService {
         if (ocorrencia == null) {
             throw new IllegalArgumentException("Ocorrência não encontrada");
         }
+        Endereco endereco = enderecoRepository.buscarPorId(ocorrenciaDTO.getEnderecoId());
 
         ocorrencia.setTitulo(ocorrenciaDTO.getTitulo());
         ocorrencia.setDescricao(ocorrenciaDTO.getDescricao());
         ocorrencia.setHashtags(ocorrenciaDTO.getHashtags());
         ocorrencia.setImagemURL(ocorrenciaDTO.getImagemURL());
-
-        if (ocorrenciaDTO.getEnderecoId() != null) {
-            //aqui vai ter a funcao de buscar por endereco via id quando tiver pronta
-            //if (endereco == null) {
-                //throw new IllegalArgumentException("Endereço não encontrado");
-            //}
-            //existente.setEndereco(endereco);
-        }
-
         ocorrencia.setSetor(ocorrenciaDTO.getSetor());
+        ocorrencia.setEndereco(endereco);
 
         publicacaoRepository.atualizar(id, ocorrencia);
     }
@@ -96,19 +96,13 @@ public class PublicacaoService {
             throw new IllegalArgumentException("Informativo não encontrado");
         }
 
+        Endereco endereco = enderecoRepository.buscarPorId(dto.getEnderecoId());
+
         informativo.setTitulo(dto.getTitulo());
         informativo.setDescricao(dto.getDescricao());
         informativo.setHashtags(dto.getHashtags());
         informativo.setImagemURL(dto.getImagemURL());
-
-        if (dto.getEnderecoId() != null) {
-            //aqui vai ter a funcao de buscar por endereco via id quando tiver pronta
-            //if (endereco == null) {
-                //throw new IllegalArgumentException("Endereço não encontrado");
-            //}
-            //existente.setEndereco(endereco);
-        }
-
+        informativo.setEndereco(endereco);
         informativo.setPublicoAlvo(dto.getPublicoAlvo());
 
         publicacaoRepository.atualizar(id, informativo);
