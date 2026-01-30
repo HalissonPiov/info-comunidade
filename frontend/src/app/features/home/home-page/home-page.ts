@@ -52,6 +52,7 @@ export class HomePage implements OnInit {
     this.publicacaoService.findOcorrecia().subscribe(
       (response) => {
         this.OCORRECIA_DATA = response;
+
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);
@@ -62,7 +63,7 @@ export class HomePage implements OnInit {
   findInformativos() {
     this.publicacaoService.findInformativos().subscribe(
       (response) => {
-        this.OCORRECIA_DATA = response;
+        this.INFORMATIVO_DATA = response;
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);

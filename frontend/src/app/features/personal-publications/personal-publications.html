@@ -1,4 +1,17 @@
+<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';" class="breadcrumb-container">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" aria-current="page">
+      <a href="/home">
+        <i class="fa fa-home"></i>
+        Página inicial
+
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Minhas publicações</li>
+  </ol>
+</nav>
 <section class="cards-container">
+
   @for (item of PUBLICACAO_DATA; track $index) {
   <app-card-component [publicacao]="item"></app-card-component>
   }
