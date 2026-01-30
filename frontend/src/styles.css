@@ -5,7 +5,9 @@ body {
 }
 
 * {
-  transition: 0.3s ease, color 0.3s ease;
+  transition:
+    0.3s ease,
+    color 0.3s ease;
 }
 
 :root {
@@ -53,8 +55,7 @@ label {
   font-size: 0.75rem;
 }
 
-.floating-compact
-.form-control {
+.floating-compact .form-control {
   height: 36px;
   padding-top: 0.75rem;
   padding-bottom: 0.25rem;
@@ -80,9 +81,9 @@ label {
   padding-top: 1.8rem;
 }
 
-.floating-compact input[type="text"]:focus,
-.floating-compact input[type="password"]:focus,
-.floating-compact input[type="date"]:focus,
+.floating-compact input[type='text']:focus,
+.floating-compact input[type='password']:focus,
+.floating-compact input[type='date']:focus,
 .accordion-button:focus {
   box-shadow: none;
   border-bottom: 2px solid var(--color-primary-dark);
@@ -122,8 +123,6 @@ h2 {
   font-weight: bold;
 }
 
-
-
 mat-form-field {
   width: 100%;
 }
@@ -148,4 +147,50 @@ mat-form-field {
 
 .button:hover {
   opacity: 100%;
+}
+
+.cards-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 200px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 20px;
+  border-radius: 30px;
+
+  background-color: var(--color-primary-dark);
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+.fab-icon {
+  font-size: 1.5rem;
+  line-height: 1;
 }

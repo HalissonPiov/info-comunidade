@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ocorrencia } from '../models/Ocorrencia';
 import { Informativo } from '../models/Informativo';
+import { Publicacao } from '../models/Publicacao';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,10 @@ export class PublicacaoService {
 
   saveInformativo(informativo: Informativo) {
     return this.httpClient.post(this.BASE_URL+"/informativo", informativo);
+  }
+
+  findAllByUserId(userId: string): Observable<Publicacao[]>  {
+    return this.httpClient.get<Publicacao[]>(this.BASE_URL + `/por-usuario/${userId}`)
   }
 
 

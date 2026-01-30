@@ -1,4 +1,4 @@
-import { PublicacaoService } from './../../../services/publicacao-service';
+import { PublicacaoService } from '../../../services/publicacao-service';
 import { Component, inject, OnInit } from '@angular/core';
 import { SharedModule } from '../../../shared/shared-module';
 import { PublicacaoFormComponent } from '../../../components/publicacao/publicacao-form-component/publicacao-form-component';
