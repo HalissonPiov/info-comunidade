@@ -1,10 +1,12 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ufop.bancodedados.infocomunidade.models.DTOs.InformativoDTO;
 import com.ufop.bancodedados.infocomunidade.models.DTOs.OcorrenciaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
@@ -51,6 +53,35 @@ public class PublicacaoRepository {
     public List<Informativo> buscarTodosInformativos() {
         String mql = "{ \"_class\" : \"informativo\" }";
         return mongoTemplate.find(new BasicQuery(mql), Informativo.class, "publicacao");
+    }
+
+    public List<Publicacao> buscarComFiltros(String tipoClasse, String titulo, String bairro) {
+
+        StringBuilder mql = new StringBuilder();
+        mql.append("{");
+
+        List<String> condicoes = new ArrayList<>();
+
+        if (tipoClasse != null) {
+            condicoes.add("\"_class\": \"" + tipoClasse + "\"");
+        }
+
+        if (titulo != null && !titulo.isBlank()) {
+            condicoes.add("\"titulo\": { \"$regex\": \"" + titulo + "\", \"$options\": \"i\" }");
+        }
+
+        if (bairro != null && !bairro.isBlank()) {
+            condicoes.add("\"endereco.bairro\": { \"$regex\": \"" + bairro + "\", \"$options\": \"i\" }");
+        }
+
+        // Operação and
+        mql.append(String.join(", ", condicoes));
+        mql.append("}");
+
+        BasicQuery query = new BasicQuery(mql.toString());
+        query.with(Sort.by(Sort.Direction.DESC, "dataCriacao"));
+
+        return mongoTemplate.find(query, Publicacao.class, "publicacao");
     }
 
     public void atualizar(String id, Publicacao publicacao){

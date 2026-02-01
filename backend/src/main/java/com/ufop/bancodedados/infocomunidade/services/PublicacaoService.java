@@ -108,16 +108,20 @@ public class PublicacaoService {
         publicacaoRepository.atualizar(id, informativo);
     }
 
-    public List<Publicacao> buscarTodas() {
-        return publicacaoRepository.buscarTodas();
+    public List<Publicacao> buscarTodas(String titulo, String bairro) {
+        return publicacaoRepository.buscarComFiltros(null, titulo, bairro);
     }
 
-    public List<Ocorrencia> buscarTodasOcorrencias() {
-        return publicacaoRepository.buscarTodasOcorrencias();
+    @SuppressWarnings("unchecked")
+    public List<Ocorrencia> buscarTodasOcorrencias(String titulo, String bairro) {
+        List<Publicacao> resultados = publicacaoRepository.buscarComFiltros("ocorrencia", titulo, bairro);
+        return (List<Ocorrencia>)(List<?>) resultados;
     }
 
-    public List<Informativo> buscarTodosInformativo() {
-        return publicacaoRepository.buscarTodosInformativos();
+    @SuppressWarnings("unchecked")
+    public List<Informativo> buscarTodosInformativos(String titulo, String bairro) {
+        List<Publicacao> resultados = publicacaoRepository.buscarComFiltros("informativo", titulo, bairro);
+        return (List<Informativo>)(List<?>) resultados;
     }
 
     public void deletar(String id) {

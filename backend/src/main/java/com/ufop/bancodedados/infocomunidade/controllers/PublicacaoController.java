@@ -56,18 +56,24 @@ public class PublicacaoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Publicacao>> buscarTodas(){
-        return ResponseEntity.ok(publicacaoService.buscarTodas());
+    public ResponseEntity<List<Publicacao>> buscarTodas(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String bairro) {
+        return ResponseEntity.ok(publicacaoService.buscarTodas(titulo, bairro));
     }
 
     @GetMapping("/ocorrencia")
-    public ResponseEntity<List<Ocorrencia>> buscarTodasOcorrencias(){
-        return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias());
+    public ResponseEntity<List<Ocorrencia>> buscarTodasOcorrencias(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String bairro) {
+        return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias(titulo, bairro));
     }
 
-    @GetMapping("informativo")
-    public ResponseEntity<List<Informativo>> buscarTodosInformativos(){
-        return ResponseEntity.ok(publicacaoService.buscarTodosInformativo());
+    @GetMapping("/informativo")
+    public ResponseEntity<List<Informativo>> buscarTodosInformativos(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String bairro) {
+        return ResponseEntity.ok(publicacaoService.buscarTodosInformativos(titulo, bairro));
     }
 
     @DeleteMapping("/{id}")
