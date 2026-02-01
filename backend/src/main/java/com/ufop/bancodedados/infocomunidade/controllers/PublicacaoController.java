@@ -1,10 +1,12 @@
 package com.ufop.bancodedados.infocomunidade.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.ufop.bancodedados.infocomunidade.models.Informativo;
 import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -58,22 +60,38 @@ public class PublicacaoController {
     @GetMapping
     public ResponseEntity<List<Publicacao>> buscarTodas(
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String bairro) {
-        return ResponseEntity.ok(publicacaoService.buscarTodas(titulo, bairro));
+            @RequestParam(required = false) String bairro,
+            @RequestParam(required = false) String rua,
+            @RequestParam(required = false) String hashtags,
+            @RequestParam(required = false) String setor,
+            @RequestParam(required = false) String publicoAlvo,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataCriacao) {
+
+        return ResponseEntity.ok(publicacaoService.buscarTodas(titulo, bairro, rua, hashtags, setor, publicoAlvo, dataCriacao));
     }
 
     @GetMapping("/ocorrencia")
     public ResponseEntity<List<Ocorrencia>> buscarTodasOcorrencias(
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String bairro) {
-        return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias(titulo, bairro));
+            @RequestParam(required = false) String bairro,
+            @RequestParam(required = false) String rua,
+            @RequestParam(required = false) String hashtags,
+            @RequestParam(required = false) String setor,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataCriacao) {
+
+        return ResponseEntity.ok(publicacaoService.buscarTodasOcorrencias(titulo, bairro, rua, hashtags, setor, dataCriacao));
     }
 
     @GetMapping("/informativo")
     public ResponseEntity<List<Informativo>> buscarTodosInformativos(
             @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String bairro) {
-        return ResponseEntity.ok(publicacaoService.buscarTodosInformativos(titulo, bairro));
+            @RequestParam(required = false) String bairro,
+            @RequestParam(required = false) String rua,
+            @RequestParam(required = false) String hashtags,
+            @RequestParam(required = false) String publicoAlvo,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataCriacao) {
+
+        return ResponseEntity.ok(publicacaoService.buscarTodosInformativos(titulo, bairro, rua, hashtags, publicoAlvo, dataCriacao));
     }
 
     @DeleteMapping("/{id}")

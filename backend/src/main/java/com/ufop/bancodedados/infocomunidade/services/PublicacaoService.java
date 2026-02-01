@@ -1,5 +1,6 @@
 package com.ufop.bancodedados.infocomunidade.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -108,20 +109,20 @@ public class PublicacaoService {
         publicacaoRepository.atualizar(id, informativo);
     }
 
-    public List<Publicacao> buscarTodas(String titulo, String bairro) {
-        return publicacaoRepository.buscarComFiltros(null, titulo, bairro);
+    public List<Publicacao> buscarTodas(String titulo, String bairro, String rua, String hashtags, String setor, String publicoAlvo, LocalDate dataCriacao) {
+        return publicacaoRepository.buscarComFiltros(null, titulo, bairro, rua, hashtags, setor, publicoAlvo, dataCriacao);
     }
 
     @SuppressWarnings("unchecked")
-    public List<Ocorrencia> buscarTodasOcorrencias(String titulo, String bairro) {
-        List<Publicacao> resultados = publicacaoRepository.buscarComFiltros("ocorrencia", titulo, bairro);
-        return (List<Ocorrencia>)(List<?>) resultados;
+    public List<Ocorrencia> buscarTodasOcorrencias(String titulo, String bairro, String rua, String hashtags, String setor, LocalDate dataCriacao) {
+        List<Publicacao> ocorrencias = publicacaoRepository.buscarComFiltros("ocorrencia", titulo, bairro, rua, hashtags, setor, null, dataCriacao);
+        return (List<Ocorrencia>)(List<?>) ocorrencias;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Informativo> buscarTodosInformativos(String titulo, String bairro) {
-        List<Publicacao> resultados = publicacaoRepository.buscarComFiltros("informativo", titulo, bairro);
-        return (List<Informativo>)(List<?>) resultados;
+    public List<Informativo> buscarTodosInformativos(String titulo, String bairro, String rua, String hashtags, String publicoAlvo, LocalDate dataCriacao) {
+        List<Publicacao> informativos = publicacaoRepository.buscarComFiltros("informativo", titulo, bairro, rua, hashtags, null, publicoAlvo, dataCriacao);
+        return (List<Informativo>)(List<?>) informativos;
     }
 
     public void deletar(String id) {

@@ -1,5 +1,7 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,35 +36,40 @@ public class PublicacaoRepository {
         return mongoTemplate.findOne(new BasicQuery(mql), Publicacao.class, "publicacao");
     }
 
-    public List<Publicacao> buscarTodas(){
-        String mql = "{}";
-        BasicQuery query = new BasicQuery(mql);
+//    public List<Publicacao> buscarTodas(){
+//        String mql = "{}";
+//        BasicQuery query = new BasicQuery(mql);
+//
+//        query.with(org.springframework.data.domain.Sort.by(
+//                org.springframework.data.domain.Sort.Direction.DESC, "dataCriacao"
+//        ));
+//
+//        return mongoTemplate.find(query, Publicacao.class, "publicacao");
+//    }
+//
+//    public List<Ocorrencia> buscarTodasOcorrencias() {
+//        String mql = "{ \"_class\" : \"ocorrencia\" }";
+//        return mongoTemplate.find(new BasicQuery(mql), Ocorrencia.class, "publicacao");
+//    }
+//
+//    public List<Informativo> buscarTodosInformativos() {
+//        String mql = "{ \"_class\" : \"informativo\" }";
+//        return mongoTemplate.find(new BasicQuery(mql), Informativo.class, "publicacao");
+//    }
 
-        query.with(org.springframework.data.domain.Sort.by(
-                org.springframework.data.domain.Sort.Direction.DESC, "dataCriacao"
-        ));
-
-        return mongoTemplate.find(query, Publicacao.class, "publicacao");
-    }
-
-    public List<Ocorrencia> buscarTodasOcorrencias() {
-        String mql = "{ \"_class\" : \"ocorrencia\" }";
-        return mongoTemplate.find(new BasicQuery(mql), Ocorrencia.class, "publicacao");
-    }
-
-    public List<Informativo> buscarTodosInformativos() {
-        String mql = "{ \"_class\" : \"informativo\" }";
-        return mongoTemplate.find(new BasicQuery(mql), Informativo.class, "publicacao");
-    }
-
-    public List<Publicacao> buscarComFiltros(String tipoClasse, String titulo, String bairro) {
-
-        StringBuilder mql = new StringBuilder();
-        mql.append("{");
+    public List<Publicacao> buscarComFiltros(
+            String tipoClasse,
+            String titulo,
+            String bairro,
+            String rua,
+            String hashtags,
+            String setor,
+            String publicoAlvo,
+            LocalDate dataCriacao) {
 
         List<String> condicoes = new ArrayList<>();
 
-        if (tipoClasse != null) {
+        if (tipoClasse != null && !tipoClasse.isBlank()) {
             condicoes.add("\"_class\": \"" + tipoClasse + "\"");
         }
 
@@ -73,9 +80,36 @@ public class PublicacaoRepository {
         if (bairro != null && !bairro.isBlank()) {
             condicoes.add("\"endereco.bairro\": { \"$regex\": \"" + bairro + "\", \"$options\": \"i\" }");
         }
+        if (rua != null && !rua.isBlank()) {
+            condicoes.add("\"endereco.rua\": { \"$regex\": \"" + rua + "\", \"$options\": \"i\" }");
+        }
 
-        // Operação and
-        mql.append(String.join(", ", condicoes));
+        if (hashtags != null && !hashtags.isBlank()) {
+            condicoes.add("\"hashtags\": { \"$regex\": \"" + hashtags + "\", \"$options\": \"i\" }");
+        }
+
+        if (setor != null && !setor.isBlank()) {
+            condicoes.add("\"setor\": { \"$regex\": \"" + setor + "\", \"$options\": \"i\" }");
+        }
+        if (publicoAlvo != null && !publicoAlvo.isBlank()) {
+            condicoes.add("\"publicoAlvo\": { \"$regex\": \"" + publicoAlvo + "\", \"$options\": \"i\" }");
+        }
+
+        // Filtro de Data de Criação: Formato yyyy-MM-dd
+        if (dataCriacao != null) {
+            String inicioDia = dataCriacao.toString() + "T00:00:00Z";
+            String fimDia = dataCriacao.toString() + "T23:59:59Z";
+
+            String filtroData = String.format(
+                    "\"dataCriacao\": { \"$gte\": { \"$date\": \"%s\" }, \"$lte\": { \"$date\": \"%s\" } }",
+                    inicioDia, fimDia
+            );
+            condicoes.add(filtroData);
+        }
+
+        StringBuilder mql = new StringBuilder();
+        mql.append("{");
+        mql.append(String.join(", ", condicoes)); // Operação and com vírgula
         mql.append("}");
 
         BasicQuery query = new BasicQuery(mql.toString());
