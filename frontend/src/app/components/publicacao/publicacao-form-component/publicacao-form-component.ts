@@ -29,6 +29,7 @@ export class PublicacaoFormComponent implements OnInit {
   private publicacaoService: PublicacaoService = inject(PublicacaoService);
 
   public ENDERECO_DATA: Endereco[] = [];
+  public BAIRROS_UNICOS: string[] = [];
   public ENDERECO_POR_BAIRRO_DATA!: Observable<any[]>;
 
   public publicacaoForm = this.formBuilder.group({
@@ -74,6 +75,8 @@ export class PublicacaoFormComponent implements OnInit {
     this.enderecoService.findAll().subscribe(
       (response) => {
         this.ENDERECO_DATA = response;
+        const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
+        this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
       },
       (err) => {
         console.log('Erro ao buscar endereços!', err);
