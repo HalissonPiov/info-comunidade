@@ -1,11 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { Publicacao } from '../../models/Publicacao';
 import { PublicacaoFormComponent } from '../publicacao/publicacao-form-component/publicacao-form-component';
+import { PublicacaoDeleteDialog } from '../publicacao/publicacao-delete-dialog/publicacao-delete-dialog';
 
 @Component({
   selector: 'app-card-component',
@@ -21,17 +22,35 @@ export class CardComponent {
   @Input() nomeCompleto: string = '';
   @Input() date: string = '';
 
+  @Output() updated = new EventEmitter<void>();
+  @Output() deleted = new EventEmitter<void>();
+
   readonly dialog = inject(MatDialog);
 
-  openCreatePublicacaoDialog(publicacao: Publicacao): void {
+  openUpdatePublicacaoDialog(publicacao: Publicacao): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '700px',
       maxWidth: '95vw',
-      data: {publicacao: publicacao, isCreating: false},
+      data: { publicacao: publicacao, isCreating: false },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.updated.emit();
+      }
+    });
+  }
 
+  openDeletePublicacaoDialog(publicacao: Publicacao): void {
+    const dialogRef = this.dialog.open(PublicacaoDeleteDialog, {
+      width: '300px',
+      data: { publicacao },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.deleted.emit();
+      }
     });
   }
 }

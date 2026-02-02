@@ -44,7 +44,7 @@ export class PersonalPublications implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.ngOnInit();
+      this.findPersonalPublications();
     });
   }
 }

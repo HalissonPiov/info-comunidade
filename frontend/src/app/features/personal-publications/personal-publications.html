@@ -4,7 +4,6 @@
       <a href="/home">
         <i class="fa fa-home"></i>
         Página inicial
-
       </a>
     </li>
     <li class="breadcrumb-item active" aria-current="page">Minhas publicações</li>
@@ -13,7 +12,12 @@
 <section class="cards-container">
 
   @for (item of PUBLICACAO_DATA; track $index) {
-  <app-card-component [showOptions]="true" [publicacao]="item"></app-card-component>
+  <app-card-component
+    [showOptions]="true"
+    [publicacao]="item"
+    (updated)="findPersonalPublications()"
+    (deleted)="findPersonalPublications()">
+  </app-card-component>
   }
 </section>
 

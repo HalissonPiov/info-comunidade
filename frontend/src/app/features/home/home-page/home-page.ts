@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   selectedTabIndex = 1;
 
   ngOnInit(): void {
-     this.selectedTabIndex = 1;
+    this.selectedTabIndex = 1;
 
     this.findAllPublicacoes();
     this.findAllOcorrencia();
@@ -33,11 +33,13 @@ export class HomePage implements OnInit {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '700px',
       maxWidth: '95vw',
-      data: {isCreating: true},
+      data: { isCreating: true },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      this.reloadPublicacoes()
+    dialogRef.afterClosed().subscribe((salvou: boolean) => {
+      if (salvou) {
+        this.reloadPublicacoes();
+      }
     });
   }
 
@@ -45,7 +47,7 @@ export class HomePage implements OnInit {
     this.publicacaoService.findAll().subscribe(
       (response) => {
         this.PUBLICACAO_DATA = response;
-        console.log(response)
+        console.log(response);
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);
@@ -57,7 +59,6 @@ export class HomePage implements OnInit {
     this.publicacaoService.findOcorrecia().subscribe(
       (response) => {
         this.OCORRECIA_DATA = response;
-
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);
@@ -77,8 +78,9 @@ export class HomePage implements OnInit {
   }
 
   reloadPublicacoes() {
-  this.findAllPublicacoes();
-  this.findAllOcorrencia();
-  this.findInformativos();
-}
+    this.selectedTabIndex = 1;
+    this.findAllPublicacoes();
+    this.findAllOcorrencia();
+    this.findInformativos();
+  }
 }

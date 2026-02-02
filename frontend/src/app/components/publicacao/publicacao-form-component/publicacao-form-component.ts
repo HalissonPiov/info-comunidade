@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { filter, Observable, switchMap } from 'rxjs';
@@ -110,10 +110,10 @@ export class PublicacaoFormComponent implements OnInit {
     if (tipo && tipo === 'INFORMATIVO' && this.data.isCreating) {
       this.saveInformativo();
     }
-    if (tipo && tipo === 'INFORMATIVO') {
+    if (tipo && tipo === 'INFORMATIVO' && !this.data.isCreating) {
       this.updateInformativo();
     }
-    if (tipo && tipo === 'OCORRENCIA') {
+    if (tipo && tipo === 'OCORRENCIA' && !this.data.isCreating) {
       this.updateOcorrencia();
     }
     this.dialogRef.close(true);
