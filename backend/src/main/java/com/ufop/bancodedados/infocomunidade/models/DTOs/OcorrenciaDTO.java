@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OcorrenciaDTO {
     @NotBlank(message = "O título é obrigatório")
-    @Size(min = 10, max = 30, message = "O título deve ter entre 10 e 30 caracteres")
+    @Size(min = 1, max = 30, message = "O título deve ter entre 10 e 30 caracteres")
     private String titulo;
 
     @NotBlank(message = "A descrição é obrigatória")
