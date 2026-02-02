@@ -1,28 +1,29 @@
-import { PublicacaoService } from './../../../services/publicacao-service';
-import { Ocorrencia } from './../../../models/Ocorrencia';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { filter, Observable, switchMap } from 'rxjs';
 
 import { Endereco } from '../../../models/Endereco';
-import { EnderecoService } from '../../../services/endereco-service';
-import { SharedModule } from '../../../shared/shared-module';
-import { AuthUserService } from '../../../services/auth-user-service';
-import { User } from '../../../models/User';
-import { parseHashtags } from '../../../services/utils-service';
 import { Informativo } from '../../../models/Informativo';
+import { AuthUserService } from '../../../services/auth-user-service';
+import { EnderecoService } from '../../../services/endereco-service';
+import { parseHashtags } from '../../../services/utils-service';
+import { SharedModule } from '../../../shared/shared-module';
+import { Ocorrencia } from './../../../models/Ocorrencia';
+import { PublicacaoService } from './../../../services/publicacao-service';
+import { Publicacao } from '../../../models/Publicacao';
 
 @Component({
   selector: 'app-publicacao-form-component',
-  imports: [ReactiveFormsModule, SharedModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, SharedModule, MatDialogModule],
   templateUrl: './publicacao-form-component.html',
   styleUrl: './publicacao-form-component.css',
 })
 export class PublicacaoFormComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<PublicacaoFormComponent>);
   private formBuilder = inject(FormBuilder);
-  readonly data = inject<any>(MAT_DIALOG_DATA);
+  readonly data = inject<{ publicacao?: Publicacao; isCreating: boolean }>(MAT_DIALOG_DATA);
 
   private enderecoService = inject(EnderecoService);
   private authUserService: AuthUserService = inject(AuthUserService);
@@ -69,6 +70,10 @@ export class PublicacaoFormComponent implements OnInit {
       setor?.updateValueAndValidity();
       publicoAlvo?.updateValueAndValidity();
     });
+
+    if (this.data?.publicacao) {
+      this.onUpdateSubmit(this.data.publicacao);
+    }
   }
 
   getEnderecos() {
@@ -99,13 +104,19 @@ export class PublicacaoFormComponent implements OnInit {
 
   onFormSubmit() {
     const tipo = this.publicacaoForm.get('tipo')?.value;
-    if (tipo && tipo === 'OCORRENCIA') {
-      this.saveOcorrecia()
+    if (tipo && tipo === 'OCORRENCIA' && this.data.isCreating) {
+      this.saveOcorrecia();
+    }
+    if (tipo && tipo === 'INFORMATIVO' && this.data.isCreating) {
+      this.saveInformativo();
     }
     if (tipo && tipo === 'INFORMATIVO') {
-      this.saveInformativo()
+      this.updateInformativo();
     }
-    this.dialogRef.close();
+    if (tipo && tipo === 'OCORRENCIA') {
+      this.updateOcorrencia();
+    }
+    this.dialogRef.close(true);
   }
 
   saveOcorrecia() {
@@ -144,5 +155,80 @@ export class PublicacaoFormComponent implements OnInit {
         console.log('Não foi possível cadastrar informativo!', err);
       },
     );
+  }
+
+  updateInformativo() {
+    const publicacaoId = this.data?.publicacao?.idPublicacao;
+
+    const informativo: Informativo = {
+      titulo: this.publicacaoForm.value.titulo as string,
+      descricao: this.publicacaoForm.value.descricao as string,
+      imagemURL: this.publicacaoForm.value.imagemURL as string,
+      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
+      enderecoId: this.publicacaoForm.value.rua as string,
+      publicoAlvo: this.publicacaoForm.value.publicoAlvo as string,
+      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
+    };
+
+    this.publicacaoService.updateInformativo(publicacaoId!, informativo).subscribe(
+      (response) => {},
+      (err) => {
+        console.log('Não foi possível cadastrar informativo!', err);
+      },
+    );
+  }
+
+  updateOcorrencia() {
+    const publicacaoId = this.data?.publicacao?.idPublicacao;
+
+    const ocorrencia: Ocorrencia = {
+      titulo: this.publicacaoForm.value.titulo as string,
+      descricao: this.publicacaoForm.value.descricao as string,
+      imagemURL: this.publicacaoForm.value.imagemURL as string,
+      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
+      enderecoId: this.publicacaoForm.value.rua as string,
+      setor: this.publicacaoForm.value.setor as string,
+      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
+    };
+
+    this.publicacaoService.updateOcorrencia(publicacaoId!, ocorrencia).subscribe(
+      (response) => {},
+      (err) => {
+        console.log('Não foi possível cadastrar ocorrência!', err);
+      },
+    );
+  }
+
+  onUpdateSubmit(data: Publicacao) {
+    const id = this.authUserService.getUserFromStorage()?.id;
+    if (!id) return;
+
+    if (data?.usuario?.id !== id) return;
+
+    // Preenche campos comuns
+    this.publicacaoForm.patchValue({
+      titulo: data.titulo,
+      descricao: data.descricao,
+      hashtags: data.hashtags?.join(', '),
+      imagemURL: data.imagemURL,
+      rua: data.endereco?.idEndereco ?? '',
+    });
+
+    // Define o tipo com base nos campos existentes
+    if (data.setor) {
+      this.publicacaoForm.patchValue({
+        tipo: 'OCORRENCIA',
+        setor: data.setor,
+        publicoAlvo: '',
+      });
+    }
+
+    if (data.publicoAlvo) {
+      this.publicacaoForm.patchValue({
+        tipo: 'INFORMATIVO',
+        publicoAlvo: data.publicoAlvo,
+        setor: '',
+      });
+    }
   }
 }

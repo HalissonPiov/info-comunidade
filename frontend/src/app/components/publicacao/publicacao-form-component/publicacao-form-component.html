@@ -58,6 +58,8 @@
       <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag1, hashtag2" formControlName="hashtags"></textarea>
     </div>
 
-    <button class="button" type="submit" [disabled]="!publicacaoForm.valid">Criar</button>
+    <button class="button" type="submit" [disabled]="!publicacaoForm.valid">
+      {{data.isCreating === true ? "Criar" : "Atualizar"}}
+    </button>
   </form>
 </div>

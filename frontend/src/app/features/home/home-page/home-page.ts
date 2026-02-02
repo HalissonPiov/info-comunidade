@@ -1,10 +1,10 @@
-import { PublicacaoService } from '../../../services/publicacao-service';
 import { Component, inject, OnInit } from '@angular/core';
-import { SharedModule } from '../../../shared/shared-module';
-import { PublicacaoFormComponent } from '../../../components/publicacao/publicacao-form-component/publicacao-form-component';
 import { MatDialog } from '@angular/material/dialog';
+
+import { PublicacaoFormComponent } from '../../../components/publicacao/publicacao-form-component/publicacao-form-component';
 import { Publicacao } from '../../../models/Publicacao';
-import { Route, Router } from '@angular/router';
+import { PublicacaoService } from '../../../services/publicacao-service';
+import { SharedModule } from '../../../shared/shared-module';
 
 @Component({
   selector: 'app-home-page',
@@ -19,7 +19,11 @@ export class HomePage implements OnInit {
   readonly dialog = inject(MatDialog);
   publicacaoService: PublicacaoService = inject(PublicacaoService);
 
+  selectedTabIndex = 1;
+
   ngOnInit(): void {
+     this.selectedTabIndex = 1;
+
     this.findAllPublicacoes();
     this.findAllOcorrencia();
     this.findInformativos();
@@ -29,11 +33,11 @@ export class HomePage implements OnInit {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '900px',
       maxWidth: '95vw',
-      data: {},
+      data: {isCreating: true},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.ngOnInit()
+      this.reloadPublicacoes()
     });
   }
 
@@ -41,6 +45,7 @@ export class HomePage implements OnInit {
     this.publicacaoService.findAll().subscribe(
       (response) => {
         this.PUBLICACAO_DATA = response;
+        console.log(response)
       },
       (err) => {
         console.log('Erro ao buscar publicações!', err);
@@ -70,4 +75,10 @@ export class HomePage implements OnInit {
       },
     );
   }
+
+  reloadPublicacoes() {
+  this.findAllPublicacoes();
+  this.findAllOcorrencia();
+  this.findInformativos();
+}
 }

@@ -40,7 +40,7 @@ export class PersonalPublications implements OnInit {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '900px',
       maxWidth: '95vw',
-      data: {},
+      data: {isCreating: true},
     });
 
     dialogRef.afterClosed().subscribe((result) => {

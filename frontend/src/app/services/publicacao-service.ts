@@ -32,6 +32,14 @@ export class PublicacaoService {
     return this.httpClient.post(this.BASE_URL+"/informativo", informativo);
   }
 
+  updateOcorrencia(id: string, ocorrecia: Ocorrencia) {
+    return this.httpClient.put(this.BASE_URL+"/ocorrencia/"+id, ocorrecia);
+  }
+
+  updateInformativo(id: string, informativo: Informativo) {
+    return this.httpClient.put(this.BASE_URL+"/informativo/"+id, informativo);
+  }
+
   findAllByUserId(userId: string): Observable<Publicacao[]>  {
     return this.httpClient.get<Publicacao[]>(this.BASE_URL + `/por-usuario/${userId}`)
   }

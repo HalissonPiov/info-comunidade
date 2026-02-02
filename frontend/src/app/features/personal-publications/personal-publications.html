@@ -13,7 +13,7 @@
 <section class="cards-container">
 
   @for (item of PUBLICACAO_DATA; track $index) {
-  <app-card-component [publicacao]="item"></app-card-component>
+  <app-card-component [showOptions]="true" [publicacao]="item"></app-card-component>
   }
 </section>
 

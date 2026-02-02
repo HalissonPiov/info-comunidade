@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group [(selectedIndex)]="selectedTabIndex">
   <mat-tab label="Informe-se">
     <section class="cards-container">
       @for (item of INFORMATIVO_DATA; track $index) {
