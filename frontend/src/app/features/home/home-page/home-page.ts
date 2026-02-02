@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
 
   openCreatePublicacaoDialog(): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
-      width: '900px',
+      width: '700px',
       maxWidth: '95vw',
       data: {isCreating: true},
     });

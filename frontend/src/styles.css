@@ -41,7 +41,7 @@ label {
 .form-floating,
 .select-container,
 .mb-3 {
-  width: 90%; 
+  width: 90%;
 }
 .title {
   font-weight: bolder;
@@ -116,6 +116,7 @@ label {
   gap: 10px;
   max-height: 100%;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 h2 {

@@ -25,7 +25,7 @@ export class CardComponent {
 
   openCreatePublicacaoDialog(publicacao: Publicacao): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
-      width: '900px',
+      width: '700px',
       maxWidth: '95vw',
       data: {publicacao: publicacao, isCreating: false},
     });
