@@ -11,9 +11,15 @@
       <textarea type="text" class="form-control" id="descricao" placeholder="" formControlName="descricao"></textarea>
     </div>
     <div class="mb-3">
-      <label for="formFileSm" class="form-label">Escolher imagem</label>
-      <input class="form-control form-control-sm" id="formFileSm" type="file">
+      <label for="imagemURL" class="form-label">Coloque a URL da imagem: </label>
+      <input class="form-control form-control-sm" id="imagemURL" type="text" formControlName="imagemURL">
     </div>
+
+    @if(publicacaoForm.get('imagemURL')?.value) {
+    <div class="form-floating mb-3 floating-compact image">
+      <img class="image" [src]="publicacaoForm.get('imagemURL')?.value" alt="Imagem da publicação" />
+    </div>
+    }
 
     <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
@@ -55,7 +61,8 @@
     }
     <div class="mb-3">
       <label for="hashtags">Hashtags</label>
-      <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag1, hashtag2" formControlName="hashtags"></textarea>
+      <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag1, hashtag2"
+        formControlName="hashtags"></textarea>
     </div>
 
     <button class="button" type="submit" [disabled]="!publicacaoForm.valid">

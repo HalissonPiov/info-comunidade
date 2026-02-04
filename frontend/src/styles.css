@@ -144,7 +144,7 @@ mat-form-field {
   margin: 0 auto;
 }
 
-.fab {
+.small-btn {
   position: fixed;
 
   right: 24px;
@@ -173,7 +173,7 @@ mat-form-field {
     box-shadow 0.2s ease;
 }
 
-.fab:hover {
+.small-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
 }
@@ -193,13 +193,13 @@ mat-form-field {
   z-index: 1000;
 }
 
-.fab.primary{
+.small-btn.primary{
   border-radius: 999px;
   padding: 14px 20px;
   bottom: 90px;
 }
 
-.fab.secondary{
+.small-btn.secondary{
   border-radius: 999px;
   padding: 14px 20px;
   bottom: 24px;

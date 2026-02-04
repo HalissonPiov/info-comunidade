@@ -5,9 +5,9 @@
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.INFORMATIVO)">
-      <span class="fab-icon">🔍</span>
-      <span class="fab-text">Aplicar filtros</span>
+    <button class="small-btn  primary" (click)="openFilterDialog(TipoPublicacao.INFORMATIVO)">
+      <i class="fa-solid fa-filter"></i>
+      <span class="">Aplicar filtros</span>
     </button>
   </mat-tab>
 
@@ -17,9 +17,9 @@
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.PUBLICACAO)">
-      <span class="fab-icon">🔍</span>
-      <span class="fab-text">Aplicar filtros</span>
+    <button class="small-btn  primary" (click)="openFilterDialog(TipoPublicacao.PUBLICACAO)">
+      <i class="fa-solid fa-filter"></i>
+      <span class="">Aplicar filtros</span>
     </button>
   </mat-tab>
 
@@ -29,14 +29,14 @@
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.OCORRENCIA)">
-      <span class="fab-icon">🔍</span>
-      <span class="fab-text">Aplicar filtros</span>
+    <button class="small-btn primary" (click)="openFilterDialog(TipoPublicacao.OCORRENCIA)">
+      <i class="fa-solid fa-filter"></i>
+      <span class="">Aplicar filtros</span>
     </button>
   </mat-tab>
 </mat-tab-group>
 
-<button class="fab secondary" (click)="openCreatePublicacaoDialog()">
+<button class="small-btn secondary" (click)="openCreatePublicacaoDialog()">
   <span class="fab-icon">+</span>
-  <span class="fab-text">Criar publicação</span>
+  <span class="">Criar publicação</span>
 </button>

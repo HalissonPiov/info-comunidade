@@ -5,6 +5,7 @@ import { PublicacaoFormComponent } from '../../components/publicacao/publicacao-
 import { User } from '../../models/User';
 import { AuthUserService } from '../../services/auth-user-service';
 import { PublicacaoService } from '../../services/publicacao-service';
+import { ordenarPorDataDesc } from '../../services/utils-service';
 import { SharedModule } from '../../shared/shared-module';
 import { Publicacao } from './../../models/Publicacao';
 
@@ -29,7 +30,7 @@ export class PersonalPublications implements OnInit {
   findPersonalPublications() {
     this.publicacaoService.findAllByUserId(this.user?.id!).subscribe(
       (response) => {
-        this.PUBLICACAO_DATA = response;
+        this.PUBLICACAO_DATA = ordenarPorDataDesc(response);
       },
       (err) => {
         console.log('Não foi possível buscar as publicações por ID: ' + err);
@@ -41,14 +42,13 @@ export class PersonalPublications implements OnInit {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
       width: '700px',
       maxWidth: '95vw',
-      data: {isCreating: true},
+      data: { isCreating: true },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-         this.findPersonalPublications();
+        this.findPersonalPublications();
       }
-
     });
   }
 }
