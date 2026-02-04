@@ -10,19 +10,26 @@ body {
     color 0.3s ease;
 }
 
+
 :root {
-  --color-bg: #f4faf9;
+  --color-bg: #F5F9FC;
   --color-surface: #e6f0ee;
   --color-surface-alt: #d3e4e1;
+
   --text-color: #fff9f0;
   --text-atention: #960018;
-  --gray-text: #898989;
+  --gray-text: #6B7C8F;
 
-  --color-primary: #d0e3ff;
-  --color-primary-dark: #081f5c;
-  --color-primary-light: #7096d1;
+  --color-primary: #163A63;
+  --color-primary-dark: #0B1F3A;
+  --color-primary-light: #2F6DA1;
+
   --card-container-bg: #ffffff;
   --bg-color: transparent;
+}
+
+a i {
+  margin-right: 8px;
 }
 
 form {

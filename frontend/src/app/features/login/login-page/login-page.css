@@ -1,6 +1,35 @@
-.container {
-  width: 30%;
-  margin: 100px auto;
+.container-login {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 1;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.image-login-container {
+  width: 50%;
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.image-login-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.6)
+  );
+}
+
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .form-container {
@@ -9,6 +38,8 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
+  width: 50%;
+  height: 100%;
 }
 
 form {
@@ -18,6 +49,7 @@ form {
   justify-content: center;
   gap: 15px;
   width: 100%;
+  max-width: 420px;
 }
 
 p {
@@ -44,4 +76,19 @@ mat-form-field {
   text-decoration: underline;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .container-login {
+    flex-direction: column;
+  }
+
+  .image-container {
+    display: none; /* ou height: 35vh se quiser manter */
+  }
+
+  .form-container {
+    width: 100%;
+  }
+}
+
 

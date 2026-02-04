@@ -9,8 +9,7 @@
 }
 
 .card-component {
-  border-color: transparent;
-  box-shadow: none;
+  border-radius: 10px;
 }
 
 .card-header {
@@ -97,4 +96,13 @@ i {
   padding: 3px;
 }
 
+.icon-pencil {
+  margin-right: 8px;
+  color: #000000;
+}
+
+.icon-trash {
+  margin-right: 8px;
+  color: var(--text-atention);
+}
 
