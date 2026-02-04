@@ -5,24 +5,38 @@
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <mat-tab label="O que está acontecendo na cidade?">
-      <section class="cards-container">
+    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.INFORMATIVO)">
+      <span class="fab-icon">🔍</span>
+      <span class="fab-text">Aplicar filtros</span>
+    </button>
+  </mat-tab>
+
+  <mat-tab label="O que está acontecendo na cidade?">
+    <section class="cards-container">
       @for (item of PUBLICACAO_DATA; track $index) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    </mat-tab>
+    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.PUBLICACAO)">
+      <span class="fab-icon">🔍</span>
+      <span class="fab-text">Aplicar filtros</span>
+    </button>
   </mat-tab>
+
   <mat-tab label="Acontecimentos">
     <section class="cards-container">
       @for (item of OCORRECIA_DATA; track $index) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
+    <button class="fab primary" (click)="openFilterDialog(TipoPublicacao.OCORRENCIA)">
+      <span class="fab-icon">🔍</span>
+      <span class="fab-text">Aplicar filtros</span>
+    </button>
   </mat-tab>
 </mat-tab-group>
 
-<button class="fab" (click)="openCreatePublicacaoDialog()">
+<button class="fab secondary" (click)="openCreatePublicacaoDialog()">
   <span class="fab-icon">+</span>
   <span class="fab-text">Criar publicação</span>
 </button>

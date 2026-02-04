@@ -14,9 +14,13 @@
         Nome de usuário já está em uso
       </div>
     </div>
-    <div class="form-floating mb-3 floating-compact">
-      <input type="text" class="form-control" id="bairro" placeholder="" formControlName="bairro">
+   <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
+      <select class="form-select" formControlName="bairro">
+        @for (bairro of BAIRROS_UNICOS; track $index) {
+        <option [value]="bairro">{{bairro | titlecase}}</option>
+        }
+      </select>
     </div>
     <div class="form-floating mb-3 floating-compact">
       <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento">

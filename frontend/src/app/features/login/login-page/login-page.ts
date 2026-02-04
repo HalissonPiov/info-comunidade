@@ -3,8 +3,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
+import { Endereco } from '../../../models/Endereco';
 import { User } from '../../../models/User';
 import { AuthUserService } from '../../../services/auth-user-service';
+import { EnderecoService } from '../../../services/endereco-service';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { Login } from '../model/Login';
@@ -15,16 +17,19 @@ import { Login } from '../model/Login';
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
   showLogin = signal(true);
-  userService = inject(UserService)
-  authService = inject(AuthUserService)
+  userService = inject(UserService);
+  authService = inject(AuthUserService);
   private router = inject(Router);
+  public BAIRROS_UNICOS: string[] = [];
+  private enderecoService: EnderecoService = inject(EnderecoService);
 
-  isLoginInvalid: boolean = false
+  isLoginInvalid: boolean = false;
 
   ngOnInit() {
-    this.authService.logout()
+    this.authService.logout();
+    this.getEnderecos();
   }
 
   toggleForm() {
@@ -49,19 +54,19 @@ export class LoginPage implements OnInit{
   onLoginFormSubmit() {
     const login: Login = {
       username: this.loginForm.value.username as string,
-      senha: this.loginForm.value.senha as string
-    }
+      senha: this.loginForm.value.senha as string,
+    };
 
     this.userService.loginUser(login).subscribe(
       (response) => {
         this.router.navigate(['/home']);
-        this.authService.setUser(response)
-        this.isLoginInvalid = false
+        this.authService.setUser(response);
+        this.isLoginInvalid = false;
       },
       (err) => {
-        this.isLoginInvalid = true
+        this.isLoginInvalid = true;
         console.log('Erro ao fazer login!', err);
-      }
+      },
     );
   }
 
@@ -77,23 +82,21 @@ export class LoginPage implements OnInit{
     this.userService.createUser(user).subscribe(
       (response) => {
         this.router.navigate(['/home']);
-        this.authService.setUser(response)
+        this.authService.setUser(response);
       },
       (err) => {
         console.log('Erro ao atualizar perfil', err);
-      }
+      },
     );
   }
 
   findByUsername() {
-      this.singinForm
+    this.singinForm
       .get('username')
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap(username =>
-          this.userService.findByUsername(username)
-        )
+        switchMap((username) => this.userService.findByUsername(username)),
       )
       .subscribe({
         next: (response) => {
@@ -101,7 +104,20 @@ export class LoginPage implements OnInit{
         },
         error: (error) => {
           this.singinForm.get('username')?.setErrors(null);
-        }
+        },
       });
-    }
+  }
+
+  getEnderecos() {
+    this.enderecoService.findAll().subscribe(
+      (response) => {
+        this.BAIRROS_UNICOS = response;
+        const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
+        this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
+      },
+      (err) => {
+        console.log('Erro ao buscar endereços!', err);
+      },
+    );
+  }
 }

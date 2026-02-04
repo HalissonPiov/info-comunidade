@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import { CardComponent } from '../components/card-component/card-component';
+import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
+
+import { CardComponent } from '../components/card-component/card-component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -15,6 +17,7 @@ import { MatTab, MatTabGroup } from '@angular/material/tabs';
     MatIconModule,
     MatInputModule,
     CardComponent,
+    MatDialogModule,
     MatTab,
     MatTabGroup
   ],
@@ -25,7 +28,8 @@ import { MatTab, MatTabGroup } from '@angular/material/tabs';
     MatInputModule,
     CardComponent,
     MatTab,
-    MatTabGroup
+    MatTabGroup,
+    MatDialogModule
   ]
 })
 export class SharedModule { }

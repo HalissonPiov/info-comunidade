@@ -7,6 +7,8 @@ import { User } from '../../../models/User';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { AuthUserService } from './../../../services/auth-user-service';
+import { EnderecoService } from '../../../services/endereco-service';
+import { Endereco } from '../../../models/Endereco';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -25,6 +27,8 @@ export class UserFormDialog {
 
   private formBuilder = inject(FormBuilder);
   private authUserService: AuthUserService = inject(AuthUserService);
+  public BAIRROS_UNICOS: string[] = [];
+  private enderecoService: EnderecoService = inject(EnderecoService);
 
   public userForm = this.formBuilder.group({
     nome: ['', Validators.required],
@@ -66,7 +70,7 @@ export class UserFormDialog {
       },
       (err) => {
         console.log('Erro ao atualizar perfil', err);
-      }
+      },
     );
   }
 
@@ -76,7 +80,7 @@ export class UserFormDialog {
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((username) => this.userService.findByUsername(username))
+        switchMap((username) => this.userService.findByUsername(username)),
       )
       .subscribe({
         next: (response) => {
@@ -86,5 +90,18 @@ export class UserFormDialog {
           this.userForm.get('username')?.setErrors(null);
         },
       });
+  }
+
+  getEnderecos() {
+    this.enderecoService.findAll().subscribe(
+      (response) => {
+        this.BAIRROS_UNICOS = response;
+        const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
+        this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
+      },
+      (err) => {
+        console.log('Erro ao buscar endereços!', err);
+      },
+    );
   }
 }

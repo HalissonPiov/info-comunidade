@@ -1,11 +1,12 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
-import { SharedModule } from '../../shared/shared-module';
-import { Publicacao } from '../../models/Publicacao';
-import { PublicacaoService } from '../../services/publicacao-service';
-import { AuthUserService } from '../../services/auth-user-service';
-import { User } from '../../models/User';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { PublicacaoFormComponent } from '../../components/publicacao/publicacao-form-component/publicacao-form-component';
+import { User } from '../../models/User';
+import { AuthUserService } from '../../services/auth-user-service';
+import { PublicacaoService } from '../../services/publicacao-service';
+import { SharedModule } from '../../shared/shared-module';
+import { Publicacao } from './../../models/Publicacao';
 
 @Component({
   selector: 'app-personal-publications',
@@ -44,7 +45,10 @@ export class PersonalPublications implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.findPersonalPublications();
+      if (result) {
+         this.findPersonalPublications();
+      }
+
     });
   }
 }

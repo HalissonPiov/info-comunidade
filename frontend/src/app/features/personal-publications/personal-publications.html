@@ -12,16 +12,13 @@
 <section class="cards-container">
 
   @for (item of PUBLICACAO_DATA; track $index) {
-  <app-card-component
-    [showOptions]="true"
-    [publicacao]="item"
-    (updated)="findPersonalPublications()"
+  <app-card-component [showOptions]="true" [publicacao]="item" (updated)="findPersonalPublications()"
     (deleted)="findPersonalPublications()">
   </app-card-component>
   }
 </section>
 
-<button class="fab" (click)="openCreatePublicacaoDialog()">
+<button class="fab secondary" (click)="openCreatePublicacaoDialog()">
   <span class="fab-icon">+</span>
   <span class="fab-text">Criar publicação</span>
 </button>

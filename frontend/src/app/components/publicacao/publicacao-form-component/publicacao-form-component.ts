@@ -205,7 +205,6 @@ export class PublicacaoFormComponent implements OnInit {
 
     if (data?.usuario?.id !== id) return;
 
-    // Preenche campos comuns
     this.publicacaoForm.patchValue({
       titulo: data.titulo,
       descricao: data.descricao,
@@ -214,7 +213,6 @@ export class PublicacaoFormComponent implements OnInit {
       rua: data.endereco?.idEndereco ?? '',
     });
 
-    // Define o tipo com base nos campos existentes
     if (data.setor) {
       this.publicacaoForm.patchValue({
         tipo: 'OCORRENCIA',
