@@ -16,7 +16,7 @@
     </div>
    <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
-      <select class="form-select" formControlName="bairro">
+      <select class="info-select form-select" formControlName="bairro">
         @for (bairro of BAIRROS_UNICOS; track $index) {
         <option [value]="bairro">{{bairro | titlecase}}</option>
         }

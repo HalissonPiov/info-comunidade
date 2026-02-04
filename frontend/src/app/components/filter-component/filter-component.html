@@ -1,5 +1,5 @@
 <div class="dialog-container-lg dialog-container">
-  <h2>Publicação</h2>
+  <h2>Filtrar</h2>
   <form [formGroup]="publicacaoForm" (ngSubmit)="onFormSubmit()">
     <div class="form-floating mb-3 floating-compact">
       <input type="text" class="form-control" id="titulo" placeholder="" formControlName="titulo">
@@ -8,14 +8,14 @@
 
     <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
-      <select class="form-select" formControlName="bairro">
+      <select class="info-select form-select" formControlName="bairro">
         @for (bairro of BAIRROS_UNICOS; track $index) {
         <option [value]="bairro">{{bairro | titlecase}}</option>
         }
       </select>
     </div>
 
-   @if(data.tipo !== TipoPublicacao.INFORMATIVO) {
+    @if(data.tipo !== TipoPublicacao.INFORMATIVO) {
     <div class="form-floating mb-3 floating-compact">
       <input type="text" class="form-control" id="setor" placeholder="" formControlName="setor">
       <label for="setor">Setor</label>
@@ -28,15 +28,14 @@
       <label for="publicoAlvo">Público-alvo</label>
     </div>
     }
-  <div class="form-floating mb-3 floating-compact search">
-    <input type="date" class="form-control" id="dataCriacao" placeholder="" formControlName="dataCriacao">
-    <label for="dataCriacao">Data de publicação</label>
-  </div>
+    <div class="form-floating mb-3 floating-compact search">
+      <input type="date" class="form-control" id="dataCriacao" placeholder="" formControlName="dataCriacao">
+      <label for="dataCriacao">Data de publicação</label>
+    </div>
 
-
-    <div class="mb-3">
-      <label for="hashtags">Hashtags</label>
-      <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag" formControlName="hashtags"></textarea>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="hashtags" placeholder="" formControlName="hashtags">
+      <label for="hashtags">Hashtag</label>
     </div>
 
     <button class="button" type="submit" [disabled]="!publicacaoForm.valid">
@@ -44,4 +43,3 @@
     </button>
   </form>
 </div>
-

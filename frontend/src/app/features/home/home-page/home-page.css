@@ -5,4 +5,11 @@ main {
 
 ::ng-deep .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs > .mat-mdc-tab-header .mat-mdc-tab {
   width: 30%;
+
 }
+
+::ng-deep .mdc-tab-indicator__content--underline {
+  border-color: var(--color-primary-dark) !important;
+}
+
+

@@ -45,11 +45,27 @@ label {
   font-size: 0.95rem;
 }
 
+.form-control.info-textarea {
+  background-color: transparent;
+}
+
+.form-control.info-textarea:focus {
+  background-color: transparent;
+}
+
+.form-select.info-select {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
 .form-floating,
 .select-container,
 .mb-3 {
   width: 90%;
 }
+
 .title {
   font-weight: bolder;
   font-size: 2rem;
@@ -146,7 +162,7 @@ mat-form-field {
 
 .cards-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 24px;
   margin: 0 auto;
 }

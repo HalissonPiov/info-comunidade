@@ -8,12 +8,14 @@
 
     <div class="mb-3">
       <label for="descricao">Descrição</label>
-      <textarea type="text" class="form-control" id="descricao" placeholder="" formControlName="descricao"></textarea>
+      <textarea type="text" class="info-textarea form-control" id="descricao" placeholder="" formControlName="descricao"></textarea>
     </div>
-    <div class="mb-3">
-      <label for="imagemURL" class="form-label">Coloque a URL da imagem: </label>
-      <input class="form-control form-control-sm" id="imagemURL" type="text" formControlName="imagemURL">
+
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="imagemURL" placeholder="" formControlName="imagemURL">
+      <label for="imagemURL">Link da imagem: </label>
     </div>
+
 
     @if(publicacaoForm.get('imagemURL')?.value) {
     <div class="form-floating mb-3 floating-compact image">
@@ -23,7 +25,7 @@
 
     <div class="mb-3 select-container">
       <label for="bairro">Bairro</label>
-      <select class="form-select" formControlName="bairro">
+      <select class="info-select form-select " formControlName="bairro">
         @for (bairro of BAIRROS_UNICOS; track $index) {
         <option [value]="bairro">{{bairro | titlecase}}</option>
         }
@@ -31,7 +33,7 @@
     </div>
     <div class="mb-3 select-container">
       <label for="rua">Rua</label>
-      <select class="form-select" formControlName="rua">
+      <select class="info-select form-select" formControlName="rua">
         @for (endereco of ENDERECO_POR_BAIRRO_DATA | async; track $index) {
         <option [value]="endereco.id">{{endereco.rua | titlecase}}</option>
         }
@@ -39,7 +41,7 @@
     </div>
     <div class="mb-3 select-container">
       <label for="tipo">Tipo de publicação</label>
-      <select class="form-select" formControlName="tipo">
+      <select class="info-select form-select" formControlName="tipo">
         <option value="" disabled selected>Tipo de publicação</option>
         <option value="OCORRENCIA">Ocorrência</option>
         <option value="INFORMATIVO">Informativo</option>
@@ -61,7 +63,7 @@
     }
     <div class="mb-3">
       <label for="hashtags">Hashtags</label>
-      <textarea type="text" class="form-control" id="hashtags" placeholder="Padrão: Hashtag1, hashtag2"
+      <textarea type="text" class="info-textarea form-control " id="hashtags" placeholder="Padrão: Hashtag1, hashtag2"
         formControlName="hashtags"></textarea>
     </div>
 
