@@ -1,28 +1,37 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../models/User';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthUserService {
-  private readonly _user = signal<User | null>(this.getUserFromStorage());
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
 
-  user = this._user.asReadonly();
-
-  isLoggedIn = () => !!this._user();
+  constructor() {
+    const storedUser = this.getUserFromStorage();
+    if (storedUser) {
+      this.userSubject.next(storedUser);
+    }
+  }
 
   setUser(user: User) {
-    localStorage.setItem('LOGGED_USER', JSON.stringify(user));
-    this._user.set(user);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userSubject.next(user);
+  }
+
+  getUserFromStorage(): User | null {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  get isLoggedIn(): boolean {
+    return !!this.userSubject.value;
   }
 
   logout() {
     localStorage.removeItem('LOGGED_USER');
-    this._user.set(null);
-  }
-
-  getUserFromStorage(): User | null {
-    const data = localStorage.getItem('LOGGED_USER');
-    return data ? JSON.parse(data) : null;
+    this.userSubject.next(null);
   }
 }

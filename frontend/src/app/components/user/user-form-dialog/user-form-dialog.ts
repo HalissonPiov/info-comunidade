@@ -42,6 +42,7 @@ export class UserFormDialog {
     if (this.data?.user) {
       this.userForm.patchValue(this.data.user);
     }
+    this.getEnderecos()
   }
 
   constructor(private userService: UserService) {}

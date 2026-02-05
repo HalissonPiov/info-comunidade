@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../components/navbar-component/navbar-component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,4 +16,14 @@ import { NavbarComponent } from '../components/navbar-component/navbar-component
 })
 export class App {
   protected readonly title = signal('frontend');
+
+  showNavbar = true;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.showNavbar = event.urlAfterRedirects !== '/login';
+      });
+  }
 }

@@ -1,13 +1,13 @@
 <nav class="navbar">
   <div class="container-fluid">
-    <a class="navbar-brand title" [href]="isLoggedIn() ? '/home' : '/'">
+    <a class="navbar-brand title" [href]="isLoggedIn ? '/home' : '/'">
       <i class="fa-solid fa-computer-mouse"></i> InfoComunidade
     </a>
-    <div class="dropdown" *ngIf="isLoggedIn()">
+    <div class="dropdown" *ngIf="isLoggedIn">
       <button class="btn profile-container" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-solid fa-user"></i>
         <div class="profile-info">
-          <mat-card-title class="name">{{user()?.nome}}</mat-card-title>
+          <mat-card-title class="name" *ngIf="user$ | async as user">{{user.nome}}</mat-card-title>
         </div>
       </button>
       <ul class="dropdown-menu">

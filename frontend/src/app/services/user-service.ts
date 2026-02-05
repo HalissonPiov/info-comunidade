@@ -20,6 +20,10 @@ export class UserService {
     return this.httpClient.post(this.BASE_URL, user);
   }
 
+  findById(id: string): Observable<any> {
+    return this.httpClient.get(this.BASE_URL+"/" + id);
+  }
+
   findByUsername(username: string| null) : Observable<any> {
     return this.httpClient.get(this.BASE_URL + `/pesquisa/username?username=${username}`);
   }

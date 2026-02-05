@@ -18,8 +18,11 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" (click)="openUpdatePublicacaoDialog(publicacao)"><i class="fa-solid fa-pencil icon-pencil"></i>Editar</a></li>
-              <li><a class="dropdown-item" style="color: var(--text-atention);" (click)="openDeletePublicacaoDialog(publicacao)"><i class="fa-solid fa-trash icon-trash"></i>Deletar</a></li>
+              <li><a class="dropdown-item" (click)="openUpdatePublicacaoDialog(publicacao)"><i
+                    class="fa-solid fa-pencil icon-pencil"></i>Editar</a></li>
+              <li><a class="dropdown-item" style="color: var(--text-atention);"
+                  (click)="openDeletePublicacaoDialog(publicacao)"><i
+                    class="fa-solid fa-trash icon-trash"></i>Deletar</a></li>
             </ul>
           </div>
           }
@@ -27,26 +30,28 @@
       </div>
     </mat-card-header>
     @if(publicacao.imagemURL) {
-    <img mat-card-image class="image" [src]="publicacao.imagemURL"
-      alt="Imagem da publicação" />
+    <img mat-card-image class="image" [src]="publicacao.imagemURL" alt="Imagem da publicação" />
     }
     <mat-card-content class="content">
 
       <h3 class="card-title">{{publicacao.titulo}}</h3>
       @if (publicacao.setor) {
       <p class="card-content">
-        Setor: {{publicacao.setor}}
-      </p>
+        <i class="fa-solid fa-puzzle-piece"></i>
+      <span class="description-type">Setor: </span>{{publicacao.setor}}
+
       }
       @if(publicacao.publicoAlvo) {
       <p class="card-content">
-
-        Público Alvo: {{publicacao.publicoAlvo}}
+        <i class="fa-solid fa-users"></i>
+        <span class="description-type">Público alvo:</span> {{publicacao.publicoAlvo}}
       </p>
       }
       @if(publicacao.endereco) {
-     <p class="card-content">
-        Endereço: {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
+      <p class="card-content">
+        <i class="fa-solid fa-location-pin"></i>
+        <span class="description-type">Endereço: </span>
+        {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
       </p>
       }
 
@@ -55,7 +60,9 @@
       </p>
       <p class="hashtags">
         @for (hashtag of publicacao.hashtags; track $index) {
-          <span class="hashtag">#{{hashtag}}</span>
+          @if (hashtag) {
+             <span class="hashtag">#{{hashtag}}</span>
+          }
         }
       </p>
     </mat-card-content>

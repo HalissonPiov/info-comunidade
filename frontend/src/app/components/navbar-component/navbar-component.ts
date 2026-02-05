@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { UserService } from './../../services/user-service';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -17,9 +18,13 @@ export class NavbarComponent {
 
   readonly dialog = inject(MatDialog);
   private authService = inject(AuthUserService);
+  private userService: UserService = inject(UserService)
 
-  isLoggedIn = this.authService.isLoggedIn;
-  user = this.authService.user;
+  user$ = this.authService.user$;
+
+  get isLoggedIn() {
+  return this.authService.isLoggedIn;
+}
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(UserFormDialog, {
@@ -28,10 +33,19 @@ export class NavbarComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
+      if (result) {
+        this.updateProfile()
       }
     });
+  }
+
+  updateProfile() {
+    const user = this.authService.getUserFromStorage()
+     if (!user) return;
+    this.userService.findById(user?.id!).subscribe({
+      next: (response) => this.authService.setUser(response),
+      error: err => console.log('Erro ao atualizar perfil', err)}
+    )
   }
 
   openDeleteDialog(): void {
