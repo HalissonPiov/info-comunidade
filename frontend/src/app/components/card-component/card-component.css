@@ -5,7 +5,7 @@
 
 .header-container {
   background: var(--card-container-bg);
-  color: #000000;
+  color: var(--text-black-color);
 }
 
 .card-component {
@@ -21,7 +21,7 @@
 .custom-card-header {
   width: 100%;
   background: var(--card-container-bg);
-  color: #000000;
+  color: var(--text-black-color);
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -32,35 +32,47 @@
   min-height: 3rem;
   display: flex;
   gap: 10px;
-  font-size: 1.2rem;
-}
-
-.profile-info i {
-  font-size: 1.6rem;
-  padding: 0.2rem;
-}
-
-.profile-info div,
-.profile-info i {
-  align-content: center;
-  color: #000000;
-}
-
-.name,
-.username {
   font-size: 1rem;
 }
 
-.username,
+.profile-info i {
+  padding: 0.2rem;
+  font-size: 1rem;
+}
+
+.profile-info div,
+.profile-info i:not(.fa-location-pin) {
+  align-content: center;
+  color: var(--text-black-color);
+}
+
+.user {
+  font-size: 1rem;
+}
+
+.address,
 .date,
 i {
-  color: #9c9c9c;
+  color: var(--text-dark-gray-color);
+  font-size: 1rem;
 }
 
 .options-container {
   display: flex;
   gap: 5px;
   align-items: center;
+}
+
+.options-container div {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.options-container i {
+  color: var(--text-black-color);
+  margin-left: 6px;
+  font-size: 1rem;
 }
 
 .btn {
@@ -73,12 +85,11 @@ i {
 
 .card-title {
   font-size: 1.3rem;
-  padding: 0.5rem 0.6rem 0.2rem;
+  padding: 0.5rem 0rem 0.2rem;
 }
 
 .card-content {
-  padding: 0 0.6rem 0.2rem;
-  font-size: 1rem;
+  padding: 0.3rem 0 0.3rem;
 }
 
 .image {
@@ -89,11 +100,6 @@ i {
   display: block;
 }
 
-.hashtags {
-  color: var(--gray-text);
-  font-size: 1rem;
-}
-
 .hashtag {
   color: var(--gray-text);
   padding: 3px;
@@ -101,7 +107,7 @@ i {
 
 .icon-pencil {
   margin-right: 8px;
-  color: #000000;
+  color: var(--text-black-color);
 }
 
 .icon-trash {
@@ -109,18 +115,6 @@ i {
   color: var(--text-atention);
 }
 
-.card-content i,
-.card-content.description-type {
-  color: #000000;
-}
-
 .description-type {
   font-weight: bold;
-}
-
-.card-content i {
-  margin-right: 8px;
-  width: 17px;
-  text-align: center;
-  font-size: 1rem;
 }

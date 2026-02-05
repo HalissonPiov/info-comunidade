@@ -1,3 +1,23 @@
+:root {
+  --color-bg: #f5f9fc;
+  --color-surface: #e6f0ee;
+  --color-surface-alt: #d3e4e1;
+
+  --text-color: #fff9f0;
+  --text-atention: #960018;
+  --gray-text: #6b7c8f;
+  --text-black-color: #000;
+  --text-dark-gray-color: #9c9c9c;
+
+  --color-primary: #163a63;
+  --color-primary-dark: #0b1f3a;
+  --color-primary-light: #2f6da1;
+
+  --card-container-bg: #ffffff;
+  --bg-color: transparent;
+}
+
+
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -8,24 +28,6 @@ body {
   transition:
     0.3s ease,
     color 0.3s ease;
-}
-
-
-:root {
-  --color-bg: #F5F9FC;
-  --color-surface: #e6f0ee;
-  --color-surface-alt: #d3e4e1;
-
-  --text-color: #fff9f0;
-  --text-atention: #960018;
-  --gray-text: #6B7C8F;
-
-  --color-primary: #163A63;
-  --color-primary-dark: #0B1F3A;
-  --color-primary-light: #2F6DA1;
-
-  --card-container-bg: #ffffff;
-  --bg-color: transparent;
 }
 
 a i {
@@ -126,8 +128,18 @@ label {
   opacity: 90%;
 }
 
-.button:hover {
+.button:hover:not(disable) {
   opacity: 100%;
+}
+
+.button:disabled {
+  background-color: var(--color-primary); /* cinza azulado */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button:disabled:hover {
+  opacity: 0.7;
 }
 
 .dialog-container {
@@ -135,15 +147,13 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  max-height: 100%;
+  max-height: 80vh;
   overflow-y: auto;
-  overflow-x: auto;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -216,13 +226,13 @@ mat-form-field {
   z-index: 1000;
 }
 
-.small-btn.primary{
+.small-btn.primary {
   border-radius: 999px;
   padding: 14px 20px;
   bottom: 90px;
 }
 
-.small-btn.secondary{
+.small-btn.secondary {
   border-radius: 999px;
   padding: 14px 20px;
   bottom: 24px;

@@ -86,19 +86,17 @@ mat-form-field {
 @media (max-width: 900px) {
   .container-login {
     flex-direction: column;
+    align-items: center;
   }
 
-  .image-container {
-    display: none; /* ou height: 35vh se quiser manter */
+  .image-login-container, .image{
+    display: none;
   }
 
-  .form-container {
+  .form-container, .content {
     width: 100%;
+    height: 100%;
   }
-}
-
-.logo {
-  background-image: url('../../../../assets/logomarca.png');
 }
 
 

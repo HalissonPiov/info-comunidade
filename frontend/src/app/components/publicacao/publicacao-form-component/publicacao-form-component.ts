@@ -34,15 +34,15 @@ export class PublicacaoFormComponent implements OnInit {
   public ENDERECO_POR_BAIRRO_DATA!: Observable<any[]>;
 
   public publicacaoForm = this.formBuilder.group({
-    titulo: ['', Validators.required],
-    descricao: ['', Validators.required],
+    titulo: ['', Validators.required, Validators.maxLength(30)],
+    descricao: ['', Validators.required, Validators.maxLength(350)],
     hashtags: [''],
-    rua: [''],
-    bairro: [''],
-    tipo: [''],
+    rua: ['', Validators.required],
+    bairro: ['', Validators.required],
+    tipo: ['', Validators.required],
     imagemURL: [''],
-    setor: [''],
-    publicoAlvo: [''],
+    setor: ['', Validators.required],
+    publicoAlvo: ['', Validators.required],
   });
 
   ngOnInit() {

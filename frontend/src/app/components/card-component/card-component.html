@@ -4,14 +4,40 @@
     <mat-card-header class="header-container card-header">
       <div class="custom-card-header">
         <div class="profile-info">
-          <i class="fa-solid fa-user"></i>
+
           <div>
-            <mat-card-title class="name">{{publicacao.usuario.nome}}</mat-card-title>
-            <mat-card-subtitle class="username">{{publicacao.usuario.username}}</mat-card-subtitle>
+            <mat-card-title class="user">
+              <i class="fa-solid fa-user"></i>
+              {{publicacao.usuario.nome}}
+            </mat-card-title>
+            <mat-card-subtitle class="address">@if(publicacao.endereco) {
+              <i class="pin fa-solid fa-location-pin "></i>
+              {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
+              }
+            </mat-card-subtitle>
           </div>
         </div>
+
         <div class="options-container">
-          <span class="date">{{ publicacao.dataCriacao | date:'d \'de\' MMMM \'de\' y' }}</span>
+          <div>
+            @if (publicacao.setor) {
+            <p class="mb-0">
+              <span class="description-type">Setor: </span>{{publicacao.setor}}
+              <i class="fa-solid fa-puzzle-piece"></i>
+              }
+
+              @if(publicacao.publicoAlvo) {
+            <p class="mb-0 ">
+              <span class="description-type">Público alvo:</span> {{publicacao.publicoAlvo}}
+              <i class="fa-solid fa-users "></i>
+            </p>
+            }
+
+            <span class="date">{{ publicacao.dataCriacao | date:'d \'de\' MMMM \'de\' y' }}
+              <i class="fa-regular fa-calendar" style="color: #9c9c9c;"></i>
+            </span>
+          </div>
+
           @if(showOptions) {
           <div class="dropdown">
             <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,39 +55,22 @@
         </div>
       </div>
     </mat-card-header>
+
     @if(publicacao.imagemURL) {
     <img mat-card-image class="image" [src]="publicacao.imagemURL" alt="Imagem da publicação" />
     }
+
     <mat-card-content class="content">
-
       <h3 class="card-title">{{publicacao.titulo}}</h3>
-      @if (publicacao.setor) {
-      <p class="card-content">
-        <i class="fa-solid fa-puzzle-piece"></i>
-      <span class="description-type">Setor: </span>{{publicacao.setor}}
-
-      }
-      @if(publicacao.publicoAlvo) {
-      <p class="card-content">
-        <i class="fa-solid fa-users"></i>
-        <span class="description-type">Público alvo:</span> {{publicacao.publicoAlvo}}
-      </p>
-      }
-      @if(publicacao.endereco) {
-      <p class="card-content">
-        <i class="fa-solid fa-location-pin"></i>
-        <span class="description-type">Endereço: </span>
-        {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
-      </p>
-      }
 
       <p class="card-content">
         {{publicacao.descricao}}
       </p>
+
       <p class="hashtags">
         @for (hashtag of publicacao.hashtags; track $index) {
           @if (hashtag) {
-             <span class="hashtag">#{{hashtag}}</span>
+          <span class="hashtag">#{{hashtag}}</span>
           }
         }
       </p>
