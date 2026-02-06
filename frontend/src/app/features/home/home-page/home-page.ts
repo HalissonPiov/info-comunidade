@@ -104,7 +104,6 @@ export class HomePage implements OnInit {
 
   aplicarFiltros(tipo: TipoPublicacao, filtros: any) {
     const params = buildQueryParams(filtros);
-    console.log(params);
 
     switch (tipo) {
       case TipoPublicacao.OCORRENCIA:

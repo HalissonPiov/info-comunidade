@@ -1,12 +1,9 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.ufop.bancodedados.infocomunidade.models.DTOs.InformativoDTO;
-import com.ufop.bancodedados.infocomunidade.models.DTOs.OcorrenciaDTO;
+import com.ufop.bancodedados.infocomunidade.models.Informativo;
+import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
+import com.ufop.bancodedados.infocomunidade.models.Publicacao;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -14,11 +11,9 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import com.ufop.bancodedados.infocomunidade.models.Informativo;
-import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
-import com.ufop.bancodedados.infocomunidade.models.Publicacao;
-
-import lombok.Data;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Repository
@@ -35,27 +30,6 @@ public class PublicacaoRepository {
         String mql = "{ \"_id\" : \"" + id + "\" }";
         return mongoTemplate.findOne(new BasicQuery(mql), Publicacao.class, "publicacao");
     }
-
-//    public List<Publicacao> buscarTodas(){
-//        String mql = "{}";
-//        BasicQuery query = new BasicQuery(mql);
-//
-//        query.with(org.springframework.data.domain.Sort.by(
-//                org.springframework.data.domain.Sort.Direction.DESC, "dataCriacao"
-//        ));
-//
-//        return mongoTemplate.find(query, Publicacao.class, "publicacao");
-//    }
-//
-//    public List<Ocorrencia> buscarTodasOcorrencias() {
-//        String mql = "{ \"_class\" : \"ocorrencia\" }";
-//        return mongoTemplate.find(new BasicQuery(mql), Ocorrencia.class, "publicacao");
-//    }
-//
-//    public List<Informativo> buscarTodosInformativos() {
-//        String mql = "{ \"_class\" : \"informativo\" }";
-//        return mongoTemplate.find(new BasicQuery(mql), Informativo.class, "publicacao");
-//    }
 
     public List<Publicacao> buscarComFiltros(
             String tipoClasse,
