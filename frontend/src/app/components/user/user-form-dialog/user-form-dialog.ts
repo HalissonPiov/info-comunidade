@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 
 import { User } from '../../../models/User';
 import { UserService } from '../../../services/user-service';
@@ -39,10 +39,11 @@ export class UserFormDialog {
   });
 
   ngOnInit(): void {
+    this.findByUsername();
     if (this.data?.user) {
       this.userForm.patchValue(this.data.user);
     }
-    this.getEnderecos()
+    this.getEnderecos();
   }
 
   constructor(private userService: UserService) {}
@@ -81,15 +82,33 @@ export class UserFormDialog {
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((username) => this.userService.findByUsername(username)),
+         switchMap(username => {
+        if (!username || username === this.authUserService.getUserFromStorage()?.username) {
+          return of(false);
+        }
+
+      return this.userService.findByUsername(username).pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+    })
       )
-      .subscribe({
-        next: (response) => {
-          this.userForm.get('username')?.setErrors({ usernameExists: true });
-        },
-        error: (error) => {
-          this.userForm.get('username')?.setErrors(null);
-        },
+      .subscribe((usernameExists) => {
+        const control = this.userForm.get('username');
+
+        if (usernameExists) {
+          control?.setErrors({ ...control.errors, usernameExists: true });
+        } else {
+          const errors = control?.errors;
+          if (errors) {
+            delete errors['usernameExists'];
+            if (Object.keys(errors).length === 0) {
+              control.setErrors(null);
+            } else {
+              control.setErrors(errors);
+            }
+          }
+        }
       });
   }
 

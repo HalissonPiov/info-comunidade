@@ -41,8 +41,8 @@ export class PublicacaoFormComponent implements OnInit {
     bairro: ['', Validators.required],
     tipo: ['', Validators.required],
     imagemURL: [''],
-    setor: ['', Validators.required],
-    publicoAlvo: ['', Validators.required],
+    setor: [''],
+    publicoAlvo: [''],
   });
 
   ngOnInit() {

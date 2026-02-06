@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 
 import { Endereco } from '../../../models/Endereco';
 import { User } from '../../../models/User';
@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
   isLoginInvalid: boolean = false;
 
   ngOnInit() {
+    this.findByUsername();
     this.authService.logout();
     this.getEnderecos();
   }
@@ -96,15 +97,28 @@ export class LoginPage implements OnInit {
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((username) => this.userService.findByUsername(username)),
+        switchMap((username) =>
+          this.userService.findByUsername(username).pipe(
+            map(() => true),
+            catchError(() => of(false)),
+          ),
+        ),
       )
-      .subscribe({
-        next: (response) => {
-          this.singinForm.get('username')?.setErrors({ usernameExists: true });
-        },
-        error: (error) => {
-          this.singinForm.get('username')?.setErrors(null);
-        },
+      .subscribe((usernameExists) => {
+        const control = this.singinForm.get('username');
+        if (usernameExists) {
+          control?.setErrors({ ...control.errors, usernameExists: true });
+        } else {
+          const errors = control?.errors;
+          if (errors) {
+            delete errors['usernameExists'];
+            if (Object.keys(errors).length === 0) {
+              control.setErrors(null);
+            } else {
+              control.setErrors(errors);
+            }
+          }
+        }
       });
   }
 

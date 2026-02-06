@@ -7,7 +7,6 @@
     </div>
     <div class="form-floating mb-3 floating-compact">
       <input type="text" class="form-control" id="username" placeholder="" formControlName="username"
-        (ngModelChange)="findByUsername()"
         [class.is-invalid]="userForm.get('username')?.hasError('usernameExists')">
       <label for="username">Nome de usuário</label>
       <div class="invalid-feedback">
