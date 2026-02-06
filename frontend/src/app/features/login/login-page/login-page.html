@@ -1,8 +1,6 @@
 <div class="container-login">
   <div class="image-login-container">
-      <img
-      src="assets/background_image.jpeg"
-      alt="" srcset="  ">
+    <img src="assets/background_image.jpeg" alt="" srcset="  ">
   </div>
   <div class="content">
 
@@ -48,38 +46,43 @@
         </div>
         <div class="form-floating mb-3 floating-compact">
           <input type="text" class="form-control" id="username" placeholder="" formControlName="username"
-
-            [class.is-invalid]="singinForm.get('username')?.hasError('usernameExists')">
+            [class.is-invalid]="singinForm.get('username')?.hasError('usernameExists') || singinForm.get('username')?.hasError('blank') ">
           <label for="username">Nome de usuário</label>
           <div class="invalid-feedback">
-            Nome de usuário já está em uso
-          </div>
+          @if(singinForm.get('username')?.hasError('blank')) {
+          O nome de usuário não pode conter apenas espaços.
+          }
+          @else {
+          Nome de usuário já está em uso
+          }
         </div>
-        <div class="mb-3 select-container">
-          <label for="bairro">Bairro</label>
-          <select class="info-select form-select" formControlName="bairro">
-            @for (bairro of BAIRROS_UNICOS; track $index) {
-            <option [value]="bairro">{{bairro | titlecase}}</option>
-            }
-          </select>
-        </div>
-        <div class="form-floating mb-3 floating-compact">
-          <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento">
-          <label for="dataNascimento">dataNascimento</label>
-        </div>
-        <div class="form-floating mb-3 floating-compact">
-          <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
-          <label for="senha">Senha</label>
-        </div>
-
-        <button class="button" type="submit" [disabled]="!singinForm.valid">Criar conta</button>
-
-        <p class="switch">
-          Já tem conta?
-          <a (click)="toggleForm()">Fazer login</a>
-        </p>
-      </form>
     </div>
-    }
+    <div class="mb-3 select-container">
+      <label for="bairro">Bairro</label>
+      <select class="info-select form-select" formControlName="bairro">
+        @for (bairro of BAIRROS_UNICOS; track $index) {
+        <option [value]="bairro">{{bairro | titlecase}}</option>
+        }
+      </select>
+    </div>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento"
+        [max]="today">
+      <label for="dataNascimento">dataNascimento</label>
+    </div>
+    <div class="form-floating mb-3 floating-compact">
+      <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+      <label for="senha">Senha</label>
+    </div>
+
+    <button class="button" type="submit" [disabled]="!singinForm.valid">Criar conta</button>
+
+    <p class="switch">
+      Já tem conta?
+      <a (click)="toggleForm()">Fazer login</a>
+    </p>
+    </form>
   </div>
+  }
+</div>
 </div>

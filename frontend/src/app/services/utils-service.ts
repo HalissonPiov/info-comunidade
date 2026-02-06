@@ -1,7 +1,10 @@
 import { HttpParams } from "@angular/common/http";
+import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 export function parseHashtags(hashtags: string): string[] {
-  return hashtags.split(', ');
+  const hashes: string[] | void = hashtags.split(', ').forEach((hashtag) => hashtag.trim());
+  if(hashes == null) return []
+  return hashes;
 }
 
 export function buildQueryParams(filtros: any) {
@@ -22,4 +25,12 @@ export function ordenarPorDataDesc<T extends { dataCriacao: string }>(lista: T[]
     const dataB = new Date(b.dataCriacao).getTime();
     return dataB - dataA;
   });
+}
+
+export function notBlankValidator(control: AbstractControl): ValidationErrors | null {
+  if (control.value == null) return null;
+
+  return control.value.trim().length === 0
+    ? { blank: true }
+    : null;
 }

@@ -5,4 +5,5 @@ textarea {
 .image {
   text-align: center;
   overflow: auto;
+  max-height: 300px;
 }

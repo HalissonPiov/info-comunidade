@@ -69,7 +69,7 @@ i {
   text-align: end;
 }
 
-.options-container i {
+.options-container i:not(.icon-trash) {
   color: var(--text-black-color);
   margin-left: 6px;
   font-size: 1rem;
@@ -111,7 +111,6 @@ i {
 }
 
 .icon-trash {
-  margin-right: 8px;
   color: var(--text-atention);
 }
 

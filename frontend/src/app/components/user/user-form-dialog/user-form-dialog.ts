@@ -9,6 +9,7 @@ import { SharedModule } from '../../../shared/shared-module';
 import { AuthUserService } from './../../../services/auth-user-service';
 import { EnderecoService } from '../../../services/endereco-service';
 import { Endereco } from '../../../models/Endereco';
+import { notBlankValidator } from '../../../services/utils-service';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -29,6 +30,7 @@ export class UserFormDialog {
   private authUserService: AuthUserService = inject(AuthUserService);
   public BAIRROS_UNICOS: string[] = [];
   private enderecoService: EnderecoService = inject(EnderecoService);
+  today = new Date().toISOString().split('T')[0];
 
   public userForm = this.formBuilder.group({
     nome: ['', Validators.required],
@@ -82,16 +84,23 @@ export class UserFormDialog {
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-         switchMap(username => {
-        if (!username || username === this.authUserService.getUserFromStorage()?.username) {
-          return of(false);
-        }
+        switchMap((username) => {
+          if (!username || username.trim().length === 0) {
+            const control = this.userForm.get('username');
 
-      return this.userService.findByUsername(username).pipe(
-        map(() => true),
-        catchError(() => of(false))
-      );
-    })
+            control?.setErrors({ ...control.errors, blank: true });
+            return of(false);
+          }
+
+          if (username === this.authUserService.getUserFromStorage()?.username) {
+            return of(false);
+          }
+
+          return this.userService.findByUsername(username).pipe(
+            map(() => true),
+            catchError(() => of(false)),
+          );
+        }),
       )
       .subscribe((usernameExists) => {
         const control = this.userForm.get('username');

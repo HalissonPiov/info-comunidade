@@ -10,6 +10,7 @@ import { EnderecoService } from '../../../services/endereco-service';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { Login } from '../model/Login';
+import { notBlankValidator } from '../../../services/utils-service';
 
 @Component({
   selector: 'app-login-page',
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
   private enderecoService: EnderecoService = inject(EnderecoService);
 
   isLoginInvalid: boolean = false;
+  today = new Date().toISOString().split('T')[0];
 
   ngOnInit() {
     this.findByUsername();
@@ -97,12 +99,18 @@ export class LoginPage implements OnInit {
       ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap((username) =>
-          this.userService.findByUsername(username).pipe(
+        switchMap((username) => {
+          if (!username || username.trim().length === 0) {
+            const control = this.singinForm.get('username');
+            control?.setErrors({ ...control.errors, blank: true });
+            return of(false);
+          }
+
+          return this.userService.findByUsername(username).pipe(
             map(() => true),
             catchError(() => of(false)),
-          ),
-        ),
+          );
+        }),
       )
       .subscribe((usernameExists) => {
         const control = this.singinForm.get('username');

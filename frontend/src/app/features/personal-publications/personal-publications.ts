@@ -21,16 +21,16 @@ export class PersonalPublications implements OnInit {
   private authService = inject(AuthUserService);
   readonly dialog = inject(MatDialog);
 
-  user: User | null = this.authService.getUserFromStorage();
-
   ngOnInit(): void {
     this.findPersonalPublications();
   }
 
   findPersonalPublications() {
-    this.publicacaoService.findAllByUserId(this.user?.id!).subscribe(
+    const user: User | null = this.authService.getUserFromStorage();
+    this.publicacaoService.findAllByUserId(user?.id!).subscribe(
       (response) => {
         this.PUBLICACAO_DATA = ordenarPorDataDesc(response);
+        console.log(response)
       },
       (err) => {
         console.log('Não foi possível buscar as publicações por ID: ' + err);
