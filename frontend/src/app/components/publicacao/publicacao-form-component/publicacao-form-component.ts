@@ -1,17 +1,17 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { filter, Observable, switchMap } from 'rxjs';
 
 import { Endereco } from '../../../models/Endereco';
 import { Informativo } from '../../../models/Informativo';
+import { Publicacao } from '../../../models/Publicacao';
 import { AuthUserService } from '../../../services/auth-user-service';
 import { EnderecoService } from '../../../services/endereco-service';
 import { parseHashtags } from '../../../services/utils-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { Ocorrencia } from './../../../models/Ocorrencia';
 import { PublicacaoService } from './../../../services/publicacao-service';
-import { Publicacao } from '../../../models/Publicacao';
 
 @Component({
   selector: 'app-publicacao-form-component',
@@ -34,8 +34,8 @@ export class PublicacaoFormComponent implements OnInit {
   public ENDERECO_POR_BAIRRO_DATA!: Observable<any[]>;
 
   public publicacaoForm = this.formBuilder.group({
-    titulo: ['', Validators.required, Validators.maxLength(30)],
-    descricao: ['', Validators.required, Validators.maxLength(350)],
+    titulo: ['', [Validators.required, Validators.maxLength(30)]],
+    descricao: ['', [Validators.required, Validators.maxLength(350)]],
     hashtags: [''],
     rua: ['', Validators.required],
     bairro: ['', Validators.required],

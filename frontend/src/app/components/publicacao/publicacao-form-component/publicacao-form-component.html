@@ -1,4 +1,4 @@
-<div class="dialog-container-lg dialog-container">
+<div class="dialog-container">
   <h2>Publicação</h2>
   <form [formGroup]="publicacaoForm" (ngSubmit)="onFormSubmit()">
     <div class="form-floating mb-3 floating-compact">
@@ -75,7 +75,7 @@
         formControlName="hashtags"></textarea>
     </div>
 
-    <button class="button" type="submit" [disabled]="publicacaoForm.invalid">
+    <button class="button" type="submit" [disabled]="!publicacaoForm.valid">
       {{data.isCreating === true ? "Criar" : "Atualizar"}}
     </button>
   </form>
