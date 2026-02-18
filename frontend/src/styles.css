@@ -101,7 +101,7 @@ label {
   border-bottom: 2px solid var(--color-primary-dark);
   border-radius: 0%;
   font-weight: normal;
-  background-color: var(--color-bg);
+  background-color: transparent;
   color: var(--color-text);
   padding-top: 1.8rem;
 }
@@ -112,7 +112,7 @@ label {
 .accordion-button:focus {
   box-shadow: none;
   border-bottom: 2px solid var(--color-primary-dark);
-  background-color: var(--color-bg);
+  background-color: transparent;
 }
 
 .button {

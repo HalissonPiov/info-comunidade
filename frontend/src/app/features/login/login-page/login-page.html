@@ -67,8 +67,8 @@
     </div>
     <div class="form-floating mb-3 floating-compact">
       <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento"
-        [max]="today">
-      <label for="dataNascimento">dataNascimento</label>
+        [max]="today" (keydown)="$event.preventDefault()">
+      <label for="dataNascimento">Data de Nascimento</label>
     </div>
     <div class="form-floating mb-3 floating-compact">
       <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
