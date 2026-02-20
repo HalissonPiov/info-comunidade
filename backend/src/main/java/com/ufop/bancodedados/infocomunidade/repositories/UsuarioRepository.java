@@ -90,4 +90,12 @@ public class UsuarioRepository {
         }
     }
 
+    public long contar(){
+        String mql = "{}";
+        return mongoTemplate.count(new BasicQuery(mql), "usuarios");
+    }
+
+    public Usuario salvar(Usuario usuario){
+        return mongoTemplate.save(usuario);
+    }
 }

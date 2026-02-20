@@ -1,0 +1,74 @@
+[
+{
+    "nome" : "Bruna",
+    "username" : "br_una_123",
+    "senha" : "amocafe123",
+    "bairro" : "Vila Tanque",
+    "dataNascimento" : "2001-01-20",
+    "excluido" : false
+},
+{
+    "nome" : "Thiago",
+    "username" : "thiago_t",
+    "senha" : "thiago321",
+    "bairro" : "Aclimação",
+    "dataNascimento" : "1994-08-22",
+    "excluido" : false
+},
+{
+    "nome" : "Renato",
+    "username" : "renato_tech",
+    "senha" : "rtech2023",
+    "bairro" : "Areia Preta",
+    "dataNascimento" : "1996-04-08",
+    "excluido" : false
+},
+{
+    "nome" : "Juliana",
+    "username" : "ju_lima",
+    "senha" : "juliana987",
+    "bairro" : "Cruzeiro Celeste",
+    "dataNascimento" : "2003-02-15",
+    "excluido" : false
+},
+{
+    "nome" : "Lucas",
+    "username" : "lucas_m",
+    "senha" : "lucas789",
+    "bairro" : "Loanda",
+    "dataNascimento" : "1997-09-14",
+    "excluido" : false
+},
+{
+    "nome" : "Carlos",
+    "username" : "carlos_dev",
+    "senha" : "dev12345",
+    "bairro" : "Satélite",
+    "dataNascimento" : "1998-07-12",
+    "excluido" : false
+},
+{
+    "nome" : "Mariana",
+    "username" : "mari_souza",
+    "senha" : "mariana2024",
+    "bairro" : "Satélite",
+    "dataNascimento" : "2000-03-18",
+    "excluido" : false
+},
+{
+    "nome" : "Felipe",
+    "username" : "felps_99",
+    "senha" : "felipe123",
+    "bairro" : "Aclimação",
+    "dataNascimento" : "1999-11-02",
+    "excluido" : false
+},
+{
+    "nome" : "Ana Clara",
+    "username" : "ana.clara",
+    "senha" : "aclara321",
+    "bairro" : "Areia Preta",
+    "dataNascimento" : "2002-05-27",
+    "excluido" : false
+}
+]
