@@ -38,7 +38,7 @@ public class UsuarioDataLoader implements CommandLineRunner{
             InputStream inputStream = getClass().getResourceAsStream("/jsons/usuarioData.json");
 
             if(inputStream == null){
-                System.err.println("Erro!! Arquivo data.json não encontrado em /resources/");
+                System.err.println("Erro!! Arquivo usuarioData.json não encontrado em /resources/");
                 return;
             }
 

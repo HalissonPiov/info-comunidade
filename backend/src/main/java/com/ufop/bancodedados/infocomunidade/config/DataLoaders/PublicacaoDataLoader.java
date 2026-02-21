@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import com.ufop.bancodedados.infocomunidade.models.Publicacao;
 import com.ufop.bancodedados.infocomunidade.repositories.PublicacaoRepository;
@@ -12,8 +13,6 @@ import com.ufop.bancodedados.infocomunidade.repositories.PublicacaoRepository;
 import tools.jackson.core.JacksonException;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
-
-import org.springframework.stereotype.Component;
 
 @Component
 public class PublicacaoDataLoader implements CommandLineRunner{
@@ -39,7 +38,7 @@ public class PublicacaoDataLoader implements CommandLineRunner{
             InputStream inputStream = getClass().getResourceAsStream("/jsons/publicacaoData.json");
 
             if(inputStream == null){
-                System.err.println("Erro!! Arquivo data.json não encontrado em /resources/");
+                System.err.println("Erro!! Arquivo publicacaoData.json não encontrado em /resources/");
                 return;
             }
 

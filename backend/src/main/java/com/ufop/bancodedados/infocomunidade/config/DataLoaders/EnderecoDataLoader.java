@@ -38,7 +38,7 @@ public class EnderecoDataLoader implements CommandLineRunner{
             InputStream inputStream = getClass().getResourceAsStream("/jsons/enderecoData.json");
 
             if(inputStream == null){
-                System.err.println("Erro!! Arquivo data.json não encontrado em /resources/");
+                System.err.println("Erro!! Arquivo enderecoData.json não encontrado em /resources/");
                 return;
             }
 
