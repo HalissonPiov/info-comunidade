@@ -104,22 +104,21 @@ export class CardComponent implements OnInit {
     );
   }
 
-  editing: boolean = false;
+  editingComment: string = '';
   editedText = new FormControl('');
 
   startEdit(comment: Comentario) {
-    this.editing = !this.editing;
+    this.editingComment = comment.id;
     this.editedText.setValue(comment.texto);
   }
 
   saveEdit(id: string, idPublicacao: string) {
-    console.log('clicouu em atualizar')
     const userId = this.authUserService.getUserFromStorage()?.id;
 
     if (!this.editedText.valid) return;
 
     const commentDTO: ComentarioDTO = {
-      texto: this.text.value!,
+      texto: this.editedText.value!,
       usuarioID: userId!,
       publicacaoID: idPublicacao,
       excluido: false,
@@ -127,7 +126,6 @@ export class CardComponent implements OnInit {
 
     this.comentarioService.updateComment(id, commentDTO).subscribe(
       (response) => {
-        console.log('sucesso ao atualizar')
         this.cancelEdit();
         this.findCommentsByPublicacao();
       },
@@ -138,7 +136,7 @@ export class CardComponent implements OnInit {
   }
 
   cancelEdit() {
-    this.editing = false;
+    this.editingComment = '';
     this.editedText.setValue('');
   }
 

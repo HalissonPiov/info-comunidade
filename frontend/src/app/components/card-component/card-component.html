@@ -93,17 +93,17 @@
             <span class="point"></span>
             <span class="date">{{comment.dataCriacao | date:'dd/MM/yy'}}</span>
           </p>
-          @if (!editing) {
+          @if (editingComment !== comment.id) {
           <p class="comment-text">
             {{ comment.texto }}
           </p>
-          <!-- @if (user!.id == comment.usuario.id) { -->
+          @if (user!.id == comment.usuario.id) {
           <div class="comment-actions">
             <button (click)="startEdit(comment)">Editar</button>
             <span class="point"></span>
             <button (click)="deleteComment(comment.id)">Excluir</button>
           </div>
-          <!-- } -->
+          }
           }
           @else {
           <div class="edit-comment">
@@ -115,7 +115,7 @@
         </div>
         }
       </div>
-    }
+      }
     </mat-card-footer>
   </mat-card>
 </div>
