@@ -105,7 +105,7 @@ export class CardComponent implements OnInit {
   }
 
   editingComment: string = '';
-  editedText = new FormControl('');
+  editedText = new FormControl('', Validators.required);
 
   startEdit(comment: Comentario) {
     this.editingComment = comment.id;
