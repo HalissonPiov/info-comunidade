@@ -69,12 +69,54 @@
 
       <p class="hashtags">
         @for (hashtag of publicacao.hashtags; track $index) {
-          @if (hashtag) {
-          <span class="hashtag">#{{hashtag}}</span>
-          }
+        @if (hashtag) {
+        <span class="hashtag">#{{hashtag}}</span>
+        }
         }
       </p>
     </mat-card-content>
+    <mat-card-footer class="footer">
+      <div class="comment-container">
+        <div class="mb-3 comment-box">
+          <input type="text" class="form-control" id="nome" placeholder="Deixar um comentário..." [formControl]="text">
+        </div>
+        <div class="send-comment" (click)="createComment(publicacao.idPublicacao)">
+          <i class="fa-solid fa-arrow-up"></i>
+        </div>
+      </div>
+      @if (comments !== null) {
+      <div class="comments">
+        @for (comment of comments; track $index) {
+        <div class="comment mb-3">
+          <p class="comment-header">
+            <span class="comment-user">{{ comment.usuario.nome }}</span>
+            <span class="point"></span>
+            <span class="date">{{comment.dataCriacao | date:'dd/MM/yy'}}</span>
+          </p>
+          @if (!editing) {
+          <p class="comment-text">
+            {{ comment.texto }}
+          </p>
+          <!-- @if (user!.id == comment.usuario.id) { -->
+          <div class="comment-actions">
+            <button (click)="startEdit(comment)">Editar</button>
+            <span class="point"></span>
+            <button (click)="deleteComment(comment.id)">Excluir</button>
+          </div>
+          <!-- } -->
+          }
+          @else {
+          <div class="edit-comment">
+            <input type="text" [formControl]="editedText" class="form-control" />
+
+            <button (click)="saveEdit(comment.id, comment.publicacao.idPublicacao)">Salvar</button>
+          </div>
+          }
+        </div>
+        }
+      </div>
+    }
+    </mat-card-footer>
   </mat-card>
 </div>
 }
