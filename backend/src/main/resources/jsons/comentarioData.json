@@ -1,0 +1,92 @@
+[
+  {
+    "texto": "Isso é perigoso, alguém deveria resolver!",
+    "dataCriacao": "2024-02-20 11:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9013",
+      "nome": "Thiago",
+      "username": "thiago_t",
+      "senha": "thiago321",
+      "bairro": "Aclimação",
+      "dataNascimento": "1994-08-22",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9020"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Vou participar, obrigado pelo aviso!",
+    "dataCriacao": "2024-02-19 15:30:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9012",
+      "nome": "Bruna",
+      "username": "br_una_123",
+      "senha": "amocafe123",
+      "bairro": "Vila Tanque",
+      "dataNascimento": "2001-01-20",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9021"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Também escuto muito barulho aqui...",
+    "dataCriacao": "2024-02-18 22:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9014",
+      "nome": "Renato",
+      "username": "renato_tech",
+      "senha": "rtech2023",
+      "bairro": "Areia Preta",
+      "dataNascimento": "1996-04-08",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9022"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Boa notícia para os idosos!",
+    "dataCriacao": "2024-02-16 10:15:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9016",
+      "nome": "Lucas",
+      "username": "lucas_m",
+      "senha": "lucas789",
+      "bairro": "Loanda",
+      "dataNascimento": "1997-09-14",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9023"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Tenho medo de andar por lá à noite.",
+    "dataCriacao": "2024-02-15 21:00:00",
+    "usuario": {
+      "id": "699919ef5842081f1e471d75",
+      "nome": "Felipe",
+      "username": "felps_99",
+      "senha": "felipe123",
+      "bairro": "Aclimação",
+      "dataNascimento": "1999-11-02",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9024"
+    },
+    "excluido": false
+  }
+]

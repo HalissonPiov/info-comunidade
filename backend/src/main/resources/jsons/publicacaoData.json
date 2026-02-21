@@ -1,6 +1,7 @@
 [
   {
     "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9020",
     "titulo": "Buraco na rua principal",
     "descricao": "Gigante buraco está causando acidentes na Avenida Armando Fajardo",
     "dataCriacao": "2024-02-19T10:30:00",
@@ -20,6 +21,7 @@
   },
   {
     "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9021",
     "titulo": "Reunião comunitária",
     "descricao": "Encontro sobre segurança no bairro Satélite",
     "dataCriacao": "2024-02-18T14:00:00",
@@ -39,6 +41,7 @@
   },
   {
     "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9022",
     "titulo": "Música alta durante a madrugada",
     "descricao": "Vizinho na Rua Manaus liga som alto todas as noites.",
     "dataCriacao": "2024-02-17T23:15:00",
@@ -58,6 +61,7 @@
   },
   {
     "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9023",
     "titulo": "Novo ponto de vacinação",
     "descricao": "Amanhã começa a vacinação contra gripe no polo da Aclimação",
     "dataCriacao": "2024-02-16T09:00:00",
@@ -77,6 +81,7 @@
   },
   {
     "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9024",
     "titulo": "Iluminação pública apagada",
     "descricao": "Postes sem luz na Rua Padre José de Anchieta",
     "dataCriacao": "2024-02-15T20:45:00",

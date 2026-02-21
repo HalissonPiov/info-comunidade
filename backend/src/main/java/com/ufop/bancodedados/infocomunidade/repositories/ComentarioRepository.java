@@ -80,4 +80,13 @@ public class ComentarioRepository {
         Update comentarioExcluido = new Update().set("excluido", true);
         mongoTemplate.updateFirst(new BasicQuery(mql), comentarioExcluido, Comentario.class, "comentarios");
     }
+
+    public long contar(){
+        String mql = "{}";
+        return mongoTemplate.count(new BasicQuery(mql), "comentarios");
+    }
+
+    public Comentario salvar(Comentario comentario){
+        return mongoTemplate.save(comentario);
+    }
 }
