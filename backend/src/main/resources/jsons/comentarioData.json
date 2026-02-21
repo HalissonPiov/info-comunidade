@@ -88,5 +88,257 @@
       "idPublicacao": "65fa2c8b9d1e4a7f8b3c9024"
     },
     "excluido": false
+  },
+  {
+    "texto": "Cuidado com o lixo eletrônico!",
+    "dataCriacao": "2024-02-14 09:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9016",
+      "nome": "Lucas",
+      "username": "lucas_m",
+      "senha": "lucas789",
+      "bairro": "Loanda",
+      "dataNascimento": "1997-09-14",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9025"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Vou participar do festival.",
+    "dataCriacao": "2024-02-12 13:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9012",
+      "nome": "Bruna",
+      "username": "br_una_123",
+      "senha": "amocafe123",
+      "bairro": "Vila Tanque",
+      "dataNascimento": "2001-01-20",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9027"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "A água subiu dentro de casa.",
+    "dataCriacao": "2024-02-11 10:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9014",
+      "nome": "Renato",
+      "username": "renato_tech",
+      "senha": "rtech2023",
+      "bairro": "Areia Preta",
+      "dataNascimento": "1996-04-08",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9028"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Ótimo curso!",
+    "dataCriacao": "2024-02-10 15:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9013",
+      "nome": "Thiago",
+      "username": "thiago_t",
+      "senha": "thiago321",
+      "bairro": "Aclimação",
+      "dataNascimento": "1994-08-22",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9029"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "A polícia deveria patrulhar.",
+    "dataCriacao": "2024-02-09 18:30:00",
+    "usuario": {
+      "id": "699919ef5842081f1e471d75",
+      "nome": "Felipe",
+      "username": "felps_99",
+      "senha": "felipe123",
+      "bairro": "Aclimação",
+      "dataNascimento": "1999-11-02",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9030"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Quero adotar um cachorro.",
+    "dataCriacao": "2024-02-08 11:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9018",
+      "nome": "Mariana",
+      "username": "mari_souza",
+      "senha": "mariana2024",
+      "bairro": "Satélite",
+      "dataNascimento": "2000-03-18",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9031"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Triste ver os gatos.",
+    "dataCriacao": "2024-02-07 08:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9013",
+      "nome": "Thiago",
+      "username": "thiago_t",
+      "senha": "thiago321",
+      "bairro": "Aclimação",
+      "dataNascimento": "1994-08-22",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9032"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Yoga vai me ajudar.",
+    "dataCriacao": "2024-02-06 17:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9016",
+      "nome": "Lucas",
+      "username": "lucas_m",
+      "senha": "lucas789",
+      "bairro": "Loanda",
+      "dataNascimento": "1997-09-14",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9033"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "A calçada é um perigo.",
+    "dataCriacao": "2024-02-05 14:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9012",
+      "nome": "Bruna",
+      "username": "br_una_123",
+      "senha": "amocafe123",
+      "bairro": "Vila Tanque",
+      "dataNascimento": "2001-01-20",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9034"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Também vou levar meu velho computador.",
+    "dataCriacao": "2024-02-14 09:30:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9026",
+      "nome": "Carlos",
+      "username": "carlos_42",
+      "senha": "car123",
+      "bairro": "Centro",
+      "dataNascimento": "1988-12-05",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9025"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Os donos deveriam ser multados.",
+    "dataCriacao": "2024-02-13 19:00:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9027",
+      "nome": "Patricia",
+      "username": "paty23",
+      "senha": "pat123",
+      "bairro": "Vila Tanque",
+      "dataNascimento": "1992-03-11",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9026"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Que bom ter cultura por perto.",
+    "dataCriacao": "2024-02-12 14:30:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9028",
+      "nome": "João",
+      "username": "joao_cult",
+      "senha": "joao123",
+      "bairro": "Satélite",
+      "dataNascimento": "1990-07-22",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "informativo",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9027"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Consertem isso rápido.",
+    "dataCriacao": "2024-02-11 11:30:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9029",
+      "nome": "Beatriz",
+      "username": "bea_92",
+      "senha": "bea789",
+      "bairro": "Areia Preta",
+      "dataNascimento": "1995-10-30",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9028"
+    },
+    "excluido": false
+  },
+  {
+    "texto": "Espero que roubem menos.",
+    "dataCriacao": "2024-02-09 19:30:00",
+    "usuario": {
+      "id": "65fa2c8b9d1e4a7f8b3c9030",
+      "nome": "Marcelo",
+      "username": "marcelo_it",
+      "senha": "marcelo123",
+      "bairro": "Aclimação",
+      "dataNascimento": "1985-06-19",
+      "excluido": false
+    },
+    "publicacao": {
+      "_class": "ocorrencia",
+      "idPublicacao": "65fa2c8b9d1e4a7f8b3c9030"
+    },
+    "excluido": false
   }
 ]

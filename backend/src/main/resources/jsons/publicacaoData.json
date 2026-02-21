@@ -98,5 +98,205 @@
         "excluido": false
     },
     "setor": "Iluminação"
+  },
+  {
+    "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9025",
+    "titulo": "Coleta de lixo eletrônico",
+    "descricao": "Coleta de lixo eletrônico no sábado na Praça Central",
+    "dataCriacao": "2024-06-01T08:00:00",
+    "hashtags": ["lixo", "eletrônico"],
+    "endereco": {"bairro": "Centro", "rua": "Praça Central"},
+    "imagemURL": "https://www.unifacear.edu.br/wp-content/uploads/coleta-lixo-eletronico-unifacear-2024-1200x628-1.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9026",
+        "nome": "Carlos",
+        "username": "carlos_42",
+        "senha": "car123",
+        "bairro": "Centro",
+        "dataNascimento": "1988-12-05",
+        "excluido": false
+    },
+    "publicoAlvo": "Todos"
+  },
+  {
+    "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9026",
+    "titulo": "Cães soltos",
+    "descricao": "Vários cães soltos assustando moradores na Rua da Paz",
+    "dataCriacao": "2024-02-13T18:20:00",
+    "hashtags": ["animais", "segurança"],
+    "endereco": {"bairro": "Vila Tanque", "rua": "Rua da Paz"},
+    "imagemURL": "https://cdn6.campograndenews.com.br/uploads/noticias/2025/07/13/284a908d83f1bb98b553ad2928d075cff9af7c66.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9027",
+        "nome": "Patricia",
+        "username": "paty23",
+        "senha": "pat123",
+        "bairro": "Vila Tanque",
+        "dataNascimento": "1992-03-11",
+        "excluido": false
+    },
+    "setor": "Animais"
+  },
+  {
+    "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9027",
+    "titulo": "Festival cultural",
+    "descricao": "Festival de música e dança na Praça do Coreto",
+    "dataCriacao": "2024-02-12T12:00:00",
+    "hashtags": ["cultura", "festival"],
+    "endereco": {"bairro": "Satélite", "rua": "Praça do Coreto"},
+    "imagemURL": "https://festivalculturaldobrasil.org/wp-content/uploads/2025/04/Logo-Festival-cultural-do-Brasil-em-Viena-2025.png",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9028",
+        "nome": "João",
+        "username": "joao_cult",
+        "senha": "joao123",
+        "bairro": "Satélite",
+        "dataNascimento": "1990-07-22",
+        "excluido": false
+    },
+    "publicoAlvo": "Todos"
+  },
+  {
+    "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9028",
+    "titulo": "Vazamento de água",
+    "descricao": "Grande vazamento de água na esquina da Rua 7 de Setembro",
+    "dataCriacao": "2024-02-11T09:45:00",
+    "hashtags": ["vazamento", "água"],
+    "endereco": {"bairro": "Areia Preta", "rua": "Rua 7 de Setembro"},
+    "imagemURL": "https://www.cacavazamento.srv.br/wp-content/uploads/2020/05/descobrir-vazamento-agua-condominio.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9029",
+        "nome": "Beatriz",
+        "username": "bea_92",
+        "senha": "bea789",
+        "bairro": "Areia Preta",
+        "dataNascimento": "1995-10-30",
+        "excluido": false
+    },
+    "setor": "Finanças Públicas"
+  },
+  {
+    "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9029",
+    "titulo": "Curso gratuito de informática",
+    "descricao": "Curso para idosos no Centro Comunitário",
+    "dataCriacao": "2024-02-10T14:30:00",
+    "hashtags": ["curso", "informática"],
+    "endereco": {"bairro": "Aclimação", "rua": "Rua São Paulo"},
+    "imagemURL": "https://cptstatic.s3.amazonaws.com/imagens/enviadas/materias/materia11471/informatica-5-cursos-cpt.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9030",
+        "nome": "Marcelo",
+        "username": "marcelo_it",
+        "senha": "marcelo123",
+        "bairro": "Aclimação",
+        "dataNascimento": "1985-06-19",
+        "excluido": false
+    },
+    "publicoAlvo": "Idosos"
+  },
+  {
+    "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9030",
+    "titulo": "Furto de bicicletas",
+    "descricao": "Furtos de bicicletas na ciclovia da Avenida Brasil",
+    "dataCriacao": "2024-02-09T17:10:00",
+    "hashtags": ["furto", "bicicleta"],
+    "endereco": {"bairro": "Loanda", "rua": "Avenida Brasil"},
+    "imagemURL": "https://cdn.autopapo.com.br/box/uploads/2024/08/16230914/ladrao_rouba_bicicleta_foto_shutterstock-565x377.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9031",
+        "nome": "Fernanda",
+        "username": "fer_souza",
+        "senha": "fer2024",
+        "bairro": "Loanda",
+        "dataNascimento": "1993-02-25",
+        "excluido": false
+    },
+    "setor": "Segurança Pública"
+  },
+  {
+    "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9031",
+    "titulo": "Feira de adoção de animais",
+    "descricao": "Venha adotar um pet no Parque Central",
+    "dataCriacao": "2024-02-08T10:00:00",
+    "hashtags": ["adoção", "animais"],
+    "endereco": {"bairro": "Satélite", "rua": "Parque Central"},
+    "imagemURL": "https://mid-noticias.curitiba.pr.gov.br/2018/capa/00240761.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9032",
+        "nome": "Roberto",
+        "username": "roberto_99",
+        "senha": "rob123",
+        "bairro": "Satélite",
+        "dataNascimento": "1989-01-15",
+        "excluido": false
+    },
+    "publicoAlvo": "Famílias"
+  },
+  {
+    "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9032",
+    "titulo": "Gatos atropelados",
+    "descricao": "Gatos mortos na Avenida Beira Rio",
+    "dataCriacao": "2024-02-07T07:25:00",
+    "hashtags": ["animais", "trânsito"],
+    "endereco": {"bairro": "Areia Preta", "rua": "Avenida Beira Rio"},
+    "imagemURL": "https://images.impresa.pt/sicnot/2022-02-11-triangulo-acidente-canva/original",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9033",
+        "nome": "Marisa",
+        "username": "marisa_br",
+        "senha": "marisa321",
+        "bairro": "Areia Preta",
+        "dataNascimento": "1991-04-04",
+        "excluido": false
+    },
+    "setor": "Trânsito"
+  },
+  {
+    "_class": "informativo",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9033",
+    "titulo": "Aula de yoga ao ar livre",
+    "descricao": "Yoga no Parque todos os domingos às 8h",
+    "dataCriacao": "2024-02-06T16:00:00",
+    "hashtags": ["yoga", "saúde"],
+    "endereco": {"bairro": "Centro", "rua": "Parque Municipal"},
+    "imagemURL": "https://s2-oglobo.glbimg.com/6p1uRdP5-tRdHRw0Y_xbpKMDBV0=/0x0:5184x3456/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/E/u/dwloJPQHukWivU80Aq8w/103980009-zs-rio-de-janeiro-rj-15-08-2023-yoga-na-praia-de-botafogo-opcoes-de-lugares-para-fazer-a.jpg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9034",
+        "nome": "Tiago",
+        "username": "tiagoyoga",
+        "senha": "tiago2023",
+        "bairro": "Centro",
+        "dataNascimento": "1998-11-11",
+        "excluido": false
+    },
+    "publicoAlvo": "Jovens"
+  },
+  {
+    "_class": "ocorrencia",
+    "idPublicacao": "65fa2c8b9d1e4a7f8b3c9034",
+    "titulo": "Quebra de calçada",
+    "descricao": "Calçada quebrada impede passagem na Rua das Flores",
+    "dataCriacao": "2024-02-05T13:35:00",
+    "hashtags": ["calçada", "acessibilidade"],
+    "endereco": {"bairro": "Loanda", "rua": "Rua das Flores"},
+    "imagemURL": "https://progambiental.com.br/wp-content/uploads/2024/06/Av.-Barber-Greene-calcada-quebrada-e1608397247505.jpeg",
+    "usuario": {
+        "id": "65fa2c8b9d1e4a7f8b3c9035",
+        "nome": "Sofia",
+        "username": "sofia123",
+        "senha": "sofia321",
+        "bairro": "Loanda",
+        "dataNascimento": "2000-09-09",
+        "excluido": false
+    },
+    "setor": "Urbanismo"
   }
 ]
