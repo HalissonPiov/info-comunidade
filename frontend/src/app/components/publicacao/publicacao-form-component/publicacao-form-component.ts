@@ -26,8 +26,8 @@ export class PublicacaoFormComponent implements OnInit {
   readonly data = inject<{ publicacao?: Publicacao; isCreating: boolean }>(MAT_DIALOG_DATA);
 
   private enderecoService = inject(EnderecoService);
-  private authUserService: AuthUserService = inject(AuthUserService);
-  private publicacaoService: PublicacaoService = inject(PublicacaoService);
+  private authUserService = inject(AuthUserService);
+  private publicacaoService = inject(PublicacaoService);
 
   public ENDERECO_DATA: Endereco[] = [];
   public BAIRROS_UNICOS: string[] = [];

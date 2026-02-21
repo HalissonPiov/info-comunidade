@@ -15,37 +15,41 @@ import { UserFormDialog } from '../user/user-form-dialog/user-form-dialog';
   styleUrl: './navbar-component.css',
 })
 export class NavbarComponent {
-
   readonly dialog = inject(MatDialog);
   private authService = inject(AuthUserService);
-  private userService: UserService = inject(UserService)
+  private userService = inject(UserService);
 
   user$ = this.authService.user$;
 
   get isLoggedIn() {
-  return this.authService.isLoggedIn;
-}
+    return this.authService.isLoggedIn;
+  }
 
   openEditDialog(): void {
     const dialogRef = this.dialog.open(UserFormDialog, {
       width: '500px',
-      data: {user: this.authService.getUserFromStorage(), title: 'Editar dados', confirmationMessage: "Salvar", action: "edicao"},
+      data: {
+        user: this.authService.getUserFromStorage(),
+        title: 'Editar dados',
+        confirmationMessage: 'Salvar',
+        action: 'edicao',
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.updateProfile()
+        this.updateProfile();
       }
     });
   }
 
   updateProfile() {
-    const user = this.authService.getUserFromStorage()
-     if (!user) return;
+    const user = this.authService.getUserFromStorage();
+    if (!user) return;
     this.userService.findById(user?.id!).subscribe({
       next: (response) => this.authService.setUser(response),
-      error: err => console.log('Erro ao atualizar perfil', err)}
-    )
+      error: (err) => console.log('Erro ao atualizar perfil', err),
+    });
   }
 
   openDeleteDialog(): void {
@@ -53,7 +57,7 @@ export class NavbarComponent {
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result !== undefined) {
       }
     });

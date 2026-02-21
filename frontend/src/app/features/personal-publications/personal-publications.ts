@@ -17,7 +17,8 @@ import { Publicacao } from './../../models/Publicacao';
 })
 export class PersonalPublications implements OnInit {
   public PUBLICACAO_DATA: Publicacao[] = [];
-  publicacaoService: PublicacaoService = inject(PublicacaoService);
+
+  private publicacaoService = inject(PublicacaoService);
   private authService = inject(AuthUserService);
   readonly dialog = inject(MatDialog);
 
@@ -30,7 +31,7 @@ export class PersonalPublications implements OnInit {
     this.publicacaoService.findAllByUserId(user?.id!).subscribe(
       (response) => {
         this.PUBLICACAO_DATA = ordenarPorDataDesc(response);
-        console.log(response)
+        console.log(response);
       },
       (err) => {
         console.log('Não foi possível buscar as publicações por ID: ' + err);

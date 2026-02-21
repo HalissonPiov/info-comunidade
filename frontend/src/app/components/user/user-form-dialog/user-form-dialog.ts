@@ -27,9 +27,11 @@ export class UserFormDialog {
   }>(MAT_DIALOG_DATA);
 
   private formBuilder = inject(FormBuilder);
-  private authUserService: AuthUserService = inject(AuthUserService);
+  private authUserService = inject(AuthUserService);
+  private enderecoService = inject(EnderecoService);
+  private userService = inject(UserService);
+
   public BAIRROS_UNICOS: string[] = [];
-  private enderecoService: EnderecoService = inject(EnderecoService);
   today = new Date().toISOString().split('T')[0];
   showPassword: boolean = false;
 
@@ -41,6 +43,8 @@ export class UserFormDialog {
     senha: ['', Validators.required],
   });
 
+  constructor() {}
+
   ngOnInit(): void {
     this.findByUsername();
     if (this.data?.user) {
@@ -48,8 +52,6 @@ export class UserFormDialog {
     }
     this.getEnderecos();
   }
-
-  constructor(private userService: UserService) {}
 
   onFormSubmit() {
     if (this.data.action === 'edicao') {

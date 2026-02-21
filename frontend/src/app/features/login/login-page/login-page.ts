@@ -10,7 +10,6 @@ import { EnderecoService } from '../../../services/endereco-service';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { Login } from '../model/Login';
-import { notBlankValidator } from '../../../services/utils-service';
 
 @Component({
   selector: 'app-login-page',
@@ -20,12 +19,13 @@ import { notBlankValidator } from '../../../services/utils-service';
 })
 export class LoginPage implements OnInit {
   showLogin = signal(true);
-  userService = inject(UserService);
-  authService = inject(AuthUserService);
-  private router = inject(Router);
-  public BAIRROS_UNICOS: string[] = [];
-  private enderecoService: EnderecoService = inject(EnderecoService);
 
+  private userService = inject(UserService);
+  private authService = inject(AuthUserService);
+  private enderecoService = inject(EnderecoService);
+  private router = inject(Router);
+
+  public BAIRROS_UNICOS: string[] = [];
   isLoginInvalid: boolean = false;
   showPassword: boolean = false;
   today = new Date().toISOString().split('T')[0];

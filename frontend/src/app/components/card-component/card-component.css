@@ -5,7 +5,7 @@
 
 .header-container,
 mat-card-footer {
-  background: var(--card-container-bg);
+  background: var(--white-color);
   color: var(--text-black-color);
 }
 
@@ -21,7 +21,7 @@ mat-card-footer {
 
 .custom-card-header {
   width: 100%;
-  background: var(--card-container-bg);
+  background: var(--white-color);
   color: var(--text-black-color);
   display: flex;
   align-items: center;
@@ -81,7 +81,7 @@ i {
 }
 
 .content {
-  background-color: var(--card-container-bg);
+  background-color: var(--white-color);
 }
 
 .card-title {
@@ -162,7 +162,7 @@ mat-card-footer {
 }
 
 .send-comment i {
-  color: #fff;
+  color: var(--white-color);
   font-weight: bold;
 }
 
@@ -228,7 +228,7 @@ mat-card-footer {
   border-radius: 15px;
   text-align: center;
   align-content: center;
-  color: #fff;
+  color: var(--white-color);
   opacity: 90%;
 }
 

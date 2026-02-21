@@ -29,8 +29,8 @@ export class PublicacaoDeleteDialog {
   readonly dialogRef = inject(MatDialogRef<PublicacaoDeleteDialog>);
   readonly data = inject<{ publicacao: Publicacao }>(MAT_DIALOG_DATA);
   private router = inject(Router);
-  private authUserService: AuthUserService = inject(AuthUserService);
-  private publicacaoServive: PublicacaoService = inject(PublicacaoService);
+  private authUserService = inject(AuthUserService);
+  private publicacaoServive = inject(PublicacaoService);
 
   closeDialog() {
     this.dialogRef.close(true);

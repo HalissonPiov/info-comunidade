@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   public INFORMATIVO_DATA: Publicacao[] = [];
   public OCORRECIA_DATA: Publicacao[] = [];
 
-  private publicacaoService: PublicacaoService = inject(PublicacaoService);
+  private publicacaoService = inject(PublicacaoService);
 
   readonly dialog = inject(MatDialog);
   public TipoPublicacao = TipoPublicacao;
