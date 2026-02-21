@@ -27,6 +27,7 @@ export class LoginPage implements OnInit {
   private enderecoService: EnderecoService = inject(EnderecoService);
 
   isLoginInvalid: boolean = false;
+  showPassword: boolean = false;
   today = new Date().toISOString().split('T')[0];
 
   ngOnInit() {
@@ -141,5 +142,9 @@ export class LoginPage implements OnInit {
         console.log('Erro ao buscar endereços!', err);
       },
     );
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

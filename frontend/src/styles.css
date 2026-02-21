@@ -86,7 +86,6 @@ label {
   padding-bottom: 0.25rem;
   font-size: 0.85rem;
   width: 100%;
-  margin-right: 15px;
 }
 
 .floating-compact label {
@@ -113,6 +112,25 @@ label {
   box-shadow: none;
   border-bottom: 2px solid var(--color-primary-dark);
   background-color: transparent;
+}
+
+.password-container {
+  display: flex;
+}
+
+.password-container button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+.password-container .is-invalid {
+  border-bottom: 2px solid var(--bs-form-invalid-border-color);
+}
+
+.password-container i {
+  font-size: 1rem;
+  padding: 5px;
 }
 
 .button {

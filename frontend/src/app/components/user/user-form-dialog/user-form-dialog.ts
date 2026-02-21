@@ -31,6 +31,7 @@ export class UserFormDialog {
   public BAIRROS_UNICOS: string[] = [];
   private enderecoService: EnderecoService = inject(EnderecoService);
   today = new Date().toISOString().split('T')[0];
+  showPassword: boolean = false;
 
   public userForm = this.formBuilder.group({
     nome: ['', Validators.required],
@@ -132,5 +133,9 @@ export class UserFormDialog {
         console.log('Erro ao buscar endereços!', err);
       },
     );
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

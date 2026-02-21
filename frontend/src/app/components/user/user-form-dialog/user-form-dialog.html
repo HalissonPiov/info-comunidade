@@ -32,8 +32,11 @@
         [max]="today" (keydown)="$event.preventDefault()">
       <label for="dataNascimento">Data de Nascimento</label>
     </div>
-    <div class="form-floating mb-3 floating-compact">
-      <input type="password" class="form-control" id="senha" placeholder="" formControlName="senha">
+    <div class="form-floating mb-3 floating-compact password-container">
+      <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="senha" placeholder="" formControlName="senha">
+       <button type="button" (click)="togglePassword()">
+            <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
       <label for="senha">Senha</label>
     </div>
 
