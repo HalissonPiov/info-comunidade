@@ -1,9 +1,9 @@
 package com.ufop.bancodedados.infocomunidade.repositories;
 
-import com.ufop.bancodedados.infocomunidade.models.Informativo;
-import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
-import com.ufop.bancodedados.infocomunidade.models.Publicacao;
-import lombok.Data;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,9 +11,11 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import com.ufop.bancodedados.infocomunidade.models.Informativo;
+import com.ufop.bancodedados.infocomunidade.models.Ocorrencia;
+import com.ufop.bancodedados.infocomunidade.models.Publicacao;
+
+import lombok.Data;
 
 @Data
 @Repository
@@ -134,5 +136,14 @@ public class PublicacaoRepository {
     public List<Publicacao> buscarPorIdDoUsuario(String idUsuario){
         String mql = "{ \"usuario._id\" : \"" + idUsuario + "\" }";
         return mongoTemplate.find(new BasicQuery(mql), Publicacao.class, "publicacao");
+    }
+
+    public long contar(){
+        String mql = "{}";
+        return mongoTemplate.count(new BasicQuery(mql), "publicacao");
+    }
+
+    public Publicacao salvar(Publicacao publicacao){
+        return mongoTemplate.save(publicacao);
     }
 }

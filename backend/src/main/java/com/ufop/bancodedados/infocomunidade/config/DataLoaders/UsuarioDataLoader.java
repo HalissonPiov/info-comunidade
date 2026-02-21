@@ -1,4 +1,4 @@
-package com.ufop.bancodedados.infocomunidade.config;
+package com.ufop.bancodedados.infocomunidade.config.DataLoaders;
 
 import java.io.InputStream;
 import java.util.List;
