@@ -1,36 +1,122 @@
+@if (publicacao) {
 <div class="container">
   <mat-card class="card card-component" appearance="raised">
     <mat-card-header class="header-container card-header">
       <div class="custom-card-header">
         <div class="profile-info">
-          <i class="fa-solid fa-user"></i>
+
           <div>
-            <mat-card-title class="name">{{nomeCompleto}}</mat-card-title>
-            <mat-card-subtitle class="username">{{nomeUsuario}}</mat-card-subtitle>
+            <mat-card-title class="user">
+              <i class="fa-solid fa-user"></i>
+              {{publicacao.usuario.nome}}
+            </mat-card-title>
+            <mat-card-subtitle class="address">@if(publicacao.endereco) {
+              <i class="pin fa-solid fa-location-pin "></i>
+              {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
+              }
+            </mat-card-subtitle>
           </div>
         </div>
+
         <div class="options-container">
-          <span class="date">{{date}}</span>
+          <div>
+            @if (publicacao.setor) {
+            <p class="mb-0">
+              <span class="description-type">Setor: </span>{{publicacao.setor}}
+              <i class="fa-solid fa-puzzle-piece"></i>
+              }
+
+              @if(publicacao.publicoAlvo) {
+            <p class="mb-0 ">
+              <span class="description-type">Público alvo:</span> {{publicacao.publicoAlvo}}
+              <i class="fa-solid fa-users "></i>
+            </p>
+            }
+
+            <span class="date">{{ publicacao.dataCriacao | date:'d \'de\' MMMM \'de\' y' }}
+              <i class="fa-regular fa-calendar" style="color: #9c9c9c;"></i>
+            </span>
+          </div>
+
+          @if(showOptions) {
           <div class="dropdown">
-            <button class="btn" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Editar</a></li>
-              <li><a class="dropdown-item" href="#">Deletar</a></li>
+              <li><a class="dropdown-item" (click)="openUpdatePublicacaoDialog(publicacao)"><i
+                    class="fa-solid fa-pencil icon-pencil"></i>Editar</a></li>
+              <li><a class="dropdown-item" style="color: var(--text-atention);"
+                  (click)="openDeletePublicacaoDialog(publicacao)"><i
+                    class="fa-solid fa-trash icon-trash"></i>Deletar</a></li>
             </ul>
           </div>
+          }
         </div>
       </div>
     </mat-card-header>
+
+    @if(publicacao.imagemURL) {
+    <img mat-card-image class="image" [src]="publicacao.imagemURL" alt="Imagem da publicação" />
+    }
+
     <mat-card-content class="content">
-      <h3 class="card-title">Titulo da publicação</h3>
+      <h3 class="card-title">{{publicacao.titulo}}</h3>
+
       <p class="card-content">
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
+        {{publicacao.descricao}}
+      </p>
+
+      <p class="hashtags">
+        @for (hashtag of publicacao.hashtags; track $index) {
+        @if (hashtag) {
+        <span class="hashtag">#{{hashtag}}</span>
+        }
+        }
       </p>
     </mat-card-content>
+    <mat-card-footer class="footer">
+      <div class="comment-container">
+        <div class="mb-3 comment-box">
+          <input type="text" class="form-control" id="nome" placeholder="Deixar um comentário..." [formControl]="text">
+        </div>
+        <div class="send-comment" (click)="createComment(publicacao.idPublicacao)">
+          <i class="fa-solid fa-arrow-up"></i>
+        </div>
+      </div>
+      @if (comments !== null) {
+      <div class="comments">
+        @for (comment of comments; track $index) {
+        <div class="comment mb-3">
+          <p class="comment-header">
+            <span class="comment-user">{{ comment.usuario.nome }}</span>
+            <span class="point"></span>
+            <span class="date">{{comment.dataCriacao | date:'dd/MM/yy'}}</span>
+          </p>
+          @if (editingComment !== comment.id) {
+          <p class="comment-text">
+            {{ comment.texto }}
+          </p>
+          @if (user!.id == comment.usuario.id) {
+          <div class="comment-actions">
+            <button (click)="startEdit(comment)">Editar</button>
+            <span class="point"></span>
+            <button (click)="deleteComment(comment.id)">Excluir</button>
+          </div>
+          }
+          }
+          @else {
+          <div class="edit-comment">
+            <input type="text" [formControl]="editedText" class="form-control" />
+
+            <button (click)="saveEdit(comment.id, comment.publicacao.idPublicacao)">Salvar</button>
+          </div>
+          }
+        </div>
+        }
+      </div>
+      }
+    </mat-card-footer>
   </mat-card>
 </div>
+}

@@ -1,0 +1,7 @@
+.filters {
+  padding: 16px;
+  border-radius: 12px;
+  top: 40px;
+  left: calc(10vw + 40px);
+  width: 270px;
+}

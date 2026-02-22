@@ -1,3 +1,4 @@
+@import url(colors.css);
 
 body {
   margin: 0;
@@ -5,15 +6,229 @@ body {
   background-color: var(--color-bg);
 }
 
-:root {
-  --color-bg: #f4faf9;
-  --color-surface: #e6f0ee;
-  --color-surface-alt: #d3e4e1;
-  --title-color: #fff9f0;
+* {
+  transition:
+    0.3s ease,
+    color 0.3s ease;
+}
 
-  --color-primary: #d0e3ff;
-  --color-primary-dark: #081f5c;
-  --color-primary-light: #7096d1;
-  --card-container-bg: #ffffff;
-  --bg-color: transparent;
+a i {
+  margin-right: 8px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  color: #898989;
+  font-size: 0.95rem;
+}
+
+.form-control.info-textarea {
+  background-color: transparent;
+}
+
+.form-control.info-textarea:focus {
+  background-color: transparent;
+}
+
+.form-select.info-select {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+.form-floating,
+.select-container,
+.mb-3 {
+  width: 90%;
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 2rem;
+  color: var(--color-primary-dark);
+}
+
+.form-floating .invalid-feedback {
+  position: absolute;
+  bottom: -1.5rem;
+  font-size: 0.75rem;
+}
+
+.floating-compact .form-control {
+  height: 36px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.floating-compact label {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+.floating-compact input {
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+  border-radius: 0%;
+  font-weight: normal;
+  background-color: transparent;
+  color: var(--color-text);
+  padding-top: 1.8rem;
+}
+
+.floating-compact input[type='text']:focus,
+.floating-compact input[type='password']:focus,
+.floating-compact input[type='date']:focus,
+.accordion-button:focus {
+  box-shadow: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+  background-color: transparent;
+}
+
+.password-container {
+  display: flex;
+}
+
+.password-container button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--color-primary-dark);
+}
+
+.password-container .is-invalid {
+  border-bottom: 2px solid var(--bs-form-invalid-border-color);
+}
+
+.password-container i {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.button {
+  width: 100px;
+  border-radius: 25px;
+  background-color: var(--color-primary-dark);
+  color: var(--text-color);
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.button:hover:not(disable) {
+  opacity: 100%;
+}
+
+.button:disabled {
+  background-color: var(--color-primary); /* cinza azulado */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button:disabled:hover {
+  opacity: 0.7;
+}
+
+.dialog-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button:hover {
+  opacity: 100%;
+}
+
+.cards-container {
+  width: 100%;
+  max-width: 1000px;
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.small-btn {
+  position: fixed;
+
+  right: 24px;
+  z-index: 1000;
+  width: 200px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 20px;
+  border-radius: 30px;
+
+  background-color: var(--color-primary-dark);
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.small-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
+
+.fab-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+.small-btn.primary {
+  border-radius: 999px;
+  padding: 14px 20px;
+  bottom: 90px;
+}
+
+.small-btn.secondary {
+  border-radius: 999px;
+  padding: 14px 20px;
+  bottom: 24px;
 }

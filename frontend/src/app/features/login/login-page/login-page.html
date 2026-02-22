@@ -1,0 +1,92 @@
+<div class="container-login">
+  <div class="image-login-container">
+    <img src="assets/background_image.jpeg" alt="" srcset="  ">
+  </div>
+  <div class="content">
+    <div class="logomarca">
+      <img src="assets/logo_infocomunidade.png" alt="">
+    </div>
+    @if (showLogin()) {
+    <div class="form-container log-in">
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+        <h1 class="title">Entrar</h1>
+        <div class="form-floating mb-3 floating-compact">
+          <input type="text" class="form-control" id="username" placeholder="" formControlName="username"
+            [class.is-invalid]="isLoginInvalid">
+          <label for="username">Nome de usuário</label>
+        </div>
+
+        <div class="form-floating mb-3 floating-compact password-container">
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="senha" placeholder="Senha" formControlName="senha"
+            [class.is-invalid]="isLoginInvalid">
+          <button type="button" (click)="togglePassword()" [ngClass]="isLoginInvalid ? 'is-invalid': ''">
+            <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+          <label for="senha">Senha</label>
+          <div class="invalid-feedback">
+            Nome de usuário e/ou senha estão incorretos!
+          </div>
+        </div>
+        <button class="button" type="submit" [disabled]="!loginForm.valid">Fazer login</button>
+
+        <p class="switch">
+          Não tem conta?
+          <a (click)="toggleForm()">Criar conta</a>
+        </p>
+      </form>
+    </div>
+    }
+
+    @else {
+    <div class="form-container sign-in">
+      <form [formGroup]="singinForm" (ngSubmit)="onSingInFormSubmit()">
+        <h1 class="title">Cria conta</h1>
+        <div class="form-floating mb-3 floating-compact">
+          <input type="text" class="form-control" id="nome" placeholder="" formControlName="nome">
+          <label for="nome">Nome Completo</label>
+        </div>
+        <div class="form-floating mb-3 floating-compact">
+          <input type="text" class="form-control" id="username" placeholder="" formControlName="username"
+            [class.is-invalid]="singinForm.get('username')?.hasError('usernameExists') || singinForm.get('username')?.hasError('blank') ">
+          <label for="username">Nome de usuário</label>
+          <div class="invalid-feedback">
+            @if(singinForm.get('username')?.hasError('blank')) {
+            O nome de usuário não pode conter apenas espaços.
+            }
+            @else {
+            Nome de usuário já está em uso
+            }
+          </div>
+        </div>
+        <div class="mb-3 select-container">
+          <label for="bairro">Bairro</label>
+          <select class="info-select form-select" formControlName="bairro">
+            @for (bairro of BAIRROS_UNICOS; track $index) {
+            <option [value]="bairro">{{bairro | titlecase}}</option>
+            }
+          </select>
+        </div>
+        <div class="form-floating mb-3 floating-compact">
+          <input type="date" class="form-control" id="dataNascimento" placeholder="" formControlName="dataNascimento"
+            [max]="today" (keydown)="$event.preventDefault()">
+          <label for="dataNascimento">Data de Nascimento</label>
+        </div>
+        <div class="form-floating mb-3 floating-compact password-container">
+          <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="senha" placeholder="" formControlName="senha">
+           <button type="button" (click)="togglePassword()" [ngClass]="isLoginInvalid ? 'is-invalid': ''">
+            <i class="fa-solid" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'" ></i>
+          </button>
+          <label for="senha">Senha</label>
+        </div>
+
+        <button class="button" type="submit" [disabled]="!singinForm.valid">Criar conta</button>
+
+        <p class="switch">
+          Já tem conta?
+          <a (click)="toggleForm()">Fazer login</a>
+        </p>
+      </form>
+    </div>
+    }
+  </div>
+</div>

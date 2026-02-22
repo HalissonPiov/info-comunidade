@@ -1,0 +1,21 @@
+:root {
+  --color-bg: #f5f9fc;
+  --color-surface: #e6f0ee;
+  --color-surface-alt: #d3e4e1;
+
+  --text-color: #fff9f0;
+  --text-atention: #960018;
+  --gray-text: #6b7c8f;
+  --text-black-color: #000;
+
+  --text-dark-gray-color: #9c9c9c;
+
+  --color-primary: #163a63;
+  --color-primary-dark: #0b1f3a;
+  --color-primary-light: #2f6da1;
+
+  --white-color: #fff;
+
+  --card-container-bg: #ffffff;
+  --bg-color: transparent;
+}

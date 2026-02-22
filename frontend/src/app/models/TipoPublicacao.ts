@@ -1,0 +1,5 @@
+export enum TipoPublicacao {
+  PUBLICACAO = 'PUBLICACAO',
+  OCORRENCIA = 'OCORRENCIA',
+  INFORMATIVO = 'INFORMATIVO',
+}

@@ -1,0 +1,82 @@
+<div class="dialog-container">
+  <h2>Publicação</h2>
+  <form [formGroup]="publicacaoForm" (ngSubmit)="onFormSubmit()">
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="titulo" placeholder="" formControlName="titulo" [class.is-invalid]="publicacaoForm.get('titulo')?.value?.length! > 30">
+      <label for="titulo">Título</label>
+      <div class="invalid-feedback mb-1">
+        O título deve ter menos que 30 caracteres!
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao">Descrição</label>
+      <textarea type="text" class="info-textarea form-control" id="descricao" placeholder="" formControlName="descricao" [class.is-invalid]="publicacaoForm.get('descricao')?.value?.length! > 350"></textarea>
+       <div class="invalid-feedback mb-1">
+        A descrição deve ter menos que 350 caracteres!
+      </div>
+    </div>
+
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="imagemURL" placeholder="" formControlName="imagemURL">
+      <label for="imagemURL">Link da imagem </label>
+    </div>
+
+
+    @if(publicacaoForm.get('imagemURL')?.value) {
+    <div class="form-floating mb-3 floating-compact image">
+      <img class="image" [src]="publicacaoForm.get('imagemURL')?.value" alt="Imagem da publicação" />
+    </div>
+    }
+
+    <div class="mb-3 select-container">
+      <label for="bairro">Bairro</label>
+      <select class="info-select form-select " formControlName="bairro">
+        <option value="" disabled selected>Selecione o bairro</option>
+        @for (bairro of BAIRROS_UNICOS; track $index) {
+        <option [value]="bairro">{{bairro | titlecase}}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-3 select-container">
+      <label for="rua">Rua</label>
+      <select class="info-select form-select" formControlName="rua">
+        <option value="" disabled selected>Selecione a rua</option>
+        @for (endereco of ENDERECO_POR_BAIRRO_DATA | async; track $index) {
+        <option [value]="endereco.id">{{endereco.rua | titlecase}}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-3 select-container">
+      <label for="tipo">Tipo de publicação</label>
+      <select class="info-select form-select" formControlName="tipo">
+        <option value="" disabled selected>Tipo de publicação</option>
+        <option value="OCORRENCIA">Ocorrência</option>
+        <option value="INFORMATIVO">Informativo</option>
+      </select>
+    </div>
+
+    @if(publicacaoForm.get('tipo')?.value === 'OCORRENCIA') {
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="setor" placeholder="" formControlName="setor">
+      <label for="setor">Setor</label>
+    </div>
+    }
+
+    @if (publicacaoForm.get('tipo')?.value === 'INFORMATIVO') {
+    <div class="form-floating mb-3 floating-compact">
+      <input type="text" class="form-control" id="publicoAlvo" placeholder="" formControlName="publicoAlvo">
+      <label for="publicoAlvo">Público-alvo</label>
+    </div>
+    }
+    <div class="mb-3">
+      <label for="hashtags">Hashtags</label>
+      <textarea type="text" class="info-textarea form-control " id="hashtags" placeholder="Padrão: Hashtag1, hashtag2"
+        formControlName="hashtags"></textarea>
+    </div>
+
+    <button class="button" type="submit" [disabled]="!publicacaoForm.valid">
+      {{data.isCreating === true ? "Criar" : "Atualizar"}}
+    </button>
+  </form>
+</div>

@@ -3,14 +3,16 @@
   align-items: center;
 }
 
-.header-container {
-  background: var(--card-container-bg);
-  color: #000000;
+.header-container,
+mat-card-footer {
+  background: var(--white-color);
+  color: var(--text-black-color);
 }
 
 .card-component {
-  border-color: transparent;
-  box-shadow: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
@@ -19,8 +21,8 @@
 
 .custom-card-header {
   width: 100%;
-  background: var(--card-container-bg);
-  color: #000000;
+  background: var(--white-color);
+  color: var(--text-black-color);
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -31,28 +33,29 @@
   min-height: 3rem;
   display: flex;
   gap: 10px;
-}
-
-.profile-info i {
-  font-size: 1.5rem;
-}
-
-.profile-info div,
-.profile-info i
-{
-  align-content: center;
-  color: #000000;
-}
-
-.name,
-.username {
   font-size: 1rem;
 }
 
-.username,
+.profile-info i {
+  padding: 0.2rem;
+  font-size: 1rem;
+}
+
+.profile-info div,
+.profile-info i:not(.fa-location-pin) {
+  align-content: center;
+  color: var(--text-black-color);
+}
+
+.user {
+  font-size: 1rem;
+}
+
+.address,
 .date,
 i {
-  color: #9c9c9c;
+  color: var(--text-dark-gray-color);
+  font-size: 1rem;
 }
 
 .options-container {
@@ -61,24 +64,176 @@ i {
   align-items: center;
 }
 
+.options-container div {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.options-container i:not(.icon-trash) {
+  color: var(--text-black-color);
+  margin-left: 6px;
+  font-size: 1rem;
+}
+
 .btn {
   padding: 5px;
 }
 
 .content {
-  background-color: var(--card-container-bg);
+  background-color: var(--white-color);
 }
 
-
 .card-title {
-  font-size: 1.2rem;
-  padding: 0.6rem 0 0 0.6rem;
+  font-size: 1.3rem;
+  padding: 0.5rem 0rem 0.2rem;
 }
 
 .card-content {
-  padding: 0.6rem;
+  padding: 0.3rem 0 0.3rem;
+}
+
+.image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.hashtag {
+  color: var(--gray-text);
+  padding: 3px;
+}
+
+.icon-pencil {
+  margin-right: 8px;
+  color: var(--text-black-color);
+}
+
+.icon-trash {
+  color: var(--text-atention);
+}
+
+.description-type {
+  font-weight: bold;
+}
+
+.hashtags {
+  margin-bottom: 1rem !important;
+}
+
+mat-card-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 1px solid #e2dfdf;
+}
+
+.comment-container {
+  margin: 1rem auto 0;
+  width: 99%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.comment-box input,
+.edit-comment input {
+  border-radius: 30px;
+  height: 50px;
+}
+
+.comment-box input[type='text']:focus,
+.edit-comment input[type='text']:focus {
+  background-color: transparent;
+  box-shadow: none;
+  border-color: #ccc;
+}
+
+.send-comment {
+  width: 45px;
+  height: 45px;
+  background-color: var(--color-primary-dark);
+  border-radius: 50%;
+  text-align: center;
+  align-content: center;
+  opacity: 90%;
+}
+
+.send-comment i {
+  color: var(--white-color);
+  font-weight: bold;
+}
+
+.send-comment:hover {
+  cursor: pointer;
+  opacity: 100%;
 }
 
 
+.comments {
+  margin: 0.7rem auto 0.7rem;
+  width: 95%;
+}
 
+.comments p {
+  margin-bottom: 5px;
+}
+
+.comment {
+  width: 100%;
+}
+
+.comment-header,
+.comment-actions {
+  display: flex;
+  align-items: center;
+}
+
+.comment-user {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.point {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background-color: #999;
+  border-radius: 50%;
+  margin: 0 6px;
+}
+
+.comment-actions button,
+.edit-comment button {
+  background-color: transparent;
+  border: transparent;
+  color: var(--text-dark-gray-color);
+}
+
+.comment-actions button:hover {
+  text-decoration: underline;
+}
+
+.edit-comment {
+  display: flex;
+  gap: 5px;
+}
+
+.edit-comment button {
+  width: 80px;
+  height: 45px;
+  background-color: var(--color-primary-dark);
+  border-radius: 15px;
+  text-align: center;
+  align-content: center;
+  color: var(--white-color);
+  opacity: 90%;
+}
+
+.edit-comment button:hover {
+  cursor: pointer;
+  opacity: 100%;
+}
 

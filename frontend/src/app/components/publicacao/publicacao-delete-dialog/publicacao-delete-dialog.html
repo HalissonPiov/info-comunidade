@@ -1,0 +1,8 @@
+<h2>Confirmação</h2>
+<mat-dialog-content>
+  <p>Deseja realmente excluir esta publicação?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="closeDialog()">Não</button>
+  <button matButton (click)="deletePublicacao()" cdkFocusInitial>Sim</button>
+</mat-dialog-actions>
