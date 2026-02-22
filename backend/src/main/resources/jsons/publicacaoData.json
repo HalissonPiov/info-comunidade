@@ -65,7 +65,7 @@
     "titulo": "Novo ponto de vacinação",
     "descricao": "Amanhã começa a vacinação contra gripe no polo da Aclimação",
     "dataCriacao": "2024-02-16T09:00:00",
-    "hashtags": ["#vacinação", "#saúde"],
+    "hashtags": ["vacinação", "saúde"],
     "endereco": {"bairro": "Aclimação", "rua": "Rua São João Batista"},
     "imagemURL": "https://www.tre-se.jus.br/imagens/imagens/tre-se-vacinacao/@@images/38713102-1c1c-4cfc-ae2f-d711dc34f968.jpeg",
     "usuario": {
