@@ -2,7 +2,7 @@ import { HttpParams } from "@angular/common/http";
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 export function parseHashtags(hashtags: string): string[] {
-  const hashes: string[] | void = hashtags.split(', ').forEach((hashtag) => hashtag.trim());
+  const hashes = hashtags.split(', ').map((hashtag) => hashtag.trim());
   if(hashes == null) return []
   return hashes;
 }
