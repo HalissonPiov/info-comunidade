@@ -97,7 +97,7 @@
           <p class="comment-text">
             {{ comment.texto }}
           </p>
-          @if (user!.id == comment.usuario.id) {
+          @if (user!.id == comment.usuario.id || showOptions) {
           <div class="comment-actions">
             <button (click)="startEdit(comment)">Editar</button>
             <span class="point"></span>
