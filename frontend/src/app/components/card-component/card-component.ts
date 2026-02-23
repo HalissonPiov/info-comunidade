@@ -142,7 +142,7 @@ export class CardComponent implements OnInit {
 
   deleteComment(id: string) {
     this.comentarioService.deleteComment(id).subscribe(
-      (response) => {
+      () => {
         this.findCommentsByPublicacao();
       },
       (err) => console.log('Erro ao deletar comentário!', err),

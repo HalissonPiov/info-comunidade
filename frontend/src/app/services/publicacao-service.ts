@@ -45,7 +45,7 @@ export class PublicacaoService {
     return this.httpClient.get<Publicacao[]>(this.BASE_URL + `/por-usuario/${userId}`);
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: string): Observable<void> {
     return this.httpClient.delete<void>(this.BASE_URL + `/${id}`);
   }
 }
