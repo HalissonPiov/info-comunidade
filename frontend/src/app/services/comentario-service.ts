@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComentarioDTO } from '../models/ComentarioDTO';
+import { Comentario } from '../models/Comentario';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +11,19 @@ export class ComentarioService {
   private BASE_URL: string = 'http://localhost:8080/comentarios';
   constructor(private httpClient: HttpClient) {}
 
-  createComment(comment: ComentarioDTO): Observable<any> {
-    return this.httpClient.post(this.BASE_URL, comment);
+  createComment(comment: ComentarioDTO): Observable<void> {
+    return this.httpClient.post<void>(this.BASE_URL, comment);
   }
 
-  findCommentsByPublicacaoId(idPublicacao: string): Observable<any> {
-    return this.httpClient.get(this.BASE_URL+"/por-publicacao/" + idPublicacao)
+  findCommentsByPublicacaoId(idPublicacao: string): Observable<Comentario[]> {
+    return this.httpClient.get<Comentario[]>(this.BASE_URL+"/por-publicacao/" + idPublicacao)
   }
 
-  updateComment(id: string, comment: ComentarioDTO): Observable<any> {
-    return this.httpClient.put(this.BASE_URL + "/" + id, comment);
+  updateComment(id: string, comment: ComentarioDTO): Observable<void> {
+    return this.httpClient.put<void>(this.BASE_URL + "/" + id, comment);
   }
 
-  deleteComment(id: string) : Observable<any> {
-    return this.httpClient.delete(this.BASE_URL +"/" + id)
+  deleteComment(id: string) : Observable<void> {
+    return this.httpClient.delete<void>(this.BASE_URL +"/" + id)
   }
 }
