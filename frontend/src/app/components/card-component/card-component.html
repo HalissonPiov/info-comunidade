@@ -99,8 +99,10 @@
           </p>
           @if (user!.id == comment.usuario.id || showOptions) {
           <div class="comment-actions">
+            @if (!showOptions) {
             <button (click)="startEdit(comment)">Editar</button>
             <span class="point"></span>
+            }
             <button (click)="deleteComment(comment.id)">Excluir</button>
           </div>
           }
