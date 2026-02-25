@@ -84,9 +84,9 @@
           <i class="fa-solid fa-arrow-up"></i>
         </div>
       </div>
-      @if (comments !== null) {
+      @if (comments$ !== null) {
       <div class="comments">
-        @for (comment of comments; track $index) {
+        @for (comment of comments$ | async; track $index) {
         <div class="comment mb-3">
           <p class="comment-header">
             <span class="comment-user">{{ comment.usuario.nome }}</span>

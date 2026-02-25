@@ -1,27 +1,35 @@
-import { ComentarioDTO } from '../../models/ComentarioDTO';
-import { DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { catchError, startWith, Subject, switchMap } from 'rxjs';
 
+import { ComentarioDTO } from '../../models/ComentarioDTO';
 import { Publicacao } from '../../models/Publicacao';
-import { PublicacaoFormComponent } from '../publicacao/publicacao-form-component/publicacao-form-component';
-import { PublicacaoDeleteDialog } from '../publicacao/publicacao-delete-dialog/publicacao-delete-dialog';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../models/User';
 import { AuthUserService } from '../../services/auth-user-service';
 import { ComentarioService } from '../../services/comentario-service';
-import { Comentario } from '../../models/Comentario';
-import { User } from '../../models/User';
+import { PublicacaoDeleteDialog } from '../publicacao/publicacao-delete-dialog/publicacao-delete-dialog';
+import { PublicacaoFormComponent } from '../publicacao/publicacao-form-component/publicacao-form-component';
+import { Comentario } from './../../models/Comentario';
 
 @Component({
   selector: 'app-card-component',
   standalone: true,
   templateUrl: './card-component.html',
   styleUrl: './card-component.css',
-  imports: [MatCardModule, MatButtonModule, DatePipe, MatDialogModule, ReactiveFormsModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    DatePipe,
+    MatDialogModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+  ],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() publicacao!: Publicacao;
   @Input() showOptions: boolean = false;
   @Input() nomeUsuario: string = '';
@@ -36,23 +44,20 @@ export class CardComponent implements OnInit {
   private comentarioService = inject(ComentarioService);
 
   text = new FormControl('', Validators.required);
-  comments?: Comentario[];
   user: User | null = this.authUserService.getUserFromStorage();
 
-  ngOnInit(): void {
-    this.findCommentsByPublicacao();
-  }
+  private reloadComments$ = new Subject<void>();
 
-  findCommentsByPublicacao() {
-    this.comentarioService.findCommentsByPublicacaoId(this.publicacao.idPublicacao).subscribe(
-      (response) => {
-        this.comments = response;
-      },
-      (err) => {
-        console.log('Erro ao buscar comentários!', err);
-      },
-    );
-  }
+  comments$ = this.reloadComments$.pipe(
+    startWith(null),
+    switchMap(() =>
+      this.comentarioService.findCommentsByPublicacaoId(this.publicacao.idPublicacao),
+    ),
+    catchError((err) => {
+      console.error('Erro ao buscar comentários', err);
+      return [];
+    }),
+  );
 
   openUpdatePublicacaoDialog(publicacao: Publicacao): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
@@ -93,15 +98,15 @@ export class CardComponent implements OnInit {
       excluido: false,
     };
 
-    this.comentarioService.createComment(comment).subscribe(
-      (response) => {
+    this.comentarioService.createComment(comment).subscribe({
+      next: () => {
         this.text.reset();
-        this.findCommentsByPublicacao();
+        this.reloadComments$.next();
       },
-      (err) => {
-        console.log('Erro ao criar comentário!', err);
+      error: (err) => {
+        console.error('Erro ao criar comentário', err);
       },
-    );
+    });
   }
 
   editingComment: string = '';
@@ -124,15 +129,15 @@ export class CardComponent implements OnInit {
       excluido: false,
     };
 
-    this.comentarioService.updateComment(id, commentDTO).subscribe(
-      (response) => {
+    this.comentarioService.updateComment(id, commentDTO).subscribe({
+      next: () => {
         this.cancelEdit();
-        this.findCommentsByPublicacao();
+        this.reloadComments$.next();
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao atualizar comentário!', err);
       },
-    );
+    });
   }
 
   cancelEdit() {
@@ -141,12 +146,11 @@ export class CardComponent implements OnInit {
   }
 
   deleteComment(id: string) {
-    this.comentarioService.deleteComment(id).subscribe(
-      () => {
-        this.findCommentsByPublicacao();
+    this.comentarioService.deleteComment(id).subscribe({
+      next: () => {
+        this.reloadComments$.next();
       },
-      (err) => console.log('Erro ao deletar comentário!', err),
-    );
-    this.comments = this.comments!.filter((c) => c.id !== id);
+      error: (err) => console.log('Erro ao deletar comentário!', err),
+    });
   }
 }
