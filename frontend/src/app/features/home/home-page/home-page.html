@@ -1,7 +1,7 @@
 <mat-tab-group [(selectedIndex)]="selectedTabIndex">
   <mat-tab label="Informe-se">
     <section class="cards-container">
-      @for (item of INFORMATIVO_DATA; track $index) {
+      @for (item of informativos$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
@@ -13,7 +13,7 @@
 
   <mat-tab label="O que está acontecendo na cidade?">
     <section class="cards-container">
-      @for (item of PUBLICACAO_DATA; track $index) {
+      @for (item of publicacoes$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
@@ -25,7 +25,7 @@
 
   <mat-tab label="Acontecimentos">
     <section class="cards-container">
-      @for (item of OCORRECIA_DATA; track $index) {
+      @for (item of ocorrencias$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>

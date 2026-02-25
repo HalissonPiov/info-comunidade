@@ -33,12 +33,12 @@ export class PublicacaoService {
     return this.httpClient.post<void>(this.BASE_URL + '/informativo', informativo);
   }
 
-  updateOcorrencia(id: string, ocorrecia: Ocorrencia) {
-    return this.httpClient.put(this.BASE_URL + '/ocorrencia/' + id, ocorrecia);
+  updateOcorrencia(id: string, ocorrecia: Ocorrencia): Observable<void> {
+    return this.httpClient.put<void>(this.BASE_URL + '/ocorrencia/' + id, ocorrecia);
   }
 
-  updateInformativo(id: string, informativo: Informativo) {
-    return this.httpClient.put(this.BASE_URL + '/informativo/' + id, informativo);
+  updateInformativo(id: string, informativo: Informativo): Observable<void>{
+    return this.httpClient.put<void>(this.BASE_URL + '/informativo/' + id, informativo);
   }
 
   findAllByUserId(userId: string): Observable<Publicacao[]> {
