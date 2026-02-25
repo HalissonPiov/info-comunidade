@@ -1,5 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { catchError, map, startWith, Subject, switchMap } from 'rxjs';
 
 import { PublicacaoFormComponent } from '../../components/publicacao/publicacao-form-component/publicacao-form-component';
 import { User } from '../../models/User';
@@ -8,36 +9,35 @@ import { PublicacaoService } from '../../services/publicacao-service';
 import { ordenarPorDataDesc } from '../../services/utils-service';
 import { SharedModule } from '../../shared/shared-module';
 import { Publicacao } from './../../models/Publicacao';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-personal-publications',
-  imports: [SharedModule],
+  imports: [SharedModule, RouterLink],
   templateUrl: './personal-publications.html',
   styleUrl: './personal-publications.css',
 })
-export class PersonalPublications implements OnInit {
+export class PersonalPublications {
   public PUBLICACAO_DATA: Publicacao[] = [];
 
   private publicacaoService = inject(PublicacaoService);
   private authService = inject(AuthUserService);
   readonly dialog = inject(MatDialog);
 
-  ngOnInit(): void {
-    this.findPersonalPublications();
-  }
-
-  findPersonalPublications() {
-    const user: User | null = this.authService.getUserFromStorage();
-    this.publicacaoService.findAllByUserId(user?.id!).subscribe(
-      (response) => {
-        this.PUBLICACAO_DATA = ordenarPorDataDesc(response);
-        console.log(response);
-      },
-      (err) => {
-        console.log('Não foi possível buscar as publicações por ID: ' + err);
-      },
-    );
-  }
+  realoadPublications$ = new Subject<void>();
+  publications$ = this.realoadPublications$.pipe(
+    startWith(null),
+    switchMap(() => {
+      const user: User | null = this.authService.getUserFromStorage();
+      return this.publicacaoService.findAllByUserId(user?.id!).pipe(
+        map((response) => ordenarPorDataDesc(response)),
+        catchError((err) => {
+          console.log('Erro ao carregar publicações!', err);
+          return [];
+        }),
+      );
+    }),
+  );
 
   openCreatePublicacaoDialog(): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
@@ -48,7 +48,7 @@ export class PersonalPublications implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.findPersonalPublications();
+        this.realoadPublications$.next();
       }
     });
   }

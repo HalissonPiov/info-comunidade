@@ -1,5 +1,14 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +38,7 @@ import { Comentario } from './../../models/Comentario';
     AsyncPipe,
   ],
 })
-export class CardComponent {
+export class CardComponent implements OnChanges {
   @Input() publicacao!: Publicacao;
   @Input() showOptions: boolean = false;
   @Input() nomeUsuario: string = '';
@@ -46,6 +55,9 @@ export class CardComponent {
   text = new FormControl('', Validators.required);
   user: User | null = this.authUserService.getUserFromStorage();
 
+  editingComment: string = '';
+  editedText = new FormControl('', Validators.required);
+
   private reloadComments$ = new Subject<void>();
 
   comments$ = this.reloadComments$.pipe(
@@ -58,6 +70,10 @@ export class CardComponent {
       return [];
     }),
   );
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.reloadComments$.next();
+  }
 
   openUpdatePublicacaoDialog(publicacao: Publicacao): void {
     const dialogRef = this.dialog.open(PublicacaoFormComponent, {
@@ -108,9 +124,6 @@ export class CardComponent {
       },
     });
   }
-
-  editingComment: string = '';
-  editedText = new FormControl('', Validators.required);
 
   startEdit(comment: Comentario) {
     this.editingComment = comment.id;

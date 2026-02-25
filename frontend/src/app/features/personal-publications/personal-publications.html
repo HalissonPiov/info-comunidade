@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';" class="breadcrumb-container">
   <ol class="breadcrumb">
     <li class="breadcrumb-item" aria-current="page">
-      <a href="/home">
+      <a [routerLink]="'/home'">
         <i class="fa fa-home"></i>
         Página inicial
       </a>
@@ -11,9 +11,10 @@
 </nav>
 <section class="cards-container">
 
-  @for (item of PUBLICACAO_DATA; track $index) {
-  <app-card-component [showOptions]="true" [publicacao]="item" (updated)="findPersonalPublications()"
-    (deleted)="findPersonalPublications()">
+  @for (item of publications$ | async; track $index) {
+  <app-card-component [showOptions]="true" [publicacao]="item"
+    (updated)="this.realoadPublications$.next()"
+    (deleted)="this.realoadPublications$.next()">
   </app-card-component>
   }
 </section>

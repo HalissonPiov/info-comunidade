@@ -13,24 +13,24 @@ export class PublicacaoService {
   private BASE_URL: string = 'http://localhost:8080/publicacao';
   constructor(private httpClient: HttpClient) {}
 
-  findAll(filtros?: HttpParams): Observable<any> {
-    return this.httpClient.get(this.BASE_URL + '?' + filtros);
+  findAll(filtros?: HttpParams): Observable<Publicacao[]> {
+    return this.httpClient.get<Publicacao[]>(this.BASE_URL + '?' + filtros);
   }
 
-  findOcorrecia(filtros?: HttpParams): Observable<any> {
-    return this.httpClient.get(this.BASE_URL + '/ocorrencia?' + filtros);
+  findOcorrecia(filtros?: HttpParams): Observable<Publicacao[]> {
+    return this.httpClient.get<Publicacao[]>(this.BASE_URL + '/ocorrencia?' + filtros);
   }
 
-  findInformativos(filtros?: HttpParams): Observable<any> {
-    return this.httpClient.get(this.BASE_URL + '/informativo?' + filtros);
+  findInformativos(filtros?: HttpParams): Observable<Publicacao[]> {
+    return this.httpClient.get<Publicacao[]>(this.BASE_URL + '/informativo?' + filtros);
   }
 
-  saveOcorrencia(ocorrecia: Ocorrencia) {
-    return this.httpClient.post(this.BASE_URL + '/ocorrencia', ocorrecia);
+  saveOcorrencia(ocorrecia: Ocorrencia): Observable<void> {
+    return this.httpClient.post<void>(this.BASE_URL + '/ocorrencia', ocorrecia);
   }
 
-  saveInformativo(informativo: Informativo) {
-    return this.httpClient.post(this.BASE_URL + '/informativo', informativo);
+  saveInformativo(informativo: Informativo):Observable<void> {
+    return this.httpClient.post<void>(this.BASE_URL + '/informativo', informativo);
   }
 
   updateOcorrencia(id: string, ocorrecia: Ocorrencia) {
