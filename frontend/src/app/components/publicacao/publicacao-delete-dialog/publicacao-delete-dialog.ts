@@ -44,14 +44,14 @@ export class PublicacaoDeleteDialog {
 
     const publicacaoId = this.data.publicacao.idPublicacao
 
-    this.publicacaoServive.delete(publicacaoId).subscribe(
-      (response) => {
+    this.publicacaoServive.delete(publicacaoId).subscribe({
+      next: () => {
         this.router.navigate(['/personal-publications']);
         this.dialogRef.close(true);
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao atualizar perfil', err);
-      },
+      },}
     );
   }
 }

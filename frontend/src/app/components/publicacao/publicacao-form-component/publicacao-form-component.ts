@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { filter, Observable, switchMap } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 
 import { Endereco } from '../../../models/Endereco';
 import { Informativo } from '../../../models/Informativo';
@@ -22,16 +22,15 @@ import { PublicacaoService } from './../../../services/publicacao-service';
 })
 export class PublicacaoFormComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<PublicacaoFormComponent>);
-  private formBuilder = inject(FormBuilder);
   readonly data = inject<{ publicacao?: Publicacao; isCreating: boolean }>(MAT_DIALOG_DATA);
 
+  private formBuilder = inject(FormBuilder);
   private enderecoService = inject(EnderecoService);
   private authUserService = inject(AuthUserService);
   private publicacaoService = inject(PublicacaoService);
 
   public ENDERECO_DATA: Endereco[] = [];
   public BAIRROS_UNICOS: string[] = [];
-  public ENDERECO_POR_BAIRRO_DATA!: Observable<any[]>;
 
   public publicacaoForm = this.formBuilder.group({
     titulo: ['', [Validators.required, Validators.maxLength(30)]],
@@ -45,13 +44,21 @@ export class PublicacaoFormComponent implements OnInit {
     publicoAlvo: [''],
   });
 
-  ngOnInit() {
-    this.ENDERECO_POR_BAIRRO_DATA = this.publicacaoForm.get('bairro')!.valueChanges.pipe(
-      filter((bairro) => !!bairro),
-      switchMap((bairro) => this.enderecoService.findByBairro(bairro!)),
-    );
-    this.getEnderecos();
+  public ENDERECO_POR_BAIRRO_DATA = this.publicacaoForm?.get('bairro')?.valueChanges.pipe(
+    filter((bairro) => !!bairro),
+    switchMap((bairro) => this.enderecoService.findByBairro(bairro!)),
+  );
 
+  ngOnInit() {
+    this.loadEnderecos();
+    this.listenTipoChanges();
+
+    if (this.data?.publicacao) {
+      this.patchForm(this.data.publicacao);
+    }
+  }
+
+  private listenTipoChanges() {
     this.publicacaoForm.get('tipo')?.valueChanges.subscribe((tipo) => {
       const setor = this.publicacaoForm.get('setor');
       const publicoAlvo = this.publicacaoForm.get('publicoAlvo');
@@ -70,140 +77,94 @@ export class PublicacaoFormComponent implements OnInit {
       setor?.updateValueAndValidity();
       publicoAlvo?.updateValueAndValidity();
     });
-
-    if (this.data?.publicacao) {
-      this.onUpdateSubmit(this.data.publicacao);
-    }
   }
 
-  getEnderecos() {
-    this.enderecoService.findAll().subscribe(
-      (response) => {
+  loadEnderecos() {
+    this.enderecoService.findAll().subscribe({
+      next: (response) => {
         this.ENDERECO_DATA = response;
         const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
         this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao buscar endereços!', err);
       },
-    );
+    });
   }
 
-  getEnderecosPorBairro() {
-    const bairro = this.publicacaoForm.get('bairro')?.value;
-    if (!bairro) return;
-    this.enderecoService.findByBairro(bairro).subscribe(
-      (response) => {
-        this.ENDERECO_POR_BAIRRO_DATA = response;
-      },
-      (err) => {
-        console.log('Erro ao buscar endereços!', err);
-      },
-    );
+  private buildBasePublicacao() {
+    const form = this.publicacaoForm.value;
+
+    return {
+      titulo: form.titulo!,
+      descricao: form.descricao!,
+      imagemURL: form.imagemURL!,
+      usuarioId: this.authUserService.getUserFromStorage()?.id!,
+      enderecoId: form.rua!,
+      hashtags: parseHashtags(form.hashtags ?? ''),
+    };
   }
 
   onFormSubmit() {
-    const tipo = this.publicacaoForm.get('tipo')?.value;
-    if (tipo && tipo === 'OCORRENCIA' && this.data.isCreating) {
-      this.saveOcorrecia();
+    if (this.publicacaoForm.invalid) return;
+
+    const tipo = this.publicacaoForm.value.tipo;
+
+    if (tipo === 'OCORRENCIA') {
+      this.handleOcorrencia();
     }
-    if (tipo && tipo === 'INFORMATIVO' && this.data.isCreating) {
-      this.saveInformativo();
+
+    if (tipo === 'INFORMATIVO') {
+      this.handleInformativo();
     }
-    if (tipo && tipo === 'INFORMATIVO' && !this.data.isCreating) {
-      this.updateInformativo();
-    }
-    if (tipo && tipo === 'OCORRENCIA' && !this.data.isCreating) {
-      this.updateOcorrencia();
-    }
-    this.dialogRef.close(true);
   }
 
-  saveOcorrecia() {
+  private handleOcorrencia() {
     const ocorrencia: Ocorrencia = {
-      titulo: this.publicacaoForm.value.titulo as string,
-      descricao: this.publicacaoForm.value.descricao as string,
-      imagemURL: this.publicacaoForm.value.imagemURL as string,
-      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
-      enderecoId: this.publicacaoForm.value.rua as string,
-      setor: this.publicacaoForm.value.setor as string,
-      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
+      ...this.buildBasePublicacao(),
+      setor: this.publicacaoForm.value.setor!,
     };
 
-    this.publicacaoService.saveOcorrencia(ocorrencia).subscribe(
-      (response) => {},
-      (err) => {
-        console.log('Não foi possível cadastrar ocorrência!', err);
-      },
-    );
+    if (this.data.isCreating) {
+      this.publicacaoService.saveOcorrencia(ocorrencia).subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.log('Erro ao salvar ocorrência', err),
+      });
+    } else {
+      const id = this.data.publicacao?.idPublicacao!;
+
+      this.publicacaoService.updateOcorrencia(id, ocorrencia).subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.log('Erro ao atualizar ocorrência', err),
+      });
+    }
   }
 
-  saveInformativo() {
+  private handleInformativo() {
     const informativo: Informativo = {
-      titulo: this.publicacaoForm.value.titulo as string,
-      descricao: this.publicacaoForm.value.descricao as string,
-      imagemURL: this.publicacaoForm.value.imagemURL as string,
-      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
-      enderecoId: this.publicacaoForm.value.rua as string,
-      publicoAlvo: this.publicacaoForm.value.publicoAlvo as string,
-      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
+      ...this.buildBasePublicacao(),
+      publicoAlvo: this.publicacaoForm.value.publicoAlvo!,
     };
 
-    this.publicacaoService.saveInformativo(informativo).subscribe(
-      (response) => {},
-      (err) => {
-        console.log('Não foi possível cadastrar informativo!', err);
-      },
-    );
+    if (this.data.isCreating) {
+      this.publicacaoService.saveInformativo(informativo).subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.log('Erro ao salvar informativo', err),
+      });
+    } else {
+      const id = this.data.publicacao?.idPublicacao!;
+
+      this.publicacaoService.updateInformativo(id, informativo).subscribe({
+        next: () => this.dialogRef.close(true),
+        error: (err) => console.log('Erro ao atualizar informativo', err),
+      });
+    }
   }
 
-  updateInformativo() {
-    const publicacaoId = this.data?.publicacao?.idPublicacao;
-
-    const informativo: Informativo = {
-      titulo: this.publicacaoForm.value.titulo as string,
-      descricao: this.publicacaoForm.value.descricao as string,
-      imagemURL: this.publicacaoForm.value.imagemURL as string,
-      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
-      enderecoId: this.publicacaoForm.value.rua as string,
-      publicoAlvo: this.publicacaoForm.value.publicoAlvo as string,
-      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
-    };
-
-    this.publicacaoService.updateInformativo(publicacaoId!, informativo).subscribe(
-      (response) => {},
-      (err) => {
-        console.log('Não foi possível cadastrar informativo!', err);
-      },
-    );
-  }
-
-  updateOcorrencia() {
-    const publicacaoId = this.data?.publicacao?.idPublicacao;
-
-    const ocorrencia: Ocorrencia = {
-      titulo: this.publicacaoForm.value.titulo as string,
-      descricao: this.publicacaoForm.value.descricao as string,
-      imagemURL: this.publicacaoForm.value.imagemURL as string,
-      usuarioId: this.authUserService.getUserFromStorage()?.id as string,
-      enderecoId: this.publicacaoForm.value.rua as string,
-      setor: this.publicacaoForm.value.setor as string,
-      hashtags: parseHashtags(this.publicacaoForm.value.hashtags!),
-    };
-
-    this.publicacaoService.updateOcorrencia(publicacaoId!, ocorrencia).subscribe(
-      (response) => {},
-      (err) => {
-        console.log('Não foi possível cadastrar ocorrência!', err);
-      },
-    );
-  }
-
-  onUpdateSubmit(data: Publicacao) {
+  private patchForm(data: Publicacao) {
     const id = this.authUserService.getUserFromStorage()?.id;
-    if (!id) return;
 
-    if (data?.usuario?.id !== id) return;
+    if (!id || data.usuario?.id !== id) return;
 
     this.publicacaoForm.patchValue({
       titulo: data.titulo,
@@ -217,7 +178,6 @@ export class PublicacaoFormComponent implements OnInit {
       this.publicacaoForm.patchValue({
         tipo: 'OCORRENCIA',
         setor: data.setor,
-        publicoAlvo: '',
       });
     }
 
@@ -225,7 +185,6 @@ export class PublicacaoFormComponent implements OnInit {
       this.publicacaoForm.patchValue({
         tipo: 'INFORMATIVO',
         publicoAlvo: data.publicoAlvo,
-        setor: '',
       });
     }
   }
