@@ -8,7 +8,7 @@ import { AuthUserService } from '../../services/auth-user-service';
 import { PublicacaoService } from '../../services/publicacao-service';
 import { ordenarPorDataDesc } from '../../services/utils-service';
 import { SharedModule } from '../../shared/shared-module';
-import { Publicacao } from './../../models/Publicacao';
+import { Publicacao } from '../../models/Publicacao';
 import { RouterLink } from "@angular/router";
 
 @Component({

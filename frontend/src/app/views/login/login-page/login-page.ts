@@ -30,16 +30,6 @@ export class LoginPage implements OnInit {
   showPassword: boolean = false;
   today = new Date().toISOString().split('T')[0];
 
-  ngOnInit() {
-    this.findByUsername();
-    this.authService.logout();
-    this.getEnderecos();
-  }
-
-  toggleForm() {
-    this.showLogin.update((v) => !v);
-  }
-
   private formBuilder = inject(FormBuilder);
 
   public loginForm = this.formBuilder.group({
@@ -55,26 +45,44 @@ export class LoginPage implements OnInit {
     dataNascimento: [''],
   });
 
+  ngOnInit() {
+    this.authService.logout();
+    this.listenUsernameChanges();
+    this.loadEnderecos();
+  }
+
+  toggleForm() {
+    this.showLogin.update((v) => !v);
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   onLoginFormSubmit() {
+    if (!this.loginForm.valid) return;
+
     const login: Login = {
       username: this.loginForm.value.username as string,
       senha: this.loginForm.value.senha as string,
     };
 
-    this.userService.loginUser(login).subscribe(
-      (response) => {
+    this.userService.loginUser(login).subscribe({
+      next: (response) => {
         this.router.navigate(['/home']);
         this.authService.setUser(response);
         this.isLoginInvalid = false;
       },
-      (err) => {
+      error: (err) => {
         this.isLoginInvalid = true;
         console.log('Erro ao fazer login!', err);
       },
-    );
+    });
   }
 
   onSingInFormSubmit() {
+    if (!this.singinForm.valid) return;
+
     const user: User = {
       nome: this.singinForm.value.nome as string,
       username: this.singinForm.value.username as string,
@@ -83,27 +91,28 @@ export class LoginPage implements OnInit {
       senha: this.singinForm.value.senha as string,
     };
 
-    this.userService.createUser(user).subscribe(
-      (response) => {
+    this.userService.createUser(user).subscribe({
+      next: (response) => {
         this.router.navigate(['/home']);
         this.authService.setUser(response);
       },
-      (err) => {
-        console.log('Erro ao atualizar perfil', err);
+      error: (err) => {
+        console.log('Erro ao criar usuário!', err);
       },
-    );
+    });
   }
 
-  findByUsername() {
-    this.singinForm
-      .get('username')
-      ?.valueChanges.pipe(
-        debounceTime(500),
+  private listenUsernameChanges() {
+    const control = this.singinForm.get('username');
+
+    control?.valueChanges
+      .pipe(
+        debounceTime(400),
         distinctUntilChanged(),
+
         switchMap((username) => {
           if (!username || username.trim().length === 0) {
-            const control = this.singinForm.get('username');
-            control?.setErrors({ ...control.errors, blank: true });
+            control.setErrors({ blank: true });
             return of(false);
           }
 
@@ -113,38 +122,33 @@ export class LoginPage implements OnInit {
           );
         }),
       )
-      .subscribe((usernameExists) => {
-        const control = this.singinForm.get('username');
-        if (usernameExists) {
-          control?.setErrors({ ...control.errors, usernameExists: true });
+      .subscribe((exists) => {
+        const errors = control?.errors ?? {};
+
+        if (exists) {
+          control?.setErrors({ ...errors, usernameExists: true });
+          return;
+        }
+
+        delete errors['usernameExists'];
+
+        if (Object.keys(errors).length === 0) {
+          control?.setErrors(null);
         } else {
-          const errors = control?.errors;
-          if (errors) {
-            delete errors['usernameExists'];
-            if (Object.keys(errors).length === 0) {
-              control.setErrors(null);
-            } else {
-              control.setErrors(errors);
-            }
-          }
+          control?.setErrors(errors);
         }
       });
   }
 
-  getEnderecos() {
-    this.enderecoService.findAll().subscribe(
-      (response) => {
-        this.BAIRROS_UNICOS = response;
+  loadEnderecos() {
+    this.enderecoService.findAll().subscribe({
+      next: (response) => {
         const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
         this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao buscar endereços!', err);
       },
-    );
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
+    });
   }
 }

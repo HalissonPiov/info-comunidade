@@ -3,12 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, map, startWith, Subject, switchMap } from 'rxjs';
 
-import { FilterComponent } from '../../../components/filter-component/filter-component';
-import { PublicacaoFormComponent } from '../../../components/publicacao/publicacao-form-component/publicacao-form-component';
-import { TipoPublicacao } from '../../../models/TipoPublicacao';
-import { PublicacaoService } from '../../../services/publicacao-service';
-import { buildQueryParams, ordenarPorDataDesc } from '../../../services/utils-service';
-import { SharedModule } from '../../../shared/shared-module';
+import { FilterComponent } from '../../components/filter-component/filter-component';
+import { PublicacaoFormComponent } from '../../components/publicacao/publicacao-form-component/publicacao-form-component';
+import { TipoPublicacao } from '../../models/TipoPublicacao';
+import { PublicacaoService } from '../../services/publicacao-service';
+import { buildQueryParams, ordenarPorDataDesc } from '../../services/utils-service';
+import { SharedModule } from '../../shared/shared-module';
 
 @Component({
   selector: 'app-home-page',
