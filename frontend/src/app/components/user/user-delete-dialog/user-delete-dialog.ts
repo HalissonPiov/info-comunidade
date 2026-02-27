@@ -26,12 +26,12 @@ import { UserService } from '../../../services/user-service';
   styleUrl: './user-delete-dialog.css',
 })
 export class UserDeleteDialog {
+
   readonly dialogRef = inject(MatDialogRef<UserDeleteDialog>);
   readonly data = inject<any>(MAT_DIALOG_DATA);
   private router = inject(Router);
   private authUserService = inject(AuthUserService);
-
-  constructor(private userService: UserService) {}
+  private userService = inject(UserService)
 
   closeDialog() {
     this.dialogRef.close();
@@ -41,15 +41,15 @@ export class UserDeleteDialog {
     const id = this.authUserService.getUserFromStorage()?.id;
     if (!id) return;
 
-    this.userService.deleteUser(id).subscribe(
-      (response) => {
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
         this.router.navigate(['/login']);
         this.authUserService.logout();
         this.dialogRef.close(true);
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao atualizar perfil', err);
-      },
+      },}
     );
   }
 }

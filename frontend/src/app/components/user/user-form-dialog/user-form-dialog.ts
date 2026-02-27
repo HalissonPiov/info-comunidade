@@ -3,13 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { catchError, debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 
+import { Endereco } from '../../../models/Endereco';
 import { User } from '../../../models/User';
+import { EnderecoService } from '../../../services/endereco-service';
 import { UserService } from '../../../services/user-service';
 import { SharedModule } from '../../../shared/shared-module';
 import { AuthUserService } from './../../../services/auth-user-service';
-import { EnderecoService } from '../../../services/endereco-service';
-import { Endereco } from '../../../models/Endereco';
-import { notBlankValidator } from '../../../services/utils-service';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -43,23 +42,74 @@ export class UserFormDialog {
     senha: ['', Validators.required],
   });
 
-  constructor() {}
-
   ngOnInit(): void {
-    this.findByUsername();
+    this.listenUsernameChanges();
+    this.patchUser();
+    this.loadEnderecos();
+  }
+
+  private patchUser() {
     if (this.data?.user) {
       this.userForm.patchValue(this.data.user);
     }
-    this.getEnderecos();
   }
 
-  onFormSubmit() {
-    if (this.data.action === 'edicao') {
-      this.onUpdateSubmit();
+  private listenUsernameChanges() {
+    const control = this.userForm.get('username');
+
+    control?.valueChanges
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((username) => this.validateUsername(username)),
+      )
+      .subscribe((exists) => {
+        if (exists) {
+          control.setErrors({ usernameExists: true });
+        } else {
+          this.clearError(control, 'usernameExists');
+        }
+      });
+  }
+
+  private validateUsername(username: string | null) {
+    if (!username?.trim() || !username) {
+      return of(false);
+    }
+
+    if (username === this.authUserService.getUserFromStorage()?.username) {
+      return of(false);
+    }
+
+    return this.userService.findByUsername(username).pipe(
+      map(() => true),
+      catchError(() => of(false)),
+    );
+  }
+
+  private clearError(control: any, errorKey: string) {
+    const errors = control.errors;
+
+    if (!errors) return;
+
+    delete errors[errorKey];
+
+    if (Object.keys(errors).length === 0) {
+      control.setErrors(null);
+    } else {
+      control.setErrors(errors);
     }
   }
 
-  onUpdateSubmit() {
+  onFormSubmit() {
+    if (this.userForm.invalid) return;
+
+    if (this.data.action === 'edicao') {
+      this.updateUser();
+    }
+  }
+
+  updateUser() {
     const id = this.authUserService.getUserFromStorage()?.id;
     if (!id) return;
 
@@ -71,70 +121,26 @@ export class UserFormDialog {
       senha: this.userForm.value.senha as string,
     };
 
-    this.userService.updateUserData(id, user).subscribe(
-      (response) => {
+    this.userService.updateUserData(id, user).subscribe({
+      next: () => {
         this.dialogRef.close(true);
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao atualizar perfil', err);
       },
-    );
+    });
   }
 
-  findByUsername() {
-    this.userForm
-      .get('username')
-      ?.valueChanges.pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap((username) => {
-          if (!username || username.trim().length === 0) {
-            const control = this.userForm.get('username');
-
-            control?.setErrors({ ...control.errors, blank: true });
-            return of(false);
-          }
-
-          if (username === this.authUserService.getUserFromStorage()?.username) {
-            return of(false);
-          }
-
-          return this.userService.findByUsername(username).pipe(
-            map(() => true),
-            catchError(() => of(false)),
-          );
-        }),
-      )
-      .subscribe((usernameExists) => {
-        const control = this.userForm.get('username');
-
-        if (usernameExists) {
-          control?.setErrors({ ...control.errors, usernameExists: true });
-        } else {
-          const errors = control?.errors;
-          if (errors) {
-            delete errors['usernameExists'];
-            if (Object.keys(errors).length === 0) {
-              control.setErrors(null);
-            } else {
-              control.setErrors(errors);
-            }
-          }
-        }
-      });
-  }
-
-  getEnderecos() {
-    this.enderecoService.findAll().subscribe(
-      (response) => {
-        this.BAIRROS_UNICOS = response;
+  loadEnderecos() {
+    this.enderecoService.findAll().subscribe({
+      next: (response) => {
         const bairrosSet = new Set(response.map((endereco: Endereco) => endereco.bairro));
         this.BAIRROS_UNICOS = Array.from(bairrosSet).sort() as string[];
       },
-      (err) => {
+      error: (err) => {
         console.log('Erro ao buscar endereços!', err);
       },
-    );
+    });
   }
 
   togglePassword() {
