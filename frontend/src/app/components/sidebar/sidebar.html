@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <div class="top">
+    <i class="fa-solid fa-home"></i>
+    <span>/ {{ breadcrumb }}</span>
+  </div>
+
+  <nav>
+    <a [routerLink]="'/home'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fa-solid fa-home"></i>
+      Início
+    </a>
+
+    <a [routerLink]="'/personal-publications'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fa-solid fa-photo-film"></i>
+      Minhas Publicações
+    </a>
+
+    <a [routerLink]="'/edit-profile'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <i class="fa-solid fa-gear"></i>
+      Editar perfil
+    </a>
+
+    <a (click)="logout()">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      Sair
+    </a>
+  </nav>
+</aside>

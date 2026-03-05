@@ -1,0 +1,18 @@
+.title {
+  font-size: 1.8rem;
+  margin: 20px 0;
+  font-weight: 500;
+  width: 90%;
+}
+
+.button {
+  width: 150px;
+}
+
+.btns-container {
+  display: flex;
+  gap: 25px;
+  width: 90%;
+  justify-content: end;
+  margin-top: 20px;
+}

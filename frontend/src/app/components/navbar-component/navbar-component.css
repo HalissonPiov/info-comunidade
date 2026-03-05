@@ -51,10 +51,15 @@
 
 .dropdown-menu {
   right: 0;
+  display: none;
 }
 
 .btn:focus {
   border: none;
+}
+
+.btn:hover {
+  cursor: auto;
 }
 
 

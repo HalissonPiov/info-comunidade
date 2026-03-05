@@ -1,0 +1,59 @@
+.sidebar {
+  background-color: var(--card-bg);
+  height: 100vw;
+  width: 100%;
+  margin: 0.8rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      padding: 0 1rem;
+      height: 45px;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-black-color);
+      transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.top {
+  font-size: 0.9rem;
+  padding: 15px 1rem;
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-right: 8px;
+  }
+}
+
+.sidebar nav a.active {
+  background: #08395c;
+  background: linear-gradient(
+    90deg,
+    rgba(8, 57, 92, 1) 0%,
+    rgba(11, 7, 71, 1) 28%,
+    rgba(11, 31, 58, 1) 100%
+  );
+  color: white;
+  font-weight: 500;
+  transition: all ease-in 0.2s;
+}
+
+.sidebar nav a.active i {
+  color: white;
+  transition: all ease-in 0.2s;
+}

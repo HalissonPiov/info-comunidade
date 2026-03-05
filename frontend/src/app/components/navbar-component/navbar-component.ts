@@ -7,10 +7,11 @@ import { AuthUserService } from '../../services/auth-user-service';
 import { SharedModule } from '../../shared/shared-module';
 import { UserDeleteDialog } from '../user/user-delete-dialog/user-delete-dialog';
 import { UserFormDialog } from '../user/user-form-dialog/user-form-dialog';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-navbar-component',
-  imports: [MatCardModule, SharedModule],
+  imports: [MatCardModule, SharedModule, RouterLink],
   templateUrl: './navbar-component.html',
   styleUrl: './navbar-component.css',
 })
