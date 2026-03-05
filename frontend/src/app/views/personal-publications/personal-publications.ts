@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-personal-publications',
-  imports: [SharedModule, RouterLink],
+  imports: [SharedModule],
   templateUrl: './personal-publications.html',
   styleUrl: './personal-publications.css',
 })

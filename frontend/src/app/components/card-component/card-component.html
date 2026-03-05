@@ -4,17 +4,18 @@
     <mat-card-header class="header-container card-header">
       <div class="custom-card-header">
         <div class="profile-info">
+          <div class="user-info">
+            <i class="fa-solid fa-user"></i>
+            <div>
+              <mat-card-title class="user">
+                {{publicacao.usuario.nome}}
+              </mat-card-title>
+              <mat-card-subtitle class="address">@if(publicacao.endereco) {
+                {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
+                }
+              </mat-card-subtitle>
+            </div>
 
-          <div>
-            <mat-card-title class="user">
-              <i class="fa-solid fa-user"></i>
-              {{publicacao.usuario.nome}}
-            </mat-card-title>
-            <mat-card-subtitle class="address">@if(publicacao.endereco) {
-              <i class="pin fa-solid fa-location-pin "></i>
-              {{publicacao.endereco.rua}}, {{publicacao.endereco.bairro}}
-              }
-            </mat-card-subtitle>
           </div>
         </div>
 
@@ -76,15 +77,13 @@
       </p>
     </mat-card-content>
     <mat-card-footer class="footer">
-      <div class="comment-container">
-        <div class="mb-3 comment-box">
-          <input type="text" class="form-control" id="nome" placeholder="Deixar um comentário..." [formControl]="text">
-        </div>
+      <div class="mb-3 comment-box">
+        <input type="text" class="form-control" id="nome" placeholder="Deixar um comentário..." [formControl]="text">
         <div class="send-comment" (click)="createComment(publicacao.idPublicacao)">
           <i class="fa-solid fa-arrow-up"></i>
         </div>
       </div>
-      @if (comments$ !== null) {
+      @if (comments$ | async;) {
       <div class="comments">
         @for (comment of comments$ | async; track $index) {
         <div class="comment mb-3">

@@ -1,6 +1,9 @@
 
 h2 {
   font-size: 1.5rem;
-  font-weight: bold;
   margin: 2rem auto 0.5rem;
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: var(--color-primary);
 }

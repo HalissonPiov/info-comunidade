@@ -13,7 +13,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { catchError, startWith, Subject, switchMap } from 'rxjs';
+import { catchError, of, startWith, Subject, switchMap } from 'rxjs';
 
 import { ComentarioDTO } from '../../models/ComentarioDTO';
 import { Publicacao } from '../../models/Publicacao';
@@ -67,7 +67,7 @@ export class CardComponent implements OnChanges {
     ),
     catchError((err) => {
       console.error('Erro ao buscar comentários', err);
-      return [];
+      return of([]);
     }),
   );
 

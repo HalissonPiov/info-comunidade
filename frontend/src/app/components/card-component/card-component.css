@@ -34,11 +34,16 @@ mat-card-footer {
   display: flex;
   gap: 10px;
   font-size: 1rem;
+
+  .user-info {
+    display: flex;
+  }
 }
 
 .profile-info i {
-  padding: 0.2rem;
-  font-size: 1rem;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-right: 5px;
 }
 
 .profile-info div,
@@ -130,31 +135,36 @@ mat-card-footer {
   border-top: 1px solid #e2dfdf;
 }
 
-.comment-container {
+.comment-box {
+  border-radius: 30px;
+  height: 50px;
+  border: #dfdbdb 1px solid;
   margin: 1rem auto 0;
-  width: 99%;
+  width: 98%;
   display: flex;
-  gap: 15px;
   justify-content: center;
+  overflow: hidden;
+  align-items: center;
+
 }
 
 .comment-box input,
 .edit-comment input {
-  border-radius: 30px;
   height: 50px;
+  border-color: transparent;
 }
 
 .comment-box input[type='text']:focus,
 .edit-comment input[type='text']:focus {
   background-color: transparent;
   box-shadow: none;
-  border-color: #ccc;
+  border-color: transparent;
 }
 
 .send-comment {
-  width: 45px;
-  height: 45px;
-  background-color: var(--color-primary-dark);
+  width: 51px;
+  height: 50px;
+  background-color: var(--color-secondary);
   border-radius: 50%;
   text-align: center;
   align-content: center;
@@ -170,7 +180,6 @@ mat-card-footer {
   cursor: pointer;
   opacity: 100%;
 }
-
 
 .comments {
   margin: 0.7rem auto 0.7rem;

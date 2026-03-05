@@ -3,6 +3,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../components/navbar-component/navbar-component';
 import { filter } from 'rxjs';
+import { Sidebar } from '../components/sidebar/sidebar';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,9 @@ import { filter } from 'rxjs';
   styleUrl: './app.css',
   imports: [
     NavbarComponent,
+    Sidebar,
     MatTabsModule,
-    RouterOutlet
+    RouterOutlet, ToastModule
   ]
 })
 export class App {
