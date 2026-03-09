@@ -1,0 +1,16 @@
+div {
+  width: 90%;
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+
+  }
+
+  .new-post-btn {
+    width: 180px;
+  }
+}

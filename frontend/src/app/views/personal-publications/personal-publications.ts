@@ -9,7 +9,7 @@ import { PublicacaoService } from '../../services/publicacao-service';
 import { ordenarPorDataDesc } from '../../services/utils-service';
 import { SharedModule } from '../../shared/shared-module';
 import { Publicacao } from '../../models/Publicacao';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-personal-publications',
@@ -23,6 +23,7 @@ export class PersonalPublications {
   private publicacaoService = inject(PublicacaoService);
   private authService = inject(AuthUserService);
   readonly dialog = inject(MatDialog);
+  private router = inject(Router)
 
   realoadPublications$ = new Subject<void>();
   publications$ = this.realoadPublications$.pipe(
@@ -39,17 +40,7 @@ export class PersonalPublications {
     }),
   );
 
-  openCreatePublicacaoDialog(): void {
-    const dialogRef = this.dialog.open(PublicacaoFormComponent, {
-      width: '700px',
-      maxWidth: '95vw',
-      data: { isCreating: true },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.realoadPublications$.next();
-      }
-    });
+   createPublication() {
+    this.router.navigate(['/create-publication']);
   }
 }

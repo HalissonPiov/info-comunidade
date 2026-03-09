@@ -1,5 +1,10 @@
+<div>
+  <h2 class="title">Minhas publicações</h2>
+   <button class="new-post-btn" type="button" (click)="createPublication()">
+        + Nova Publicação
+      </button>
+</div>
 <section class="cards-container">
-
   @for (item of publications$ | async; track $index) {
   <app-card-component [showOptions]="true" [publicacao]="item"
     (updated)="this.realoadPublications$.next()"
@@ -8,7 +13,7 @@
   }
 </section>
 
-<button class="small-btn secondary" (click)="openCreatePublicacaoDialog()">
+<button class="small-btn secondary" (click)="createPublication()">
   <span class="fab-icon">+</span>
   <span class="fab-text">Criar publicação</span>
 </button>
