@@ -201,34 +201,18 @@ mat-form-field {
     box-shadow 0.2s ease;
 }
 
-.small-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+.new-post-btn {
+  width: 20%;
+  margin-left: auto;
+  background: #3aa56b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-.fab-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.fab-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 1000;
-}
-
-.small-btn.primary {
-  border-radius: 999px;
-  padding: 14px 20px;
-  bottom: 90px;
-}
-
-.small-btn.secondary {
-  border-radius: 999px;
-  padding: 14px 20px;
-  bottom: 24px;
+.new-post-btn:hover {
+  background: #2f8e59;
 }

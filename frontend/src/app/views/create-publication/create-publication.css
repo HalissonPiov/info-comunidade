@@ -1,0 +1,23 @@
+.title {
+  font-size: 1.8rem;
+  margin: 20px 0;
+  font-weight: 500;
+  width: 90%;
+}
+
+.btn-container {
+  width: 90%;
+  text-align: end;
+}
+
+.inputs-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  flex-wrap: wrap;
+
+}
+
+.inputs-container .select-container {
+width: 32%;
+}
