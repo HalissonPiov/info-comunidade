@@ -1,8 +1,8 @@
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { debounceTime, Subject } from 'rxjs';
 
 import { Endereco } from '../../models/Endereco';
 import { TipoPublicacao } from '../../models/TipoPublicacao';
@@ -10,33 +10,33 @@ import { EnderecoService } from '../../services/endereco-service';
 
 @Component({
   selector: 'app-filter-component',
-  imports: [TitleCasePipe, ReactiveFormsModule, CommonModule, MatDialogModule],
+  imports: [TitleCasePipe, ReactiveFormsModule, CommonModule],
   templateUrl: './filter-component.html',
   styleUrl: './filter-component.css',
 })
 export class FilterComponent implements OnInit, OnDestroy {
+  @Output() filterChange = new EventEmitter<any>();
   public TipoPublicacao = TipoPublicacao;
   public BAIRROS_UNICOS: string[] = [];
 
   private enderecoService: EnderecoService = inject(EnderecoService);
-
-  readonly dialogRef = inject(MatDialogRef<FilterComponent>);
-  readonly data = inject<{ tipo: TipoPublicacao }>(MAT_DIALOG_DATA);
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
 
   private destroy$ = new Subject<void>();
 
   public publicacaoForm = this.formBuilder.group({
     titulo: [''],
     bairro: [''],
-    setor: [''],
-    publicoAlvo: [''],
     dataCriacao: [''],
     hashtags: [''],
   });
 
   ngOnInit(): void {
     this.getEnderecos();
+    this.publicacaoForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {
+      this.filterChange.emit(value);
+    });
   }
 
   getEnderecos() {
@@ -51,11 +51,8 @@ export class FilterComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFormSubmit() {
-    this.dialogRef.close({
-      tipo: this.data.tipo,
-      filtros: this.publicacaoForm.value,
-    });
+  createPublication() {
+    this.router.navigate(['/create-publication']);
   }
 
   ngOnDestroy(): void {
