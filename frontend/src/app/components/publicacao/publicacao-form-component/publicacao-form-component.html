@@ -2,7 +2,8 @@
   <h2>Publicação</h2>
   <form [formGroup]="publicacaoForm" (ngSubmit)="onFormSubmit()">
     <div class="form-floating mb-3 floating-compact">
-      <input type="text" class="form-control" id="titulo" placeholder="" formControlName="titulo" [class.is-invalid]="publicacaoForm.get('titulo')?.value?.length! > 30">
+      <input type="text" class="form-control" id="titulo" placeholder="" formControlName="titulo"
+        [class.is-invalid]="publicacaoForm.get('titulo')?.value?.length! > 30">
       <label for="titulo">Título</label>
       <div class="invalid-feedback mb-1">
         O título deve ter menos que 30 caracteres!
@@ -11,8 +12,9 @@
 
     <div class="mb-3">
       <label for="descricao">Descrição</label>
-      <textarea type="text" class="info-textarea form-control" id="descricao" placeholder="" formControlName="descricao" [class.is-invalid]="publicacaoForm.get('descricao')?.value?.length! > 350"></textarea>
-       <div class="invalid-feedback mb-1">
+      <textarea type="text" class="info-textarea form-control" id="descricao" placeholder="" formControlName="descricao"
+        [class.is-invalid]="publicacaoForm.get('descricao')?.value?.length! > 350"></textarea>
+      <div class="invalid-feedback mb-1">
         A descrição deve ter menos que 350 caracteres!
       </div>
     </div>
@@ -76,7 +78,7 @@
     </div>
 
     <button class="button" type="submit" [disabled]="!publicacaoForm.valid">
-      {{data.isCreating === true ? "Criar" : "Atualizar"}}
+      Atualizar dados
     </button>
   </form>
 </div>

@@ -12,7 +12,7 @@ import { SharedModule } from '../../shared/shared-module';
 
 @Component({
   selector: 'app-home-page',
-  imports: [SharedModule],
+  imports: [SharedModule, FilterComponent],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

@@ -22,7 +22,7 @@ import { PublicacaoService } from './../../../services/publicacao-service';
 })
 export class PublicacaoFormComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<PublicacaoFormComponent>);
-  readonly data = inject<{ publicacao?: Publicacao; isCreating: boolean }>(MAT_DIALOG_DATA);
+  readonly data = inject<{ publicacao: Publicacao }>(MAT_DIALOG_DATA);
 
   private formBuilder = inject(FormBuilder);
   private enderecoService = inject(EnderecoService);
@@ -125,19 +125,12 @@ export class PublicacaoFormComponent implements OnInit {
       setor: this.publicacaoForm.value.setor!,
     };
 
-    if (this.data.isCreating) {
-      this.publicacaoService.saveOcorrencia(ocorrencia).subscribe({
-        next: () => this.dialogRef.close(true),
-        error: (err) => console.log('Erro ao salvar ocorrência', err),
-      });
-    } else {
-      const id = this.data.publicacao?.idPublicacao!;
+    const id = this.data.publicacao?.idPublicacao!;
 
-      this.publicacaoService.updateOcorrencia(id, ocorrencia).subscribe({
-        next: () => this.dialogRef.close(true),
-        error: (err) => console.log('Erro ao atualizar ocorrência', err),
-      });
-    }
+    this.publicacaoService.updateOcorrencia(id, ocorrencia).subscribe({
+      next: () => this.dialogRef.close(true),
+      error: (err) => console.log('Erro ao atualizar ocorrência', err),
+    });
   }
 
   private handleInformativo() {
@@ -146,19 +139,12 @@ export class PublicacaoFormComponent implements OnInit {
       publicoAlvo: this.publicacaoForm.value.publicoAlvo!,
     };
 
-    if (this.data.isCreating) {
-      this.publicacaoService.saveInformativo(informativo).subscribe({
-        next: () => this.dialogRef.close(true),
-        error: (err) => console.log('Erro ao salvar informativo', err),
-      });
-    } else {
-      const id = this.data.publicacao?.idPublicacao!;
+    const id = this.data.publicacao?.idPublicacao!;
 
-      this.publicacaoService.updateInformativo(id, informativo).subscribe({
-        next: () => this.dialogRef.close(true),
-        error: (err) => console.log('Erro ao atualizar informativo', err),
-      });
-    }
+    this.publicacaoService.updateInformativo(id, informativo).subscribe({
+      next: () => this.dialogRef.close(true),
+      error: (err) => console.log('Erro ao atualizar informativo', err),
+    });
   }
 
   private patchForm(data: Publicacao) {

@@ -1,42 +1,28 @@
 <mat-tab-group [(selectedIndex)]="selectedTabIndex">
   <mat-tab label="Informe-se">
     <section class="cards-container">
+    <app-filter-component (filterChange)="aplicarFiltros(TipoPublicacao.INFORMATIVO, $event)"></app-filter-component>
       @for (item of informativos$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="small-btn  primary" (click)="openFilterDialog(TipoPublicacao.INFORMATIVO)">
-      <i class="fa-solid fa-filter"></i>
-      <span class="">Aplicar filtros</span>
-    </button>
   </mat-tab>
 
   <mat-tab label="O que está acontecendo na cidade?">
+    <app-filter-component (filterChange)="aplicarFiltros(TipoPublicacao.PUBLICACAO, $event)"></app-filter-component>
     <section class="cards-container">
       @for (item of publicacoes$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="small-btn  primary" (click)="openFilterDialog(TipoPublicacao.PUBLICACAO)">
-      <i class="fa-solid fa-filter"></i>
-      <span class="">Aplicar filtros</span>
-    </button>
   </mat-tab>
 
   <mat-tab label="Acontecimentos">
+    <app-filter-component (filterChange)="aplicarFiltros(TipoPublicacao.OCORRENCIA, $event)"></app-filter-component>
     <section class="cards-container">
       @for (item of ocorrencias$ | async; track item.idPublicacao) {
       <app-card-component [publicacao]="item"></app-card-component>
       }
     </section>
-    <button class="small-btn primary" (click)="openFilterDialog(TipoPublicacao.OCORRENCIA)">
-      <i class="fa-solid fa-filter"></i>
-      <span class="">Aplicar filtros</span>
-    </button>
   </mat-tab>
 </mat-tab-group>
-
-<button class="small-btn secondary" (click)="openCreatePublicacaoDialog()">
-  <span class="fab-icon">+</span>
-  <span class="">Criar publicação</span>
-</button>
