@@ -44,7 +44,7 @@ git clone git@github.com:HalissonPiov/info-comunidade.git
 ```
 
 ### 2. Subir o banco de dados com Docker
-`docker run --name infocomunidadedb -p 27018:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=1234 -d mongo:7`
+`docker run --name infocomunidadedb -p 27018:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=1234 -d mongo:latest`
 
 ### 🍃 URI para Conectar ao Banco com Software MongoDB Compass
 `mongodb://admin:1234@localhost:27018/?authSource=admin`
